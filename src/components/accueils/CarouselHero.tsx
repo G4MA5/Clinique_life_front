@@ -13,7 +13,10 @@ const CarouselHero: React.FC = () => {
   useEffect(() => {
     const savedSlides = localStorage.getItem("carouselSlides");
     if (savedSlides) {
-      setSlides(JSON.parse(savedSlides).filter((s: CarouselSlide) => s.isActive !== false));
+      const filtered = JSON.parse(savedSlides).filter(
+        (s: CarouselSlide) => s.isActive !== false && s.type !== "video"
+      );
+      setSlides(filtered.length > 0 ? filtered : initialSlides);
     }
   }, []);
 

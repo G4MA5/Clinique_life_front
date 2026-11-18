@@ -1,7 +1,6 @@
 import BuildingImg from "../assets/Acceuil0.webp";
 import TeamImg from "../assets/Chirurgie.jpg";
 import EquipImg from "../assets/Technologie.jpg";
-import TechVideo from "../assets/Docteur.mp4";
 
 export type CarouselSlide = {
   id: number;
@@ -33,12 +32,5 @@ export const initialSlides: CarouselSlide[] = [
     url: EquipImg,
     title: "Technologie de Dernière Génération",
     description: "Un plateau technique moderne pour des diagnostics précis.",
-  },
-  {
-    id: 4,
-    type: "video",
-    url: TechVideo,
-    title: "Découvrez la Clinique Life",
-    description: "Une vision humaine de la médecine moderne.",
   },
 ];
