@@ -6,6 +6,7 @@ import ImagerieImg from "../assets/Imagerie.jpg";
 import EnceinteImg from "../assets/Enceinte.jpg";
 import CardiologieImg from "../assets/Cardiologie.jpg";
 import RadiologieImg from "../assets/Radiologie.jpg";
+import SoinsImg from "../assets/Soins.jpg";
 
 export interface ServiceDetail {
   title: string;
@@ -97,6 +98,27 @@ export const servicesDetailedData: Record<string, ServiceDetail> = {
     image: ChirurgieImg,
     description: "Prise en charge des fractures, des entorses et des maladies dégénératives des articulations. Nos chirurgiens orthopédistes interviennent pour restaurer votre autonomie.",
     highlights: ["Traumatologie d'urgence", "Chirurgie prothétique", "Médecine du sport", "Arthroscopie"]
+  },
+  "service-de-chirurgie-digestive-et-viscerale": {
+    title: "Service de Chirurgie Digestive et Viscérale",
+    subtitle: "Chirurgie viscérale et cœlioscopie",
+    image: ChirurgieImg,
+    description: "Interventions chirurgicales de l'appareil digestif, de la vésicule biliaire, hernies et appendicite, réalisées avec des techniques mini-invasives avancées.",
+    highlights: ["Chirurgie cœlioscopique", "Chirurgie des hernies", "Vésicule et appendice", "Suivi post-opératoire"]
+  },
+  "service-de-reanimation": {
+    title: "Service de Réanimation",
+    subtitle: "Soins intensifs et surveillance continue 24/7",
+    image: SoinsImg,
+    description: "Unité de soins intensifs et de réanimation polyvalente assurant la prise en charge des détresses vitales, réanimations médicales et surveillances post-opératoires critiques sous monitorage continu 24h/24.",
+    highlights: ["Surveillance hémodynamique 24/7", "Ventilation et assistance respiratoire", "Prise en charge des détresses vitales", "Soins intensifs post-opératoires"]
+  },
+  "reanimation": {
+    title: "Service de Réanimation",
+    subtitle: "Soins intensifs et surveillance continue 24/7",
+    image: SoinsImg,
+    description: "Unité de soins intensifs et de réanimation polyvalente assurant la prise en charge des détresses vitales, réanimations médicales et surveillances post-opératoires critiques sous monitorage continu 24h/24.",
+    highlights: ["Surveillance hémodynamique 24/7", "Ventilation et assistance respiratoire", "Prise en charge des détresses vitales", "Soins intensifs post-opératoires"]
   },
 
   // LABORATOIRE

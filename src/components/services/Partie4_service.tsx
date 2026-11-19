@@ -25,6 +25,10 @@ const services: Service[] = [
     title: "Service de Chirurgie Digestive et Viscérale",
     description: "Chirurgie de l'appareil digestif",
   },
+  {
+    title: "Service de Réanimation",
+    description: "Soins intensifs, surveillance continue et réanimation 24h/24",
+  },
 ];
 
 const Partie4_service: React.FC = () => {
@@ -57,7 +61,7 @@ const Partie4_service: React.FC = () => {
               CHIRURGIE
             </h2>
             <p className="text-sm text-white/90">
-              3 services disponibles
+              {services.length} services disponibles
             </p>
           </div>
         </div>
