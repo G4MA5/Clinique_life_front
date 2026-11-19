@@ -61,7 +61,7 @@ const Partie5_service: React.FC = () => {
               Laboratoire d'Analyses Médicales
             </h2>
             <p className="text-sm text-white/90">
-              4 services disponibles
+              {services.length} services disponibles
             </p>
           </div>
         </div>

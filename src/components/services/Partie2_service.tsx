@@ -51,7 +51,7 @@ const Partie2_service: React.FC = () => {
               FEMME – MÈRE – ENFANT
             </h2>
             <p className="text-sm text-white/90">
-              14 services disponibles
+              {services.length} services disponibles
             </p>
           </div>
         </div>

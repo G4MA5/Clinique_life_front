@@ -73,7 +73,7 @@ const Partie3_service: React.FC = () => {
               MÉDECINE
             </h2>
             <p className="text-sm text-white/90">
-              7 services disponibles
+              {services.length} services disponibles
             </p>
           </div>
         </div>
