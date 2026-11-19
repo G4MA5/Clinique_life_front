@@ -18,6 +18,7 @@ import StructureAdmin from "./structures/StructureAdmin";
 import Admin2 from "./pages/Admin/Admin2";
 import Specialiste from "./pages/Specialiste";
 import DrDonguiProfile from "./pages/DrDonguiProfile";
+import Radiologie from "./pages/Radiologie";
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/admin-login" element={<Login />} />
           <Route path="/a-propos" element={<Apropos />} />
           <Route path="/services" element={<Service />} />
+          <Route path="/services/radiologie" element={<Radiologie />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/lire" element={<LireArticle />} />

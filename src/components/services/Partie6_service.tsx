@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ServiceModal from "./ServiceModal";
 import { servicesDetailedData, getServiceKey, ServiceDetail } from "../../data/servicesDetailedData";
 import { ArrowUpRight } from "lucide-react";
@@ -33,8 +34,13 @@ const services: Service[] = [
 
 const Partie6_service: React.FC = () => {
   const [selectedService, setSelectedService] = useState<ServiceDetail | null>(null);
+  const navigate = useNavigate();
 
-  const handleOpenModal = (title: string) => {
+  const handleServiceClick = (title: string) => {
+    if (title === "Radiologie") {
+      navigate("/services/radiologie");
+      return;
+    }
     const key = getServiceKey(title);
     const detail = servicesDetailedData[key];
     if (detail) {
@@ -73,7 +79,7 @@ const Partie6_service: React.FC = () => {
               <div
                 key={index}
                 className="group relative bg-indigo-50 rounded-xl p-6 hover:bg-indigo-100/50 hover:shadow-md transition-all cursor-pointer"
-                onClick={() => handleOpenModal(service.title)}
+                onClick={() => handleServiceClick(service.title)}
               >
                 <div className="flex items-start gap-3">
                   {/* CHECK */}
