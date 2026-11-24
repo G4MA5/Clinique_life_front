@@ -39,7 +39,7 @@ const Radiologie: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<PhotoItem | null>(null);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-gray-800 pt-[90px] overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 text-gray-800 pt-[90px] overflow-x-clip">
       
       {/* 1. HERO SECTION RESTAURÉE */}
       <section className="relative w-full bg-[linear-gradient(135deg,#0a2540_0%,#155DFC_50%,#00BBA7_100%)] text-white py-14 md:py-20 px-4 overflow-hidden">

@@ -143,22 +143,22 @@ const Recrutement: React.FC = () => {
       case "En attente":
         return "bg-yellow-100 text-yellow-700";
       case "Examinée":
-        return "bg-blue-100 text-blue-700";
+        return "bg-[#155DFC]/10 text-[#155DFC]";
       case "Acceptée":
-        return "bg-green-100 text-green-700";
+        return "bg-[#00BBA7]/15 text-[#00968a]";
       case "Refusée":
         return "bg-red-100 text-red-700";
       default:
-        return "bg-gray-100 text-gray-700";
+        return "bg-[#F1F6FB] text-gray-700";
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-[#F7FAFE] p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* ===== Header ===== */}
         <h1 className="text-3xl font-bold flex items-center gap-3 text-gray-900">
-          <Briefcase className="text-orange-600" size={32} />
+          <Briefcase className="text-[#00968a]" size={32} />
           Gestion du Recrutement
         </h1>
 
@@ -171,7 +171,7 @@ const Recrutement: React.FC = () => {
         </div>
 
         {/* ===== Filters ===== */}
-        <div className="bg-white rounded-2xl p-4 shadow-sm">
+        <div className="bg-white rounded-[28px] p-4 shadow-sm">
           <div className="flex flex-wrap gap-4">
             {/* Filtre Statut */}
             <div className="relative w-64">
@@ -179,7 +179,7 @@ const Recrutement: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setOpenFilterStatus(!openFilterStatus)}
-                className="w-full text-left border border-gray-300 rounded-xl px-4 py-2.5 flex justify-between items-center text-sm bg-white hover:bg-gray-50 transition"
+                className="w-full text-left border border-gray-200 rounded-2xl px-4 py-2.5 flex justify-between items-center text-sm bg-white hover:bg-[#F7FAFE] transition"
               >
                 <span className="font-medium text-gray-700">
                   {filterStatus === "Toutes" ? "Tous les statuts" : filterStatus}
@@ -202,7 +202,7 @@ const Recrutement: React.FC = () => {
               </button>
 
               {openFilterStatus && (
-                <div className="absolute z-50 mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden">
+                <div className="absolute z-50 mt-2 w-full bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
                   <div className="max-h-64 overflow-y-auto">
                     {["Toutes", "En attente", "Examinée", "Acceptée", "Refusée"].map(
                       (status) => (
@@ -213,7 +213,7 @@ const Recrutement: React.FC = () => {
                             setFilterStatus(status as Status | "Toutes");
                             setOpenFilterStatus(false);
                           }}
-                          className="w-full text-left px-4 py-3 text-sm hover:bg-gray-50 transition text-gray-700 font-medium"
+                          className="w-full text-left px-4 py-3 text-sm hover:bg-[#F7FAFE] transition text-gray-700 font-medium"
                         >
                           {status === "Toutes" ? "Tous les statuts" : status}
                         </button>
@@ -230,7 +230,7 @@ const Recrutement: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setOpenFilterPoste(!openFilterPoste)}
-                className="w-full text-left border border-gray-300 rounded-xl px-4 py-2.5 flex justify-between items-center text-sm bg-white hover:bg-gray-50 transition"
+                className="w-full text-left border border-gray-200 rounded-2xl px-4 py-2.5 flex justify-between items-center text-sm bg-white hover:bg-[#F7FAFE] transition"
               >
                 <span className="font-medium text-gray-700">
                   {filterPoste}
@@ -253,7 +253,7 @@ const Recrutement: React.FC = () => {
               </button>
 
               {openFilterPoste && (
-                <div className="absolute z-50 mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden">
+                <div className="absolute z-50 mt-2 w-full bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
                   <div className="max-h-64 overflow-y-auto">
                     {postesUniques.map((poste) => (
                       <button
@@ -263,7 +263,7 @@ const Recrutement: React.FC = () => {
                           setFilterPoste(poste);
                           setOpenFilterPoste(false);
                         }}
-                        className="w-full text-left px-4 py-3 text-sm hover:bg-gray-50 transition text-gray-700 font-medium"
+                        className="w-full text-left px-4 py-3 text-sm hover:bg-[#F7FAFE] transition text-gray-700 font-medium"
                       >
                         {poste}
                       </button>
@@ -280,7 +280,7 @@ const Recrutement: React.FC = () => {
                   setFilterStatus("Toutes");
                   setFilterPoste("Tous les postes");
                 }}
-                className="self-end px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition"
+                className="self-end px-4 py-2.5 text-sm font-medium text-gray-700 bg-[#F1F6FB] hover:bg-gray-200 rounded-2xl transition"
               >
                 Réinitialiser les filtres
               </button>
@@ -296,7 +296,7 @@ const Recrutement: React.FC = () => {
         {/* ===== List ===== */}
         <div className="space-y-4">
           {filteredCandidatures.length === 0 && (
-            <div className="bg-white rounded-2xl p-8 text-center">
+            <div className="bg-white rounded-[28px] p-8 text-center">
               <p className="text-gray-400 text-sm">Aucune candidature trouvée avec ces filtres.</p>
             </div>
           )}
@@ -304,36 +304,36 @@ const Recrutement: React.FC = () => {
           {filteredCandidatures.map((c) => (
             <div
               key={c.id}
-              className="bg-white rounded-2xl p-6 shadow-sm relative"
+              className="bg-white rounded-[28px] p-6 shadow-sm relative"
             >
               {/* Actions à droite */}
               <div className="absolute top-6 right-6 flex flex-col gap-2">
                 <button
                   onClick={() => setSelectedCandidature(c)}
-                  className="w-10 h-10 rounded-full bg-orange-100 hover:bg-orange-200 flex items-center justify-center transition"
+                  className="w-10 h-10 rounded-full bg-[#00BBA7]/15 hover:bg-[#00BBA7]/20 flex items-center justify-center transition"
                   title="Voir"
                 >
-                  <Eye size={18} className="text-orange-600" />
+                  <Eye size={18} className="text-[#00968a]" />
                 </button>
                 <button
                   onClick={() => setShowLettreMotivation(c)}
-                  className="w-10 h-10 rounded-full bg-purple-100 hover:bg-purple-200 flex items-center justify-center transition"
+                  className="w-10 h-10 rounded-full bg-[#155DFC]/10 hover:bg-[#155DFC]/10 flex items-center justify-center transition"
                   title="Lettre de motivation"
                 >
-                  <FileText size={18} className="text-purple-600" />
+                  <FileText size={18} className="text-[#155DFC]" />
                 </button>
                 <button
-                  className="w-10 h-10 rounded-full bg-blue-100 hover:bg-blue-200 flex items-center justify-center transition"
+                  className="w-10 h-10 rounded-full bg-[#155DFC]/10 hover:bg-[#155DFC]/15 flex items-center justify-center transition"
                   title="Télécharger"
                 >
-                  <Download size={18} className="text-blue-600" />
+                  <Download size={18} className="text-[#155DFC]" />
                 </button>
                 <button
                   onClick={() => updateStatus(c.id, "Acceptée")}
-                  className="w-10 h-10 rounded-full bg-green-100 hover:bg-green-200 flex items-center justify-center transition"
+                  className="w-10 h-10 rounded-full bg-[#00BBA7]/15 hover:bg-[#00BBA7]/25 flex items-center justify-center transition"
                   title="Accepter"
                 >
-                  <Check size={18} className="text-green-600" />
+                  <Check size={18} className="text-[#00968a]" />
                 </button>
                 <button
                   onClick={() => updateStatus(c.id, "Refusée")}
@@ -360,8 +360,8 @@ const Recrutement: React.FC = () => {
 
                 {/* Poste */}
                 <div className="flex items-center gap-2 mb-6">
-                  <Briefcase size={16} className="text-orange-600" />
-                  <p className="text-orange-600 font-semibold">{c.poste}</p>
+                  <Briefcase size={16} className="text-[#00968a]" />
+                  <p className="text-[#00968a] font-semibold">{c.poste}</p>
                 </div>
 
                 {/* Email et Téléphone */}
@@ -379,7 +379,7 @@ const Recrutement: React.FC = () => {
                 {/* Message */}
                 <div className="mb-4">
                   <p className="text-xs text-gray-500 mb-2">Message du candidat</p>
-                  <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-sm text-gray-700">
+                  <div className="bg-[#F7FAFE] border border-gray-200 rounded-2xl p-4 text-sm text-gray-700">
                     {c.message}
                   </div>
                 </div>
@@ -397,7 +397,7 @@ const Recrutement: React.FC = () => {
       {/* ===== MODAL DÉTAILS ===== */}
       {selectedCandidature && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-[32px] shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="p-8">
               {/* Header */}
               <div className="flex items-center justify-between mb-8">
@@ -406,7 +406,7 @@ const Recrutement: React.FC = () => {
                 </h2>
                 <button
                   onClick={() => setSelectedCandidature(null)}
-                  className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition"
+                  className="w-10 h-10 rounded-full hover:bg-[#F1F6FB] flex items-center justify-center transition"
                 >
                   <X size={24} className="text-gray-600" />
                 </button>
@@ -447,7 +447,7 @@ const Recrutement: React.FC = () => {
               {/* Message */}
               <div className="mb-6">
                 <p className="text-sm text-gray-500 mb-2">Message</p>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-gray-700">
+                <div className="bg-[#F7FAFE] border border-gray-200 rounded-2xl p-4 text-gray-700">
                   {selectedCandidature.message}
                 </div>
               </div>
@@ -455,7 +455,7 @@ const Recrutement: React.FC = () => {
               {/* CV */}
               <div className="mb-6">
                 <p className="text-sm text-gray-500 mb-2">CV</p>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl flex items-center gap-2 transition">
+                <button className="bg-gray-950 hover:bg-black text-white font-semibold px-6 py-3 rounded-full flex items-center gap-2 transition">
                   <Download size={18} />
                   Télécharger le CV
                 </button>
@@ -465,7 +465,7 @@ const Recrutement: React.FC = () => {
               <div className="mb-8">
                 <p className="text-sm text-gray-500 mb-2">Statut</p>
                 <span
-                  className={`inline-block px-4 py-2 rounded-lg text-sm font-semibold ${badgeStyle(
+                  className={`inline-block px-4 py-2 rounded-xl text-sm font-semibold ${badgeStyle(
                     selectedCandidature.statut
                   )}`}
                 >
@@ -484,7 +484,7 @@ const Recrutement: React.FC = () => {
                   onClick={() => {
                     updateStatus(selectedCandidature.id, "Acceptée");
                   }}
-                  className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl transition text-lg"
+                  className="bg-[#00BBA7] hover:bg-[#00968a] text-white font-bold py-4 rounded-2xl transition text-lg"
                 >
                   Accepter
                 </button>
@@ -492,7 +492,7 @@ const Recrutement: React.FC = () => {
                   onClick={() => {
                     updateStatus(selectedCandidature.id, "Refusée");
                   }}
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-xl transition text-lg"
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-2xl transition text-lg"
                 >
                   Refuser
                 </button>
@@ -505,13 +505,13 @@ const Recrutement: React.FC = () => {
      {/* ===== MODAL LETTRE DE MOTIVATION ===== */}
       {showLettreMotivation && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-[32px] shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
             <div className="p-8">
               {/* Header */}
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                    <FileText size={24} className="text-purple-600" />
+                  <div className="w-12 h-12 bg-[#155DFC]/10 rounded-2xl flex items-center justify-center">
+                    <FileText size={24} className="text-[#155DFC]" />
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900">
@@ -522,22 +522,22 @@ const Recrutement: React.FC = () => {
                 </div>
                 <button
                   onClick={() => setShowLettreMotivation(null)}
-                  className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition"
+                  className="w-10 h-10 rounded-full hover:bg-[#F1F6FB] flex items-center justify-center transition"
                 >
                   <X size={24} className="text-gray-600" />
                 </button>
               </div>
 
               {/* Poste */}
-              <div className="mb-6 bg-purple-50 border border-purple-200 rounded-xl p-4">
-                <p className="text-sm text-purple-600 font-medium mb-1">Poste sollicité</p>
-                <p className="text-lg font-bold text-purple-900">
+              <div className="mb-6 bg-[#155DFC]/10 border border-[#155DFC] rounded-2xl p-4">
+                <p className="text-sm text-[#155DFC] font-medium mb-1">Poste sollicité</p>
+                <p className="text-lg font-bold text-gray-950">
                   {showLettreMotivation.poste}
                 </p>
               </div>
 
               {/* Contenu de la lettre */}
-              <div className="bg-gray-50 border border-gray-200 rounded-xl p-6">
+              <div className="bg-[#F7FAFE] border border-gray-200 rounded-2xl p-6">
                 <div className="prose prose-sm max-w-none">
                   <pre className="whitespace-pre-wrap font-sans text-gray-700 leading-relaxed">
 {showLettreMotivation.lettreMotivation}
@@ -549,7 +549,7 @@ const Recrutement: React.FC = () => {
               <div className="mt-8">
                 <button
                   onClick={() => setShowLettreMotivation(null)}
-                  className="w-full px-6 py-3 border border-gray-300 rounded-xl font-semibold text-gray-700 hover:bg-gray-50 transition"
+                  className="w-full px-6 py-3 border border-gray-200 rounded-2xl font-semibold text-gray-700 hover:bg-[#F7FAFE] transition"
                 >
                   Fermer
                 </button>
@@ -575,15 +575,15 @@ function StatCard({
   color: "orange" | "yellow" | "blue" | "green";
 }) {
   const colors: any = {
-    orange: "border-orange-500",
+    orange: "border-[#00BBA7]",
     yellow: "border-yellow-500",
-    blue: "border-blue-500",
-    green: "border-green-500",
+    blue: "border-[#155DFC]",
+    green: "border-[#00BBA7]",
   };
 
   return (
     <div
-      className={`bg-white rounded-2xl p-6 shadow-sm border-l-4 ${colors[color]}`}
+      className={`bg-white rounded-[28px] p-6 shadow-sm border-l-4 ${colors[color]}`}
     >
       <p className="text-sm text-gray-600 mb-1">{label}</p>
       <p className="text-3xl font-bold text-gray-900">{value}</p>

@@ -104,7 +104,7 @@ export default function GestionAssurances() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-            <ShieldCheck className="text-blue-600" size={32} />
+            <ShieldCheck className="text-[#155DFC]" size={32} />
             Gestion des Assurances
           </h1>
           <p className="text-gray-500 mt-2">
@@ -113,14 +113,14 @@ export default function GestionAssurances() {
         </div>
         <button
           onClick={handleOpenAddModal}
-          className="bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition flex items-center gap-2 shadow-lg shadow-blue-200"
+          className="bg-gray-950 text-white px-6 py-3 rounded-full font-medium hover:bg-black transition flex items-center gap-2 shadow-lg shadow-[#155DFC]/20"
         >
           <Plus size={20} /> Ajouter un partenaire
         </button>
       </div>
 
       {/* Search Bar */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-8">
+      <div className="bg-white rounded-[28px] shadow-sm border border-gray-100 p-4 mb-8">
         <div className="relative">
           <label className="sr-only">Rechercher</label>
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
@@ -129,7 +129,7 @@ export default function GestionAssurances() {
             placeholder="Rechercher une assurance au nom..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-transparent focus:bg-white focus:border-blue-500 rounded-xl outline-none transition-all"
+            className="w-full pl-12 pr-4 py-3 bg-[#F7FAFE] border border-transparent focus:bg-white focus:border-[#155DFC] rounded-2xl outline-none transition-all"
           />
         </div>
       </div>
@@ -139,19 +139,19 @@ export default function GestionAssurances() {
         {filteredAssurances.map(partner => (
           <div 
             key={partner.id}
-            className="group bg-white rounded-2xl shadow-sm border border-gray-200 p-4 flex flex-col items-center justify-center text-center relative hover:shadow-md transition-shadow"
+            className="group bg-white rounded-[28px] shadow-sm border border-gray-200 p-4 flex flex-col items-center justify-center text-center relative hover:shadow-md transition-shadow"
           >
             {/* Actions overlays */}
             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
               <button 
                 onClick={() => handleOpenEditModal(partner)}
-                className="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition"
+                className="p-1.5 bg-[#F1F6FB] text-[#155DFC] rounded-xl hover:bg-[#155DFC]/10 transition"
               >
                 <Edit size={16} />
               </button>
               <button 
                 onClick={() => handleDelete(partner.id)}
-                className="p-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition"
+                className="p-1.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition"
               >
                 <Trash2 size={16} />
               </button>
@@ -182,7 +182,7 @@ export default function GestionAssurances() {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-lg p-6 shadow-2xl">
+          <div className="bg-white rounded-[28px] w-full max-w-lg p-6 shadow-2xl">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900">
                 {editingAssurance ? "Modifier l'assurance" : "Ajouter une assurance"}
@@ -203,7 +203,7 @@ export default function GestionAssurances() {
                   placeholder="Ex: NSIA Assurances"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                 />
               </div>
 
@@ -217,9 +217,9 @@ export default function GestionAssurances() {
                     placeholder="URL (/assurances/logo.png) ou parcourir..."
                     value={logo}
                     onChange={(e) => setLogo(e.target.value)}
-                    className="flex-1 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none text-sm"
+                    className="flex-1 border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none text-sm"
                   />
-                  <label className="flex items-center justify-center gap-2 bg-blue-50 text-blue-600 px-4 py-3 rounded-xl font-medium hover:bg-blue-100 transition cursor-pointer shrink-0">
+                  <label className="flex items-center justify-center gap-2 bg-[#F1F6FB] text-[#155DFC] px-4 py-3 rounded-2xl font-medium hover:bg-[#155DFC]/10 transition cursor-pointer shrink-0">
                     <ImageIcon size={18} /> Parcourir
                     <input
                       type="file"
@@ -230,7 +230,7 @@ export default function GestionAssurances() {
                   </label>
                 </div>
                 {logo && (
-                  <div className="h-24 w-full bg-gray-50 rounded-xl flex items-center justify-center border border-gray-200 p-2">
+                  <div className="h-24 w-full bg-[#F7FAFE] rounded-2xl flex items-center justify-center border border-gray-200 p-2">
                      <img src={logo} alt="Aperçu" className="max-h-full max-w-full object-contain" />
                   </div>
                 )}
@@ -240,14 +240,14 @@ export default function GestionAssurances() {
             <div className="flex gap-4 mt-8">
               <button
                 onClick={closeModal}
-                className="flex-1 bg-gray-100 text-gray-700 font-medium py-3 rounded-xl hover:bg-gray-200 transition"
+                className="flex-1 bg-[#F1F6FB] text-gray-700 font-medium py-3 rounded-2xl hover:bg-gray-200 transition"
               >
                 Annuler
               </button>
               <button
                 onClick={handleSave}
                 disabled={!name.trim() || !logo.trim()}
-                className="flex-1 bg-blue-600 text-white font-medium py-3 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="flex-1 bg-gray-950 text-white font-medium py-3 rounded-full hover:bg-black transition shadow-lg shadow-[#155DFC]/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 <Save size={18} /> {editingAssurance ? "Mettre à jour" : "Ajouter"}
               </button>

@@ -1,172 +1,221 @@
 import React, { useState, useEffect } from "react";
-import { Users, Phone, Mail, X } from "lucide-react";
+import { createPortal } from "react-dom";
+import { Link } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  UserRound, Phone, Mail, X, ArrowRight, GraduationCap, BriefcaseBusiness, Clock, Languages, Calendar,
+} from "lucide-react";
 import { initialSpecialists, Specialist } from "../../data/teamData";
-import OptimizedImage from "../ui/OptimizedImage";
+
+// Page « Nos spécialistes » : cartes des médecins + fiche détaillée
+const ease = [0.22, 1, 0.36, 1] as const;
+
+// Photo du spécialiste, ou icône personne si la photo est absente
+const Avatar: React.FC<{ src?: string; alt: string; className?: string; icon?: number }> = ({ src, alt, className = "", icon = 56 }) => {
+  const [erreur, setErreur] = useState(!src);
+  return erreur ? (
+    <div className={`grid place-items-center bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] text-white ${className}`}>
+      <UserRound size={icon} strokeWidth={1.5} />
+    </div>
+  ) : (
+    <img src={src} alt={alt} onError={() => setErreur(true)} className={`object-cover object-top ${className}`} />
+  );
+};
 
 const Teams: React.FC = () => {
-  const [selectedSpecialist, setSelectedSpecialist] = useState<Specialist | null>(null);
+  const [selected, setSelected] = useState<Specialist | null>(null);
   const [specialists, setSpecialists] = useState<Specialist[]>(initialSpecialists);
 
   useEffect(() => {
     const savedSpecs = localStorage.getItem("specialists");
-    if (savedSpecs) {
-      setSpecialists(JSON.parse(savedSpecs));
-    }
+    if (savedSpecs) setSpecialists(JSON.parse(savedSpecs));
   }, []);
 
+  // Fermeture avec Échap et blocage du défilement quand la fiche est ouverte
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setSelected(null);
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [selected]);
+
   return (
-    <section className="w-full py-20 px-6 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-        {/* GRILLE DES SPÉCIALISTES */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {specialists.map((specialist) => (
-            <div
-              key={specialist.id}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
-            >
-              {/* IMAGE AVEC ICÔNE */}
-              <div className="relative h-64 bg-gradient-to-b from-gray-200 to-gray-300">
-                <OptimizedImage
-                  src={specialist.image}
-                  alt={specialist.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+    <section id="equipe" className="relative w-full overflow-hidden py-20 px-4 md:px-8 bg-[#F7FAFE] scroll-mt-24">
+      <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(#155DFC14_1px,transparent_1px)] [background-size:26px_26px] [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" />
 
-              {/* CONTENU */}
-              <div className="p-6">
-                {/* NOM ET TITRE DANS LA PARTIE BLANCHE */}
-                <div className="mb-4">
-                  <h3 className="font-bold text-xl text-gray-900">{specialist.name}</h3>
-                  <p className="text-sm text-blue-600 font-semibold">{specialist.title}</p>
+      <div className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {specialists.map((s, i) => (
+          <motion.button
+            key={s.id}
+            type="button"
+            onClick={() => setSelected(s)}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, delay: (i % 3) * 0.1, ease }}
+            className="group relative overflow-hidden rounded-[28px] bg-white p-6 text-left ring-1 ring-gray-100 shadow-[0_20px_50px_-35px_rgba(21,93,252,0.5)] transition duration-500 hover:-translate-y-1 hover:ring-[#155DFC]/20 hover:shadow-[0_30px_60px_-30px_rgba(21,93,252,0.55)]"
+          >
+            {/* Bandeau dégradé */}
+            <div className="absolute inset-x-0 top-0 h-28 bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] opacity-[0.08] transition-opacity duration-500 group-hover:opacity-[0.16]" />
+            <span className="pointer-events-none absolute -right-10 -top-10 w-40 h-40 rounded-full border border-[#155DFC]/10 anim-ring" />
+
+            <div className="relative flex items-start justify-between">
+              {/* Avatar avec anneau */}
+              <div className="relative">
+                <span className="absolute -inset-1.5 rounded-full bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] opacity-30 blur-md transition-opacity duration-500 group-hover:opacity-60" />
+                <div className="relative rounded-full p-1 bg-white ring-1 ring-[#155DFC]/15">
+                  <Avatar src={s.image} alt={s.name} className="w-24 h-24 rounded-full" icon={44} />
                 </div>
-
-
-                {/* BOUTON VOIR LE PROFIL */}
-                <button
-                  onClick={() => setSelectedSpecialist(specialist)}
-                  className="w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white font-medium py-3 rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2"
-                >
-                  Voir le profil
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.964 0a9 9 0 10-11.964 0m11.964 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </button>
               </div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F1F6FB] px-3 py-1 text-xs font-semibold text-[#155DFC]">
+                <BriefcaseBusiness size={12} /> {s.experience.replace(" d'expérience", "")}
+              </span>
             </div>
-          ))}
-        </div>
+
+            <div className="relative mt-6">
+              <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-400">
+                <span className="w-5 h-px bg-[#00BBA7] transition-all duration-500 group-hover:w-8" />
+                {s.title}
+              </p>
+              <h3 className="mt-2 text-xl font-semibold text-gray-950">{s.name}</h3>
+              <p className="mt-1 text-gray-500">{s.specialty}</p>
+            </div>
+
+            <div className="relative mt-6 flex items-center justify-between gap-3 border-t border-gray-100 pt-5">
+              <span className="flex items-center gap-2 text-xs text-gray-500">
+                <Clock size={14} className="text-[#00BBA7]" /> {s.schedule}
+              </span>
+              <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gray-950 pl-4 pr-1 py-1 text-sm font-semibold text-white">
+                Profil
+                <span className="grid place-items-center w-7 h-7 rounded-full bg-white text-gray-950 transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight size={14} />
+                </span>
+              </span>
+            </div>
+          </motion.button>
+        ))}
       </div>
 
-      {/* MODALE DE PROFIL */}
-      {selectedSpecialist && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            {/* HEADER GRADIENT */}
-            <div className="relative h-48 bg-gradient-to-r from-blue-600 via-blue-500 to-teal-400 rounded-t-3xl">
-              {/* BOUTON FERMER */}
-              <button
-                onClick={() => setSelectedSpecialist(null)}
-                className="absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors"
+      {/* FICHE DÉTAILLÉE (même disposition que la page À propos) */}
+      {createPortal(
+        <AnimatePresence>
+          {selected && (
+            <motion.div
+              className="fixed inset-0 z-[80] flex items-center justify-center p-3 sm:p-6 bg-gray-950/50 backdrop-blur-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelected(null)}
+            >
+              <motion.div
+                role="dialog"
+                aria-modal="true"
+                aria-label={selected.name}
+                initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 30, scale: 0.97 }}
+                transition={{ duration: 0.45, ease }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-[32px] bg-white shadow-2xl grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr]"
               >
-                <X className="w-6 h-6" />
-              </button>
+                <button
+                  onClick={() => setSelected(null)}
+                  aria-label="Fermer"
+                  className="absolute top-4 right-4 z-10 grid place-items-center w-10 h-10 rounded-full bg-white/90 backdrop-blur text-gray-950 shadow-md hover:rotate-90 transition-transform duration-300"
+                >
+                  <X size={18} />
+                </button>
 
-            
-            </div>
-
-            {/* CONTENU */}
-            <div className="p-8 pt-20">
-              {/* NOM ET TITRE */}
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">
-                {selectedSpecialist.name}
-              </h2>
-              <p className="text-blue-600 font-semibold text-lg mb-1">
-                {selectedSpecialist.title}
-              </p>
-              <p className="text-gray-600 mb-6">{selectedSpecialist.specialty}</p>
-
-              {/* BIOGRAPHIE */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <Users className="w-5 h-5 text-blue-600" />
-                  <h3 className="font-semibold text-gray-900 text-lg">Biographie</h3>
+                {/* Photo / icône */}
+                <div className="relative min-h-[320px] md:min-h-full">
+                  <Avatar src={selected.image} alt={selected.name} className="absolute inset-0 w-full h-full" icon={120} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#155DFC]/80 via-[#155DFC]/10 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">
+                      <span className="w-6 h-px bg-[#00BBA7]" /> Nos spécialistes
+                    </p>
+                    <h3 className="mt-2 text-2xl sm:text-3xl font-bold leading-tight">{selected.name}</h3>
+                  </div>
                 </div>
-                <p className="text-gray-600 leading-relaxed">{selectedSpecialist.bio}</p>
-              </div>
 
-              {/* QUALIFICATIONS */}
-              <div className="mb-6">
-                <div className="bg-blue-50 rounded-xl p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-5 h-5 text-blue-600"
+                {/* Détails */}
+                <div className="p-6 sm:p-8 lg:p-10">
+                  <span className="inline-block rounded-full bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] px-3.5 py-1 text-xs font-semibold text-white">
+                    {selected.title}
+                  </span>
+                  <p className="mt-4 text-gray-600 leading-relaxed">{selected.specialty}</p>
+
+                  <div className="mt-6 grid grid-cols-2 gap-3">
+                    <div className="flex items-center gap-3 rounded-2xl bg-[#F1F6FB] p-4">
+                      <span className="grid place-items-center w-10 h-10 shrink-0 rounded-xl bg-white text-[#155DFC] shadow-sm"><BriefcaseBusiness size={18} /></span>
+                      <span className="text-sm leading-tight"><b className="block text-gray-950">{selected.experience.replace(" d'expérience", "")}</b><span className="text-gray-500">d'expérience</span></span>
+                    </div>
+                    <div className="flex items-center gap-3 rounded-2xl bg-[#F1F6FB] p-4">
+                      <span className="grid place-items-center w-10 h-10 shrink-0 rounded-xl bg-white text-[#00BBA7] shadow-sm"><Clock size={18} /></span>
+                      <span className="text-xs leading-tight text-gray-600">{selected.schedule}</span>
+                    </div>
+                  </div>
+
+                  <p className="mt-6 text-gray-600 leading-relaxed">{selected.bio}</p>
+
+                  {selected.qualifications?.length > 0 && (
+                    <div className="mt-8">
+                      <h4 className="flex items-center gap-2 font-semibold text-gray-950">
+                        <GraduationCap size={18} className="text-[#155DFC]" /> Qualifications
+                      </h4>
+                      <ol className="mt-4 space-y-4 border-l-2 border-[#155DFC]/15 pl-5">
+                        {selected.qualifications.map((q) => (
+                          <li key={q} className="relative text-sm text-gray-600 leading-relaxed">
+                            <span className="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-white ring-[3px] ring-[#00BBA7]" />
+                            {q}
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+
+                  {selected.languages?.length > 0 && (
+                    <div className="mt-6 flex flex-wrap items-center gap-2">
+                      <Languages size={16} className="text-[#155DFC]" />
+                      {selected.languages.map((l) => (
+                        <span key={l} className="rounded-full bg-[#F1F6FB] px-3 py-1 text-xs font-medium text-gray-700">{l}</span>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <Link
+                      to="/rdv"
+                      className="group inline-flex items-center gap-2 rounded-full bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] pl-1.5 pr-5 py-1.5 text-sm font-semibold text-white"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
-                      />
-                    </svg>
-                    <h4 className="font-semibold text-gray-900">Qualifications</h4>
-                  </div>
-                  <ul className="space-y-2">
-                    {selectedSpecialist.qualifications?.map((qual, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
-                        <span className="text-blue-600 mt-1">•</span>
-                        <span>{qual}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* CONTACT ET RENDEZ-VOUS */}
-              <div className="bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl p-6 text-white">
-                <h3 className="font-bold text-xl mb-4">Contact et rendez-vous</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* TÉLÉPHONE */}
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                      <Phone className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-white/80">Téléphone</p>
-                      <p className="font-semibold">{selectedSpecialist.phone}</p>
-                    </div>
-                  </div>
-
-                  {/* EMAIL */}
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                      <Mail className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-white/80">Email</p>
-                      <p className="font-semibold text-sm">{selectedSpecialist.email}</p>
-                    </div>
+                      <span className="grid place-items-center w-8 h-8 rounded-full bg-white text-[#155DFC]"><Calendar size={14} /></span>
+                      Prendre rendez-vous
+                    </Link>
+                    <a
+                      href={`tel:${selected.phone.replace(/\s/g, "")}`}
+                      className="inline-flex items-center gap-2 rounded-full bg-gray-950 pl-1.5 pr-5 py-1.5 text-sm font-semibold text-white"
+                    >
+                      <span className="grid place-items-center w-8 h-8 rounded-full bg-white text-gray-950"><Phone size={14} /></span>
+                      {selected.phone}
+                    </a>
+                    <a
+                      href={`mailto:${selected.email}`}
+                      className="inline-flex max-w-full items-center gap-2 rounded-full pl-1.5 pr-5 py-1.5 text-sm font-semibold text-gray-950 ring-1 ring-gray-200 hover:ring-[#155DFC]/40 transition"
+                    >
+                      <span className="grid place-items-center w-8 h-8 shrink-0 rounded-full bg-[#F1F6FB] text-[#155DFC]"><Mail size={14} /></span>
+                      <span className="truncate">{selected.email}</span>
+                    </a>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
       )}
     </section>
   );

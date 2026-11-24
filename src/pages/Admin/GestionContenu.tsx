@@ -264,20 +264,20 @@ export default function GestionContenu() {
         </h1>
 
         <div className="flex gap-3">
-          <button className="flex items-center gap-2 bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
-            <Eye size={18}/> Prévisualiser
+          <button className="flex items-center gap-2 bg-white text-gray-700 ring-1 ring-gray-200 px-5 py-2.5 rounded-full text-sm font-semibold hover:ring-[#155DFC]/40 transition">
+            <Eye size={16}/> Prévisualiser
           </button>
-          <button className="flex items-center gap-2 bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
-            <Save size={18}/> Sauvegarder
+          <button className="flex items-center gap-2 bg-gray-950 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-black transition">
+            <Save size={16}/> Sauvegarder
           </button>
         </div>
       </div>
 
       {/* CARD */}
-      <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+      <div className="bg-white rounded-[32px] shadow-[0_30px_60px_-40px_rgba(21,93,252,0.45)] overflow-hidden">
 
         {/* TABS */}
-        <div className="flex border-b border-gray-200">
+        <div className="flex gap-1 m-4 mb-0 p-1.5 rounded-full bg-[#F1F6FB]">
           <Tab icon={<Briefcase size={16}/>} label="Services" active={tab==="services"} onClick={()=>setTab("services")} />
           <Tab icon={<Newspaper size={16}/>} label="Blog" active={tab==="blog"} onClick={()=>setTab("blog")} />
         </div>
@@ -291,7 +291,7 @@ export default function GestionContenu() {
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold">Gestion des Services par Département</h2>
 
-                <button className="flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-5 py-2 rounded-xl shadow">
+                <button className="flex items-center gap-2 bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] text-white px-5 py-2 rounded-2xl shadow">
                   <Save size={18}/> Sauvegarder
                 </button>
               </div>
@@ -338,14 +338,14 @@ export default function GestionContenu() {
                       <div className="flex justify-between items-center mb-6">
                         <button
                           onClick={() => setViewingArticleId(null)}
-                          className="flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-medium"
+                          className="flex items-center gap-2 text-[#155DFC] hover:text-[#155DFC] font-medium"
                         >
                           ← Retour à la liste
                         </button>
                       </div>
 
                       <div className="max-w-md mx-auto">
-                        <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition">
+                        <div className="bg-white rounded-[28px] shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition">
                           {/* Image */}
                           <img 
                             src={article.image} 
@@ -375,7 +375,7 @@ export default function GestionContenu() {
                                 {article.tags.map((tag, index) => (
                                   <span
                                     key={index}
-                                    className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-lg text-sm font-medium"
+                                    className="bg-[#155DFC]/10 text-[#155DFC] px-3 py-1 rounded-xl text-sm font-medium"
                                   >
                                     {tag}
                                   </span>
@@ -384,9 +384,9 @@ export default function GestionContenu() {
                             )}
                             
                             <div className="mt-4 pt-4 border-t border-gray-200">
-                              <span className={`px-3 py-1 rounded-lg text-sm font-medium ${
+                              <span className={`px-3 py-1 rounded-xl text-sm font-medium ${
                                 article.status === "Publié" 
-                                  ? "bg-green-100 text-green-700" 
+                                  ? "bg-[#00BBA7]/15 text-[#00968a]" 
                                   : "bg-yellow-100 text-yellow-700"
                               }`}>
                                 {article.status}
@@ -402,22 +402,22 @@ export default function GestionContenu() {
                 <>
                   <div className="flex justify-between items-center mb-6">
                     <div className="flex items-center gap-3">
-                      <FileText size={32} className="text-indigo-600" />
+                      <FileText size={32} className="text-[#155DFC]" />
                       <h2 className="text-3xl font-bold text-gray-900">Gestion des Articles</h2>
                     </div>
 
                     <button 
                       onClick={() => setShowArticleForm(true)}
-                      className="flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-indigo-700 transition font-medium"
+                      className="flex items-center gap-2 bg-gray-950 text-white px-6 py-3 rounded-full shadow-lg hover:bg-black transition font-medium"
                     >
                       + Créer un article
                     </button>
                   </div>
 
                   {/* Table des articles */}
-                  <div className="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                  <div className="bg-white rounded-[28px] shadow-sm overflow-hidden border border-gray-100">
                     {/* En-tête du tableau */}
-                    <div className="bg-indigo-50/50 px-8 py-4 border-b border-gray-100">
+                    <div className="bg-[#F1F6FB] px-8 py-4 border-b border-gray-100">
                       <div className="flex items-center gap-8">
                         <div className="w-24 text-sm font-semibold text-gray-700">Image</div>
                         <div className="flex-1 text-sm font-semibold text-gray-700">Titre</div>
@@ -438,7 +438,7 @@ export default function GestionContenu() {
                               <img 
                                 src={article.image} 
                                 alt={article.title}
-                                className="w-20 h-20 object-cover rounded-xl"
+                                className="w-20 h-20 object-cover rounded-2xl"
                               />
                             </div>
 
@@ -460,9 +460,9 @@ export default function GestionContenu() {
 
                             {/* Statut */}
                             <div className="w-32 flex-shrink-0">
-                              <span className={`px-4 py-1.5 rounded-lg text-sm font-medium inline-block ${
+                              <span className={`px-4 py-1.5 rounded-xl text-sm font-medium inline-block ${
                                 article.status === "Publié" 
-                                  ? "bg-green-100 text-green-700" 
+                                  ? "bg-[#00BBA7]/15 text-[#00968a]" 
                                   : "bg-yellow-100 text-yellow-700"
                               }`}>
                                 {article.status}
@@ -473,14 +473,14 @@ export default function GestionContenu() {
                             <div className="w-32 flex items-center justify-center gap-3 flex-shrink-0">
                               <button 
                                 onClick={() => handleViewArticle(article)}
-                                className="text-indigo-600 hover:text-indigo-700 transition"
+                                className="text-[#155DFC] hover:text-[#155DFC] transition"
                                 title="Voir l'article"
                               >
                                 <Eye size={20} />
                               </button>
                               <button 
                                 onClick={() => handleEditArticle(article)}
-                                className="text-green-600 hover:text-green-700 transition"
+                                className="text-[#00968a] hover:text-[#00968a] transition"
                                 title="Modifier l'article"
                               >
                                 <Edit size={20} />
@@ -513,7 +513,7 @@ export default function GestionContenu() {
                   {/* Formulaire d'ajout d'article */}
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
-                      <FileText size={32} className="text-indigo-600" />
+                      <FileText size={32} className="text-[#155DFC]" />
                       <h2 className="text-3xl font-bold text-gray-900">
                         {editingArticleId ? "Modifier l'article" : "Créer un article"}
                       </h2>
@@ -530,9 +530,9 @@ export default function GestionContenu() {
                   <div className="flex items-center gap-4 mb-8">
                     <button
                       onClick={() => setArticleFormStep(1)}
-                      className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-medium transition ${
+                      className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-medium transition ${
                         articleFormStep === 1
-                          ? "bg-indigo-600 text-white"
+                          ? "bg-gray-950 text-white"
                           : "bg-gray-300 text-gray-600"
                       }`}
                     >
@@ -541,9 +541,9 @@ export default function GestionContenu() {
                     <div className="h-px flex-1 bg-gray-300"></div>
                     <button
                       onClick={() => setArticleFormStep(2)}
-                      className={`px-6 py-2.5 rounded-xl font-medium transition ${
+                      className={`px-6 py-2.5 rounded-full font-medium transition ${
                         articleFormStep === 2
-                          ? "bg-indigo-600 text-white"
+                          ? "bg-gray-950 text-white"
                           : "bg-gray-300 text-gray-600"
                       }`}
                     >
@@ -569,9 +569,9 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, imageUrl: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="flex-1 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+                              className="flex-1 border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                             />
-                            <label className="flex items-center gap-2 bg-indigo-100 text-indigo-600 px-6 py-3 rounded-xl font-medium hover:bg-indigo-200 transition cursor-pointer">
+                            <label className="flex items-center gap-2 bg-[#155DFC]/10 text-[#155DFC] px-6 py-3 rounded-2xl font-medium hover:bg-[#155DFC]/15 transition cursor-pointer">
                               <Image size={18} /> Choisir
                               <input
                                 type="file"
@@ -595,7 +595,7 @@ export default function GestionContenu() {
                             <img 
                               src={newArticle.imageUrl} 
                               alt="Preview" 
-                              className="mt-3 w-32 h-32 object-cover rounded-xl"
+                              className="mt-3 w-32 h-32 object-cover rounded-2xl"
                             />
                           )}
                         </div>
@@ -613,7 +613,7 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, author: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+                              className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                             />
                           </div>
 
@@ -628,7 +628,7 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, date: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+                              className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                             />
                           </div>
 
@@ -644,7 +644,7 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, readTime: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+                              className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                             />
                           </div>
                         </div>
@@ -661,7 +661,7 @@ export default function GestionContenu() {
                               setNewArticle({...newArticle, title: e.target.value});
                               setHasUnsavedChanges(true);
                             }}
-                            className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+                            className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                           />
                         </div>
 
@@ -677,7 +677,7 @@ export default function GestionContenu() {
                               setNewArticle({...newArticle, description: e.target.value});
                               setHasUnsavedChanges(true);
                             }}
-                            className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none resize-none"
+                            className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none resize-none"
                           />
                         </div>
 
@@ -689,7 +689,7 @@ export default function GestionContenu() {
                             {newArticle.tags.map((tag, index) => (
                               <span
                                 key={index}
-                                className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 px-3 py-1.5 rounded-lg text-sm font-medium"
+                                className="inline-flex items-center gap-2 bg-[#155DFC]/10 text-[#155DFC] px-3 py-1.5 rounded-xl text-sm font-medium"
                               >
                                 {tag}
                                 <button
@@ -697,7 +697,7 @@ export default function GestionContenu() {
                                     setNewArticle({...newArticle, tags: newArticle.tags.filter(t => t !== tag)});
                                     setHasUnsavedChanges(true);
                                   }}
-                                  className="hover:text-indigo-900"
+                                  className="hover:text-gray-950"
                                 >
                                   <X size={14} />
                                 </button>
@@ -718,7 +718,7 @@ export default function GestionContenu() {
                                 }
                               }}
                               disabled={newArticle.tags.length >= 5}
-                              className="flex-1 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none disabled:bg-gray-100"
+                              className="flex-1 border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none disabled:bg-[#F1F6FB]"
                             />
                             <button
                               onClick={() => {
@@ -729,7 +729,7 @@ export default function GestionContenu() {
                                 }
                               }}
                               disabled={newArticle.tags.length >= 5 || !currentTag.trim()}
-                              className="px-6 py-3 text-indigo-600 rounded-xl font-medium hover:bg-indigo-50 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                              className="px-6 py-3 text-[#155DFC] rounded-2xl font-medium hover:bg-[#F1F6FB] transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                             >
                               🏷️ Ajouter
                             </button>
@@ -741,14 +741,14 @@ export default function GestionContenu() {
                       <div className="flex justify-between items-center mt-8 pt-6 border-t">
                         <button
                           onClick={resetArticleForm}
-                          className="px-8 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition"
+                          className="px-8 py-3 bg-white border border-gray-200 text-gray-700 rounded-2xl font-medium hover:bg-[#F7FAFE] transition"
                         >
                           Annuler
                         </button>
                         <button
                           onClick={() => setArticleFormStep(2)}
                           disabled={!newArticle.title.trim() || !newArticle.author.trim()}
-                          className="px-8 py-3 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="px-8 py-3 bg-gray-950 text-white rounded-full font-medium hover:bg-black transition disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           Suivant →
                         </button>
@@ -775,9 +775,9 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, mainImage: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="flex-1 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+                              className="flex-1 border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                             />
-                            <label className="flex items-center gap-2 bg-indigo-100 text-indigo-600 px-6 py-3 rounded-xl font-medium hover:bg-indigo-200 transition cursor-pointer">
+                            <label className="flex items-center gap-2 bg-[#155DFC]/10 text-[#155DFC] px-6 py-3 rounded-2xl font-medium hover:bg-[#155DFC]/15 transition cursor-pointer">
                               <Image size={18} /> Choisir
                               <input
                                 type="file"
@@ -801,7 +801,7 @@ export default function GestionContenu() {
                             <img 
                               src={newArticle.mainImage} 
                               alt="Preview" 
-                              className="mt-3 w-32 h-32 object-cover rounded-xl"
+                              className="mt-3 w-32 h-32 object-cover rounded-2xl"
                             />
                           )}
                         </div>
@@ -819,7 +819,7 @@ export default function GestionContenu() {
                               setNewArticle({...newArticle, introduction: e.target.value});
                               setHasUnsavedChanges(true);
                             }}
-                            className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none resize-none"
+                            className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none resize-none"
                           />
                         </div>
 
@@ -828,7 +828,7 @@ export default function GestionContenu() {
                         {/* Corps de l'article - Section 1 */}
                         <h3 className="text-xl font-bold text-gray-900 mb-4">Corps de l'article</h3>
                         
-                        <div className="bg-gray-50 rounded-xl p-6 space-y-4">
+                        <div className="bg-[#F7FAFE] rounded-2xl p-6 space-y-4">
                           <h4 className="font-semibold text-gray-800">Section 1</h4>
                           
                           <div>
@@ -844,9 +844,9 @@ export default function GestionContenu() {
                                   setNewArticle({...newArticle, section1Image: e.target.value});
                                   setHasUnsavedChanges(true);
                                 }}
-                                className="flex-1 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none bg-white"
+                                className="flex-1 border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none bg-white"
                               />
-                              <label className="flex items-center gap-2 bg-indigo-100 text-indigo-600 px-6 py-3 rounded-xl font-medium hover:bg-indigo-200 transition cursor-pointer">
+                              <label className="flex items-center gap-2 bg-[#155DFC]/10 text-[#155DFC] px-6 py-3 rounded-2xl font-medium hover:bg-[#155DFC]/15 transition cursor-pointer">
                                 <Image size={18} /> Choisir
                                 <input
                                   type="file"
@@ -870,7 +870,7 @@ export default function GestionContenu() {
                               <img 
                                 src={newArticle.section1Image} 
                                 alt="Preview" 
-                                className="mt-3 w-32 h-32 object-cover rounded-xl"
+                                className="mt-3 w-32 h-32 object-cover rounded-2xl"
                               />
                             )}
                           </div>
@@ -887,7 +887,7 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, section1Title: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none bg-white"
+                              className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none bg-white"
                             />
                           </div>
 
@@ -903,13 +903,13 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, section1Content: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none resize-none bg-white"
+                              className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none resize-none bg-white"
                             />
                           </div>
                         </div>
 
                         {/* Section 2 */}
-                        <div className="bg-gray-50 rounded-xl p-6 space-y-4">
+                        <div className="bg-[#F7FAFE] rounded-2xl p-6 space-y-4">
                           <h4 className="font-semibold text-gray-800">Section 2</h4>
                           
                           <div>
@@ -925,9 +925,9 @@ export default function GestionContenu() {
                                   setNewArticle({...newArticle, section2Image: e.target.value});
                                   setHasUnsavedChanges(true);
                                 }}
-                                className="flex-1 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none bg-white"
+                                className="flex-1 border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none bg-white"
                               />
-                              <label className="flex items-center gap-2 bg-indigo-100 text-indigo-600 px-6 py-3 rounded-xl font-medium hover:bg-indigo-200 transition cursor-pointer">
+                              <label className="flex items-center gap-2 bg-[#155DFC]/10 text-[#155DFC] px-6 py-3 rounded-2xl font-medium hover:bg-[#155DFC]/15 transition cursor-pointer">
                                 <Image size={18} /> Choisir
                                 <input
                                   type="file"
@@ -951,7 +951,7 @@ export default function GestionContenu() {
                               <img 
                                 src={newArticle.section2Image} 
                                 alt="Preview" 
-                                className="mt-3 w-32 h-32 object-cover rounded-xl"
+                                className="mt-3 w-32 h-32 object-cover rounded-2xl"
                               />
                             )}
                           </div>
@@ -968,7 +968,7 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, section2Title: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none bg-white"
+                              className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none bg-white"
                             />
                           </div>
 
@@ -984,13 +984,13 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, section2Content: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none resize-none bg-white"
+                              className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none resize-none bg-white"
                             />
                           </div>
                         </div>
 
                         {/* Section 3 */}
-                        <div className="bg-gray-50 rounded-xl p-6 space-y-4">
+                        <div className="bg-[#F7FAFE] rounded-2xl p-6 space-y-4">
                           <h4 className="font-semibold text-gray-800">Section 3</h4>
                           
                           <div>
@@ -1005,7 +1005,7 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, section3Title: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none bg-white"
+                              className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none bg-white"
                             />
                           </div>
 
@@ -1021,7 +1021,7 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, section3Content1: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none resize-none bg-white"
+                              className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none resize-none bg-white"
                             />
                           </div>
 
@@ -1037,7 +1037,7 @@ export default function GestionContenu() {
                                 setNewArticle({...newArticle, section3Content2: e.target.value});
                                 setHasUnsavedChanges(true);
                               }}
-                              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none resize-none bg-white"
+                              className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none resize-none bg-white"
                             />
                           </div>
                         </div>
@@ -1059,7 +1059,7 @@ export default function GestionContenu() {
                               setNewArticle({...newArticle, conclusion: e.target.value});
                               setHasUnsavedChanges(true);
                             }}
-                            className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none resize-none"
+                            className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none resize-none"
                           />
                         </div>
 
@@ -1074,7 +1074,7 @@ export default function GestionContenu() {
                               setNewArticle({...newArticle, publishStatus: e.target.value as "Brouillon" | "Publié"});
                               setHasUnsavedChanges(true);
                             }}
-                            className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+                            className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                           >
                             <option value="Brouillon">Brouillon</option>
                             <option value="Publié">Publié</option>
@@ -1086,24 +1086,24 @@ export default function GestionContenu() {
                       <div className="flex justify-between items-center mt-8 pt-6 border-t">
                         <button
                           onClick={() => setArticleFormStep(1)}
-                          className="px-8 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition flex items-center gap-2"
+                          className="px-8 py-3 bg-white border border-gray-200 text-gray-700 rounded-2xl font-medium hover:bg-[#F7FAFE] transition flex items-center gap-2"
                         >
                           ← Retour
                         </button>
                         <div className="flex gap-3">
                           <button
                             onClick={resetArticleForm}
-                            className="px-8 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition"
+                            className="px-8 py-3 bg-white border border-gray-200 text-gray-700 rounded-2xl font-medium hover:bg-[#F7FAFE] transition"
                           >
                             Annuler
                           </button>
                           <button
                             onClick={handleCreateArticle}
                             disabled={!!(editingArticleId && !hasUnsavedChanges)}
-                            className={`px-8 py-3 rounded-xl font-medium transition flex items-center gap-2 ${
+                            className={`px-8 py-3 rounded-full font-medium transition flex items-center gap-2 ${
                               editingArticleId && !hasUnsavedChanges
                                 ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                                : "bg-indigo-600 text-white hover:bg-indigo-700"
+                                : "bg-gray-950 text-white hover:bg-black"
                             }`}
                           >
                             <Save size={18} /> {editingArticleId ? "Sauvegarder" : "Créer l'article"}
@@ -1123,10 +1123,10 @@ export default function GestionContenu() {
       {/* Modal Ajouter un service */}
       {showAddServiceModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl p-8">
+          <div className="bg-white rounded-[28px] shadow-2xl w-full max-w-2xl p-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
-                <Plus size={20} className="text-indigo-600" />
+              <div className="w-10 h-10 bg-[#155DFC]/10 rounded-xl flex items-center justify-center">
+                <Plus size={20} className="text-[#155DFC]" />
               </div>
               <h2 className="text-2xl font-bold text-gray-800">Ajouter un nouveau service</h2>
             </div>
@@ -1141,7 +1141,7 @@ export default function GestionContenu() {
                   placeholder="Ex: Service de Cardiologie"
                   value={newServiceName}
                   onChange={(e) => setNewServiceName(e.target.value)}
-                  className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+                  className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                 />
               </div>
 
@@ -1154,7 +1154,7 @@ export default function GestionContenu() {
                   placeholder="Description du service"
                   value={newServiceDescription}
                   onChange={(e) => setNewServiceDescription(e.target.value)}
-                  className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none resize-none"
+                  className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none resize-none"
                 />
               </div>
 
@@ -1165,14 +1165,14 @@ export default function GestionContenu() {
                     setNewServiceName("");
                     setNewServiceDescription("");
                   }}
-                  className="flex-1 flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-200 transition"
+                  className="flex-1 flex items-center justify-center gap-2 bg-[#F1F6FB] text-gray-700 px-6 py-3 rounded-2xl font-medium hover:bg-gray-200 transition"
                 >
                   <X size={18} /> Annuler
                 </button>
                 <button
                   onClick={handleAddService}
                   disabled={!newServiceName.trim()}
-                  className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 flex items-center justify-center gap-2 bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] text-white px-6 py-3 rounded-2xl font-medium hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Save size={18} /> Ajouter
                 </button>
@@ -1185,11 +1185,11 @@ export default function GestionContenu() {
       {/* Modal Editer un service */}
       {editingService && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8">
+          <div className="bg-white rounded-[28px] shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
-                  <Edit size={20} className="text-indigo-600" />
+                <div className="w-10 h-10 bg-[#155DFC]/10 rounded-xl flex items-center justify-center">
+                  <Edit size={20} className="text-[#155DFC]" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-800">Modifier le service</h2>
               </div>
@@ -1208,7 +1208,7 @@ export default function GestionContenu() {
                     required
                     value={editingService.title}
                     onChange={(e) => setEditingService({...editingService, title: e.target.value})}
-                    className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+                    className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                   />
                 </div>
                 <div>
@@ -1217,7 +1217,7 @@ export default function GestionContenu() {
                     type="text"
                     value={editingService.subtitle || ""}
                     onChange={(e) => setEditingService({...editingService, subtitle: e.target.value})}
-                    className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+                    className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                     placeholder="Ex: Suivi et prévention pour la femme"
                   />
                 </div>
@@ -1230,14 +1230,14 @@ export default function GestionContenu() {
                   required
                   value={editingService.description}
                   onChange={(e) => setEditingService({...editingService, description: e.target.value})}
-                  className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none resize-none"
+                  className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none resize-none"
                 />
               </div>
 
               {/* Contenu Détaillé pour le Popup */}
               <div className="border-t border-gray-200 pt-6 mt-6">
                 <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                  <FileText size={20} className="text-indigo-500"/>
+                  <FileText size={20} className="text-[#155DFC]"/>
                   Contenu détaillé du Popup
                 </h3>
                 
@@ -1249,7 +1249,7 @@ export default function GestionContenu() {
                       value={editingService.detailedDescription || ""}
                       onChange={(e) => setEditingService({...editingService, detailedDescription: e.target.value})}
                       placeholder="Texte détaillé affiché dans le popup..."
-                      className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none resize-none"
+                      className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none resize-none"
                     />
                   </div>
 
@@ -1261,9 +1261,9 @@ export default function GestionContenu() {
                         placeholder="URL de l'image"
                         value={editingService.image || ""}
                         onChange={(e) => setEditingService({...editingService, image: e.target.value})}
-                        className="flex-1 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+                        className="flex-1 border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                       />
-                      <label className="flex items-center gap-2 bg-indigo-100 text-indigo-600 px-6 py-3 rounded-xl font-medium hover:bg-indigo-200 transition cursor-pointer">
+                      <label className="flex items-center gap-2 bg-[#155DFC]/10 text-[#155DFC] px-6 py-3 rounded-2xl font-medium hover:bg-[#155DFC]/15 transition cursor-pointer">
                         <Image size={18} /> Parcourir
                         <input
                           type="file"
@@ -1281,7 +1281,7 @@ export default function GestionContenu() {
                       </label>
                     </div>
                     {editingService.image && (
-                      <div className="mt-3 relative w-48 h-32 rounded-xl overflow-hidden shadow">
+                      <div className="mt-3 relative w-48 h-32 rounded-2xl overflow-hidden shadow">
                         <img src={editingService.image} alt="Aperçu" className="w-full h-full object-cover" />
                       </div>
                     )}
@@ -1296,7 +1296,7 @@ export default function GestionContenu() {
                       value={editingService.highlights?.join('\n') || ""}
                       onChange={(e) => setEditingService({...editingService, highlights: e.target.value.split('\n').filter(h => h.trim() !== "")})}
                       placeholder="Ex: Consultations annuelles\nDépistage et frottis..."
-                      className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-400 outline-none resize-none"
+                      className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-[#155DFC]/30 outline-none resize-none"
                     />
                   </div>
                 </div>
@@ -1305,7 +1305,7 @@ export default function GestionContenu() {
               <div className="flex gap-4 pt-6 border-t border-gray-200">
                 <button
                   onClick={() => setEditingService(null)}
-                  className="flex-1 flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-200 transition"
+                  className="flex-1 flex items-center justify-center gap-2 bg-[#F1F6FB] text-gray-700 px-6 py-3 rounded-2xl font-medium hover:bg-gray-200 transition"
                 >
                   Annuler
                 </button>
@@ -1318,7 +1318,7 @@ export default function GestionContenu() {
                     }));
                     setEditingService(null);
                   }}
-                  className="flex-1 flex items-center justify-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition"
+                  className="flex-1 flex items-center justify-center gap-2 bg-gray-950 text-white px-6 py-3 rounded-full font-medium hover:bg-black shadow-lg shadow-[#155DFC]/10 transition"
                 >
                   <Save size={18} /> Enregistrer les modifications
                 </button>
@@ -1335,8 +1335,8 @@ export default function GestionContenu() {
 
 const Tab = ({icon,label,active,onClick}:{icon:any,label:string,active:boolean,onClick:()=>void}) => (
   <button onClick={onClick}
-    className={`flex-1 flex items-center justify-center gap-2 py-4 font-medium transition
-    ${active ? "border-b-2 border-indigo-500 text-indigo-600 bg-indigo-50/30" : "text-gray-500 hover:text-indigo-600"}`}>
+    className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold transition
+    ${active ? "bg-gray-950 text-white rounded-full" : "text-gray-500 hover:text-gray-950 rounded-full"}`}>
     {icon} {label}
   </button>
 );
@@ -1360,29 +1360,38 @@ const ServiceDept = ({
   onDeleteService: (id: number) => void;
   onEditService?: (service: Service) => void;
 }) => (
-  <div className="mb-5">
-    <div className="bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl p-5 text-white flex items-center justify-between shadow-lg">
-      <h3 className="text-lg font-bold">{title}</h3>
-
-      <div className="flex items-center gap-4">
-        <span className="bg-white/20 px-4 py-1 rounded-full text-sm">
-          {count} service(s)
+  <div className="mb-3">
+    <button
+      type="button"
+      onClick={onToggle}
+      className={`group w-full flex items-center justify-between gap-4 rounded-[24px] p-4 pr-5 text-left transition ${
+        isExpanded ? "bg-gray-950 text-white" : "bg-[#F7FAFE] text-gray-950 hover:bg-[#F1F6FB]"
+      }`}
+    >
+      <span className="flex items-center gap-4">
+        <span className="grid place-items-center w-11 h-11 rounded-2xl bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] text-white font-bold">
+          {title.charAt(0)}
         </span>
-        <button
-          onClick={onToggle}
-          className="w-10 h-10 flex items-center justify-center text-2xl font-bold hover:bg-white/10 rounded-lg transition"
-        >
-          {isExpanded ? "−" : "+"}
-        </button>
-      </div>
-    </div>
+        <span>
+          <span className="block font-semibold">{title}</span>
+          <span className={`block text-xs ${isExpanded ? "text-white/60" : "text-gray-400"}`}>{count} service(s)</span>
+        </span>
+      </span>
+      <span
+        className={`grid place-items-center w-9 h-9 rounded-full text-xl leading-none transition-transform duration-300 ${
+          isExpanded ? "bg-white text-gray-950 rotate-45" : "bg-white text-gray-500 ring-1 ring-gray-200"
+        }`}
+      >
+        +
+      </span>
+    </button>
 
     {isExpanded && (
-      <div className="mt-3 space-y-3 bg-gray-50 rounded-xl p-4">
+      <div className="mt-3 space-y-3 bg-[#F7FAFE] rounded-2xl p-4">
         {services.map((service) => (
           <div
             key={service.id}
-            className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 flex items-start justify-between group hover:shadow-md transition"
+            className="bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex items-start justify-between group hover:shadow-md transition"
           >
             <div className="flex-1">
               <h4 className="font-bold text-gray-800 mb-1">{service.title}</h4>
@@ -1392,7 +1401,7 @@ const ServiceDept = ({
               {onEditService && (
                 <button 
                   onClick={() => onEditService(service)}
-                  className="text-indigo-500 hover:text-indigo-700 bg-indigo-50 p-2 rounded-lg"
+                  className="text-[#155DFC] hover:text-[#155DFC] bg-[#F1F6FB] p-2 rounded-xl"
                   title="Modifier le service (et contenu du popup)"
                 >
                   <Edit size={18} />
@@ -1400,7 +1409,7 @@ const ServiceDept = ({
               )}
               <button 
                 onClick={() => onDeleteService(service.id)}
-                className="text-red-500 hover:text-red-700 bg-red-50 p-2 rounded-lg"
+                className="text-red-500 hover:text-red-700 bg-red-50 p-2 rounded-xl"
                 title="Supprimer le service"
               >
                 <Trash2 size={18} />
@@ -1411,7 +1420,7 @@ const ServiceDept = ({
         
         <button 
           onClick={onAddService}
-          className="w-full border-2 border-dashed border-indigo-300 rounded-lg p-4 text-indigo-600 font-medium hover:bg-indigo-50 hover:border-indigo-400 transition flex items-center justify-center gap-2"
+          className="w-full border-2 border-dashed border-[#155DFC]/40 rounded-xl p-4 text-[#155DFC] font-medium hover:bg-[#F1F6FB] hover:border-[#155DFC]/40 transition flex items-center justify-center gap-2"
         >
           + Ajouter un service
         </button>

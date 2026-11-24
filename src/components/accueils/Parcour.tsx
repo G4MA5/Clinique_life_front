@@ -111,9 +111,6 @@ export default function Parcours() {
       {/* Section Parcours de soins */}
       <section className="w-full py-20 px-6">
         <div className="max-w-7xl mx-auto text-center">
-          <span className="inline-block mb-6 px-6 py-2 border-2 border-cyan-400 text-cyan-500 rounded-full text-sm font-medium">
-            Parcours de soins
-          </span>
 
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
             Votre consultation en toute simplicité

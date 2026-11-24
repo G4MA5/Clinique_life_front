@@ -10,12 +10,12 @@ const Partie3_apropos: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <section className="w-full bg-gradient-to-b  py-20 px-4">
+    <section className="w-full bg-[#F7FAFE] py-24 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         
         {/* ONGLETS */}
         <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-white rounded-full p-1 shadow-sm border border-gray-100">
+          <div className="inline-flex bg-white rounded-full p-1.5 shadow-[0_10px_30px_-15px_rgba(21,93,252,0.35)] ring-1 ring-gray-100">
             <button
               onClick={() => setActiveTab("directeur")}
               className={`px-8 py-3 rounded-full font-medium transition-all text-base ${
@@ -51,15 +51,15 @@ const Partie3_apropos: React.FC = () => {
               <img
                 src={DirecteurImg}
                 alt="Dr. Gabriel DONGUI"
-                className="w-full max-w-[450px] h-auto rounded-[2rem] shadow-2xl border-8 border-white"
+                className="w-full max-w-[450px] h-auto rounded-[32px] shadow-[0_40px_80px_-30px_rgba(21,93,252,0.5)] ring-8 ring-white"
               />
               <div className="mt-8 flex justify-center w-full max-w-[450px]">
                 <Link
                   to="/directeur-biographie"
-                  className="group flex items-center justify-center gap-3 bg-white border-2 border-[url(#gradient-border)] border-[#155DFC] text-[#155DFC] font-bold px-8 py-3 rounded-xl hover:bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] hover:text-white hover:border-transparent transition-all duration-300 shadow-md"
+                  className="group inline-flex items-center gap-3 bg-gray-950 text-white font-semibold pl-6 pr-1.5 py-1.5 rounded-full"
                 >
                   Voir son parcours
-                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  <span className="grid place-items-center w-9 h-9 rounded-full bg-white text-gray-950 transition-transform group-hover:translate-x-0.5"><ArrowRight size={18} /></span>
                 </Link>
               </div>
             </motion.div>
@@ -70,11 +70,11 @@ const Partie3_apropos: React.FC = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
               >
-                <div className="inline-block bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <div className="inline-block bg-[#155DFC]/10 text-[#155DFC] px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
                   Message du Directeur
                 </div>
 
-                <h2 className="text-4xl font-extrabold text-gray-900 mb-2">
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-2">
                   Dr. Gabriel DONGUI
                 </h2>
                 
@@ -142,7 +142,7 @@ const Partie3_apropos: React.FC = () => {
 
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="mt-8 flex items-center gap-2 text-blue-600 font-bold hover:gap-3 transition-all group"
+                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-gray-950 font-semibold ring-1 ring-gray-200 hover:ring-[#155DFC]/40 transition"
                 >
                   {isExpanded ? (
                     <>
@@ -178,7 +178,7 @@ const Partie3_apropos: React.FC = () => {
               <img
                 src={HistoireImg}
                 alt="Clinique Life"
-                className="w-full max-w-[450px] h-auto rounded-[2rem] shadow-2xl border-8 border-white"
+                className="w-full max-w-[450px] h-auto rounded-[32px] shadow-[0_40px_80px_-30px_rgba(21,93,252,0.5)] ring-8 ring-white"
               />
             </motion.div>
 
@@ -188,7 +188,7 @@ const Partie3_apropos: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               className="text-left"
             >
-              <h2 className="text-4xl font-extrabold text-gray-900 mb-8">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-8">
                 Notre Histoire
               </h2>
 

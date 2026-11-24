@@ -10,7 +10,7 @@ export default function Contact() {
         min-h-screen
         bg-white
         pt-[100px]
-        overflow-x-hidden
+        overflow-x-clip
       "
     >
       <Partie1 />

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, ArrowRight, Sparkles, CalendarDays } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import medecinImg from "../../assets/Medecin.jpg";
+import Logo from "../../assets/life.png";
 
+// Pop-up d'annonce de l'accueil : photo à gauche, texte à droite (empilé en mobile).
+// Elle ne s'affiche qu'une fois par session de navigation pour ne pas gêner la visite.
 interface AnnouncementPopupProps {
   delay?: number;
   title?: string;
@@ -11,7 +15,11 @@ interface AnnouncementPopupProps {
   image?: string;
   buttonLink?: string;
   type?: "pub" | "info";
+  date?: string;
 }
+
+const CLE_SESSION = "annonce-accueil-vue";
+const ease = [0.22, 1, 0.36, 1] as const;
 
 const AnnouncementPopup: React.FC<AnnouncementPopupProps> = ({
   delay = 2000,
@@ -20,122 +28,135 @@ const AnnouncementPopup: React.FC<AnnouncementPopupProps> = ({
   image = medecinImg,
   buttonLink = "#",
   type = "pub",
+  date = "5 Mars 2026",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-    }, delay);
+    let dejaVue = false;
+    try {
+      dejaVue = sessionStorage.getItem(CLE_SESSION) === "1";
+    } catch {
+      /* stockage indisponible : on affiche quand même */
+    }
+    if (dejaVue) return;
+    const timer = setTimeout(() => setIsOpen(true), delay);
     return () => clearTimeout(timer);
   }, [delay]);
 
+  // Fermeture avec Échap + mémorisation pour la session
   const handleClose = () => {
     setIsOpen(false);
+    try {
+      sessionStorage.setItem(CLE_SESSION, "1");
+    } catch {
+      /* ignoré */
+    }
   };
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && handleClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
+
   const handleAction = () => {
-    if (buttonLink && buttonLink !== "#") {
-      navigate(buttonLink);
-    }
+    if (buttonLink && buttonLink !== "#") navigate(buttonLink);
     handleClose();
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
+        <motion.div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-gray-950/50 backdrop-blur-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={handleClose}
+        >
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={handleClose}
-            className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
-          />
+            role="dialog"
+            aria-modal="true"
+            aria-label={title}
+            initial={{ opacity: 0, y: 50, scale: 0.94 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 30, scale: 0.96 }}
+            transition={{ duration: 0.55, ease }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-sm md:max-w-3xl overflow-hidden rounded-[32px] bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.5)] grid grid-cols-1 md:grid-cols-[1fr_1.1fr]"
+          >
+            {/* Photo */}
+            <div className="relative h-48 md:h-auto md:min-h-[420px] overflow-hidden">
+              <motion.img
+                src={image}
+                alt={title}
+                initial={{ scale: 1.15 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.4, ease }}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#155DFC]/70 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-white/10" />
+              {/* Logo */}
+              <span className="absolute left-4 bottom-4 grid place-items-center w-14 h-14 rounded-2xl bg-white shadow-xl">
+                <img src={Logo} alt="Clinique Life" className="w-10 h-10 object-contain" />
+              </span>
+            </div>
 
-          {/* Modal Container */}
-          <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 30 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-sm sm:max-w-md md:max-w-sm lg:max-w-md bg-white rounded-2xl md:rounded-[1.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.3)] overflow-hidden pointer-events-auto"
-            >
-              {/* Image Header Section - Reduced height */}
-              <div className="relative h-[120px] sm:h-[140px] md:h-[160px] w-full overflow-hidden">
-                <img 
-                  src={image} 
-                  alt={title} 
-                  className="w-full h-full object-cover"
-                />
-                
-                {/* Nouveauté Badge - Smaller */}
-                <div className="absolute top-4 left-4">
-                  <div className="bg-[#2563EB] text-white px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg ring-1 ring-white/20">
-                    <span className="text-sm">🎉</span>
-                    <span className="text-[10px] font-black uppercase tracking-wider">Nouveauté</span>
-                  </div>
-                </div>
+            {/* Contenu */}
+            <div className="relative p-6 sm:p-8 md:p-10 flex flex-col">
+              <span className="pointer-events-none absolute -right-16 -top-16 w-56 h-56 rounded-full border border-[#155DFC]/10 anim-ring" />
 
-                {/* Close Button - Smaller */}
-                <button 
-                  onClick={handleClose}
-                  className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center bg-white/90 hover:bg-white text-gray-900 rounded-full shadow-lg transition-all z-10"
-                >
-                  <X size={18} strokeWidth={2.5} />
-                </button>
+              <button
+                onClick={handleClose}
+                aria-label="Fermer"
+                className="absolute top-4 right-4 grid place-items-center w-10 h-10 rounded-full bg-[#F1F6FB] text-gray-950 hover:rotate-90 transition-transform duration-300"
+              >
+                <X size={18} />
+              </button>
+
+              <div className="relative flex flex-wrap items-center gap-2 pr-12">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white">
+                  <Sparkles size={12} /> Nouveauté
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F1F6FB] px-3 py-1 text-[11px] font-semibold text-gray-500">
+                  <CalendarDays size={12} /> {date}
+                </span>
               </div>
 
-              {/* Content Section - Compacted */}
-              <div className="p-4 sm:p-5 md:p-6 text-center sm:text-left">
-                <p className="text-gray-400 font-bold text-[9px] md:text-[10px] mb-1.5 uppercase tracking-widest">
-                  5 Mars 2026
-                </p>
-                
-                <h2 className="text-lg md:text-xl font-black text-[#1A202C] mb-2 leading-tight">
-                  {title}
-                </h2>
-                
-                <p className="text-gray-500 text-xs sm:text-sm md:text-sm leading-relaxed mb-4 md:mb-5">
-                  {message}
-                </p>
+              <h2 className="relative mt-5 text-2xl md:text-3xl font-bold tracking-tight leading-tight text-gray-950">{title}</h2>
+              <p className="relative mt-3 text-gray-500 leading-relaxed">{message}</p>
 
-                {/* Footer Buttons - Conditionally rendered based on type */}
-                {type === "pub" && (
-                  <div className="flex gap-3">
-                    <button 
+              <div className="relative mt-auto pt-8">
+                {type === "pub" ? (
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
                       onClick={handleAction}
-                      className="flex-[2] bg-gradient-to-r from-[#1D4ED8] to-[#0D9488] hover:from-[#1e40af] hover:to-[#0f766e] text-white font-black py-3 px-4 rounded-xl transition-all duration-300 shadow-lg shadow-blue-50 text-xs uppercase"
+                      className="group inline-flex items-center gap-3 rounded-full bg-gray-950 pl-6 pr-1.5 py-1.5 text-sm font-semibold text-white"
                     >
                       Lire l'article
+                      <span className="grid place-items-center w-9 h-9 rounded-full bg-white text-gray-950 transition-transform group-hover:translate-x-0.5">
+                        <ArrowRight size={16} />
+                      </span>
                     </button>
-                    <button 
-                      onClick={handleClose}
-                      className="flex-[1] bg-white border border-gray-100 hover:bg-gray-50 text-gray-500 font-bold py-3 px-4 rounded-xl transition-all text-xs uppercase"
-                    >
+                    <button onClick={handleClose} className="px-4 py-3 text-sm font-semibold text-gray-500 hover:text-gray-950 transition">
                       Plus tard
                     </button>
                   </div>
-                )}
-
-                {/* Info fallback button if needed or just nothing */}
-                {type === "info" && (
-                  <button 
-                    onClick={handleClose}
-                    className="w-full bg-gray-100 hover:bg-gray-200 text-gray-600 font-black py-3 px-4 rounded-xl transition-all text-xs uppercase"
-                  >
+                ) : (
+                  <button onClick={handleClose} className="w-full rounded-full bg-gray-950 py-3.5 text-sm font-semibold text-white">
                     Fermer
                   </button>
                 )}
               </div>
-            </motion.div>
-          </div>
-        </>
+            </div>
+          </motion.div>
+        </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 

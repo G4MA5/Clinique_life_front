@@ -56,3 +56,83 @@
   border-radius: 999px;
 }
 
+
+
+/* Anneaux et halos animés des cartes en dégradé */
+@keyframes ring-breathe { 0%,100% { transform: scale(1); opacity: .7 } 50% { transform: scale(1.12); opacity: 1 } }
+@keyframes glow-drift { 0%,100% { transform: translate(0,0) } 50% { transform: translate(18px,14px) } }
+.anim-ring { animation: ring-breathe 6s ease-in-out infinite; }
+.anim-ring-delay { animation-delay: -3s; }
+.anim-glow { animation: glow-drift 9s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .anim-ring, .anim-glow { animation: none; } }
+
+/* Réseau neuronal (section Pourquoi choisir) */
+@keyframes neuro-flow { from { stroke-dashoffset: 0 } to { stroke-dashoffset: -460 } }
+@keyframes neuro-twinkle { 0%,100% { opacity: .15 } 50% { opacity: .9 } }
+@keyframes neuro-node { 0%,100% { transform: scale(1); opacity: .6 } 50% { transform: scale(1.8); opacity: 0 } }
+@keyframes neuro-ring { 0% { transform: scale(1); opacity: .8 } 100% { transform: scale(1.35); opacity: 0 } }
+.neuro-influx { stroke-dasharray: 18 442; animation: neuro-flow 2.8s linear infinite; filter: drop-shadow(0 0 4px #00BBA7); }
+.neuro-twinkle { animation: neuro-twinkle 3.5s ease-in-out infinite; }
+.neuro-node { transform-box: fill-box; transform-origin: center; animation: neuro-node 2.4s ease-out infinite; }
+.neuro-ring { animation: neuro-ring 3s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) { .neuro-influx, .neuro-twinkle, .neuro-node, .neuro-ring { animation: none; } }
+
+/* Section Pourquoi choisir : cubes 3D, croix néon, fond animé */
+@keyframes cube-spin { 0%,100% { transform: rotateX(-18deg) rotateY(-28deg) } 50% { transform: rotateX(-26deg) rotateY(-42deg) } }
+@keyframes cube-float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+@keyframes neon-float { 0%,100% { transform: translate(-50%, 0) rotate(0deg); filter: brightness(1) } 50% { transform: translate(-50%, -12px) rotate(4deg); filter: brightness(1.25) } }
+@keyframes blob-move { 0%,100% { transform: translate(0,0) scale(1) } 33% { transform: translate(60px,40px) scale(1.1) } 66% { transform: translate(-30px,60px) scale(.95) } }
+@keyframes icon-drift { 0%,100% { transform: translateY(0) rotate(0deg) } 50% { transform: translateY(-14px) rotate(6deg) } }
+.cube-spin { animation: cube-spin 7s ease-in-out infinite; }
+.cube-float { animation: cube-float 4s ease-in-out infinite; }
+.neon-cross-float { animation: neon-float 5s ease-in-out infinite; }
+.blob-move { animation: blob-move 18s ease-in-out infinite; }
+.icon-drift { animation: icon-drift 6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .cube-spin, .cube-float, .neon-cross-float, .blob-move, .icon-drift { animation: none; } }
+
+/* Néomorphisme (formulaire de candidature) */
+.neu-raised { box-shadow: 24px 24px 48px #cfd8e4, -24px -24px 48px #ffffff; }
+.neu-raised-sm { box-shadow: 4px 4px 8px #cfd8e4, -4px -4px 8px #ffffff; }
+.neu-inset { box-shadow: inset 5px 5px 10px #d2dbe7, inset -5px -5px 10px #ffffff; }
+.neu-btn { box-shadow: 8px 8px 18px #c3cedc, -8px -8px 18px #ffffff; }
+.neu-btn:hover { box-shadow: 4px 4px 10px #c3cedc, -4px -4px 10px #ffffff; }
+
+/* Bandeau défilant du blog */
+@keyframes blog-marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+.blog-marquee { animation: blog-marquee 60s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .blog-marquee { animation: none; } }
+
+/* Lignes « JOURNAL » qui défilent derrière l'en-tête du blog */
+@keyframes journal-defile { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+@keyframes journal-defile-inverse { from { transform: translateX(-50%) } to { transform: translateX(0) } }
+.journal-defile { animation: journal-defile 70s linear infinite; }
+.journal-defile-inverse { animation: journal-defile-inverse 80s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .journal-defile, .journal-defile-inverse { animation: none; } }
+
+/* ===== Rubriques de l'admin : intégration au nouveau cadre =====
+   Le titre est affiché par le bandeau (BandeauRubrique), on masque donc l'ancien titre h1 de chaque page,
+   on retire les fonds/marges propres aux pages et on modernise les cartes de chiffres. */
+.admin-page h1 { display: none; }
+.admin-page > div { min-height: 0 !important; padding: 0 !important; background: transparent !important; }
+.admin-page .border-l-4 {
+  position: relative;
+  border-left-width: 0 !important;
+  padding: 1.5rem !important;
+  border-radius: 28px !important;
+  box-shadow: 0 20px 45px -35px rgba(21, 93, 252, 0.55) !important;
+}
+.admin-page .border-l-4::before {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin-bottom: 1.25rem;
+  border-radius: 9999px;
+  border: 3px solid;
+  border-color: inherit;
+}
+.admin-page .border-l-4 p:last-of-type { font-size: 2.75rem; line-height: 1; font-weight: 300; letter-spacing: -0.02em; margin-top: 0.5rem; color: #030712; }
+.admin-page table thead tr { background: #F1F6FB !important; color: #6b7280; }
+.admin-page table thead th { font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7280 !important; }
+.admin-page table tbody tr { transition: background-color .2s; }
+.admin-page table tbody tr:hover { background: #F7FAFE; }

@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { createPortal } from "react-dom";
+import { X, Phone, Mail, GraduationCap, BriefcaseBusiness } from "lucide-react";
 import OptimizedImage from "../ui/OptimizedImage";
 
 // IMPORTS DES IMAGES DEPUIS src/assets/team/
@@ -8,216 +11,166 @@ const Partie4_apropos: React.FC = () => {
   const [selectedMember, setSelectedMember] = useState<AdminTeamMember | null>(null);
   const team = initialAdminTeam;
 
+  // Fermeture avec Échap et blocage du défilement quand la fiche est ouverte
+  useEffect(() => {
+    if (!selectedMember) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setSelectedMember(null);
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [selectedMember]);
+
   return (
-    <section className="w-full py-20 px-6 bg-white">
+    <section className="w-full py-20 px-4 md:px-8 bg-white">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-2">
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
           Notre Équipe Administrative
         </h2>
-        <p className="text-gray-500 mb-14">
+        <p className="text-gray-500 text-lg mb-14">
           Des professionnels dévoués pour vous accompagner dans vos démarches
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-left">
           {team.map((member, index) => (
-            <div
+            <button
               key={index}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+              type="button"
+              onClick={() => setSelectedMember(member)}
+              className="group relative h-[420px] overflow-hidden rounded-3xl bg-[#F1F6FB] text-left"
             >
-              {/* IMAGE */}
-              <div className="relative h-80 bg-gray-100">
-                <OptimizedImage
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                />
-                {/* ICÔNE BRIEFCASE */}
-                <div className="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-lg flex items-center justify-center shadow-md">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5 text-gray-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"
-                    />
-                  </svg>
-                </div>
-              </div>
+              <OptimizedImage
+                src={member.image}
+                alt={member.name}
+                className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+              <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/0 transition duration-500 group-hover:ring-white/30" />
 
-              {/* CONTENU */}
-              <div className="p-6 text-left">
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-blue-600 text-sm font-medium mb-2">
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75">
+                  <span className="w-5 h-px bg-[#00BBA7] transition-all duration-500 group-hover:w-8" />
                   {member.role}
                 </p>
-                <p className="text-gray-600 text-sm mb-4">
-                  {member.specialty}
-                </p>
-
-                {/* BOUTON VOIR LE PROFIL */}
-                <button
-                  onClick={() => setSelectedMember(member)}
-                  className="w-full bg-blue-50 hover:bg-blue-100 text-blue-600 font-medium text-sm py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
-                >
-                  Voir le profil
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.964 0a9 9 0 10-11.964 0m11.964 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </button>
+                <h3 className="mt-2 text-xl font-semibold">{member.name}</h3>
+                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-500">
+                  <div className="overflow-hidden">
+                    <p className="pt-2 text-sm text-white/80">{member.specialty}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-white text-gray-950 pl-4 pr-1 py-1 text-sm font-semibold">
+                      Voir le profil
+                      <span className="grid place-items-center w-7 h-7 rounded-full bg-gray-950 text-white">→</span>
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
 
       {/* MODALE DE PROFIL */}
-      {selectedMember && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-2 sm:p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl max-h-[95vh] overflow-y-auto">
-            {/* HEADER AVEC GRADIENT */}
-            <div className="relative h-20 sm:h-32 bg-gradient-to-r from-[#0066FF] via-[#00A0E9] to-[#00C9B7] p-3 sm:p-6">
-              {/* BOUTON FERMER */}
+      {createPortal(
+      <AnimatePresence>
+        {selectedMember && (
+          <motion.div
+            className="fixed inset-0 z-[80] flex items-center justify-center p-3 sm:p-6 bg-gray-950/50 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedMember(null)}
+          >
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label={selectedMember.name}
+              initial={{ opacity: 0, y: 40, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 30, scale: 0.97 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-[32px] bg-white shadow-2xl grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr]"
+            >
+              {/* Fermer */}
               <button
                 onClick={() => setSelectedMember(null)}
-                className="absolute top-2 right-2 sm:top-4 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors"
+                aria-label="Fermer"
+                className="absolute top-4 right-4 z-10 grid place-items-center w-10 h-10 rounded-full bg-white/90 backdrop-blur text-gray-950 shadow-md hover:rotate-90 transition-transform duration-300"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-4 h-4 sm:w-5 sm:h-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <X size={18} />
               </button>
-            </div>
 
-            {/* CONTENU */}
-            <div className="p-4 sm:p-6">
-              <h3 className="text-lg sm:text-2xl font-bold text-gray-900 mb-1">
-                {selectedMember.name}
-              </h3>
-              <p className="text-sm sm:text-base text-blue-600 font-medium mb-1 sm:mb-2">
-                {selectedMember.role}
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
-                {selectedMember.specialty}
-              </p>
-
-              {/* RESPONSABILITÉS SUPPRIMÉES SELON LA DEMANDE */}
-
-              {/* ÉDUCATION (SI DISPONIBLE) */}
-              {selectedMember.education && (
-                <div className="mb-4 sm:mb-6">
-                  <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 flex-shrink-0"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
-                      />
-                    </svg>
-                    <h4 className="text-sm sm:text-base font-semibold text-gray-900">Formation</h4>
-                  </div>
-                  <ul className="space-y-1.5 sm:space-y-2">
-                    {selectedMember.education.map((edu, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-gray-600 text-xs sm:text-sm">
-                        <span className="text-blue-600 mt-0.5 sm:mt-1 flex-shrink-0">•</span>
-                        <span>{edu}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* EXPÉRIENCE ET CONTACT */}
-              <div className="grid grid-cols-2 gap-2 sm:gap-4">
-                {/* EXPÉRIENCE */}
-                <div className="bg-blue-50 rounded-lg p-3 sm:p-4">
-                  <div className="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 flex-shrink-0"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0"
-                      />
-                    </svg>
-                    <p className="text-xs sm:text-sm text-gray-600">En service depuis</p>
-                  </div>
-                  <p className="text-base sm:text-xl font-bold text-gray-900">
-                    {selectedMember.experience}
+              {/* Photo */}
+              <div className="relative min-h-[320px] md:min-h-full bg-[#F1F6FB]">
+                <OptimizedImage src={selectedMember.image} alt={selectedMember.name} className="absolute inset-0 w-full h-full object-cover object-top" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#155DFC]/80 via-[#155DFC]/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">
+                    <span className="w-6 h-px bg-[#00BBA7]" /> Équipe administrative
                   </p>
-                </div>
-
-                {/* CONTACT */}
-                <div className="bg-green-50 rounded-lg p-3 sm:p-4">
-                  <div className="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
-                      />
-                    </svg>
-                    <p className="text-xs sm:text-sm text-gray-600">Contact</p>
-                  </div>
-                  <p className="text-xs sm:text-sm font-medium text-gray-900 mb-0.5 sm:mb-1">
-                    {selectedMember.phone}
-                  </p>
-                  <p className="text-[10px] sm:text-xs text-gray-600 break-all">
-                    {selectedMember.email}
-                  </p>
+                  <h3 className="mt-2 text-2xl sm:text-3xl font-bold leading-tight">{selectedMember.name}</h3>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+
+              {/* Détails */}
+              <div className="p-6 sm:p-8 lg:p-10">
+                <span className="inline-block rounded-full bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] px-3.5 py-1 text-xs font-semibold text-white">
+                  {selectedMember.role}
+                </span>
+                <p className="mt-4 text-gray-600 leading-relaxed">{selectedMember.specialty}</p>
+
+                {/* Chiffre clé */}
+                <div className="mt-6 flex items-center gap-4 rounded-2xl bg-[#F1F6FB] p-4">
+                  <span className="grid place-items-center w-12 h-12 rounded-xl bg-white text-[#155DFC] shadow-sm">
+                    <BriefcaseBusiness size={20} />
+                  </span>
+                  <div>
+                    <p className="text-2xl font-bold text-gray-950 leading-none">{selectedMember.experience}</p>
+                    <p className="mt-1 text-sm text-gray-500">en service</p>
+                  </div>
+                </div>
+
+                {/* Formation en frise */}
+                {selectedMember.education && selectedMember.education.length > 0 && (
+                  <div className="mt-8">
+                    <h4 className="flex items-center gap-2 font-semibold text-gray-950">
+                      <GraduationCap size={18} className="text-[#155DFC]" /> Formation
+                    </h4>
+                    <ol className="mt-4 space-y-4 border-l-2 border-[#155DFC]/15 pl-5">
+                      {selectedMember.education.map((edu, idx) => (
+                        <li key={idx} className="relative text-sm text-gray-600 leading-relaxed">
+                          <span className="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-white ring-[3px] ring-[#00BBA7]" />
+                          {edu}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+
+                {/* Contact */}
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a
+                    href={`tel:${selectedMember.phone.replace(/\s/g, "")}`}
+                    className="group inline-flex items-center gap-2 rounded-full bg-gray-950 pl-1.5 pr-5 py-1.5 text-sm font-semibold text-white"
+                  >
+                    <span className="grid place-items-center w-8 h-8 rounded-full bg-white text-gray-950"><Phone size={14} /></span>
+                    {selectedMember.phone}
+                  </a>
+                  <a
+                    href={`mailto:${selectedMember.email}`}
+                    className="inline-flex items-center gap-2 rounded-full pl-1.5 pr-5 py-1.5 text-sm font-semibold text-gray-950 ring-1 ring-gray-200 hover:ring-[#155DFC]/40 transition max-w-full"
+                  >
+                    <span className="grid place-items-center w-8 h-8 shrink-0 rounded-full bg-[#F1F6FB] text-[#155DFC]"><Mail size={14} /></span>
+                    <span className="truncate">{selectedMember.email}</span>
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>,
+      document.body
       )}
     </section>
   );

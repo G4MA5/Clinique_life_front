@@ -78,7 +78,7 @@ const GestionEquipe: React.FC = () => {
     setEditingMember(tab === "admin" ? {
       name: "", role: "", specialty: "", experience: "", phone: "", email: "", image: "", responsibilities: [], education: []
     } : {
-      name: "", title: "", specialty: "", experience: "", phone: "", email: "", image: "", bio: "", qualifications: [], languages: [], schedule: "", iconBg: "bg-blue-500"
+      name: "", title: "", specialty: "", experience: "", phone: "", email: "", image: "", bio: "", qualifications: [], languages: [], schedule: "", iconBg: "bg-[#155DFC]"
     });
     setShowForm(true);
   };
@@ -87,27 +87,27 @@ const GestionEquipe: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-2xl font-bold flex items-center gap-2">
-          <Users size={28} className="text-blue-600" /> Gestion de l'Équipe
+          <Users size={28} className="text-[#155DFC]" /> Gestion de l'Équipe
         </h1>
         <button 
           onClick={startAdd}
-          className="bg-blue-600 text-white px-4 py-2 rounded-xl flex items-center gap-2 hover:bg-blue-700 transition"
+          className="bg-gray-950 text-white px-4 py-2 rounded-full flex items-center gap-2 hover:bg-black transition"
         >
           <UserPlus size={18} /> Ajouter un membre
         </button>
       </div>
 
-      <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden">
         <div className="flex border-b">
           <button 
             onClick={() => setTab("admin")}
-            className={`flex-1 py-4 text-sm font-bold transition-all ${tab === "admin" ? "text-blue-600 border-b-2 border-blue-600 bg-blue-50/50" : "text-gray-400 hover:text-gray-600"}`}
+            className={`flex-1 py-4 text-sm font-bold transition-all ${tab === "admin" ? "text-[#155DFC] border-b-2 border-[#155DFC]/40 bg-[#F1F6FB]" : "text-gray-400 hover:text-gray-600"}`}
           >
             Équipe Administrative
           </button>
           <button 
             onClick={() => setTab("specialists")}
-            className={`flex-1 py-4 text-sm font-bold transition-all ${tab === "specialists" ? "text-emerald-600 border-b-2 border-emerald-600 bg-emerald-50/50" : "text-gray-400 hover:text-gray-600"}`}
+            className={`flex-1 py-4 text-sm font-bold transition-all ${tab === "specialists" ? "text-[#00BBA7] border-b-2 border-[#00BBA7] bg-[#00BBA7]/10" : "text-gray-400 hover:text-gray-600"}`}
           >
             Spécialistes
           </button>
@@ -116,27 +116,27 @@ const GestionEquipe: React.FC = () => {
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {(tab === "admin" ? adminTeam : specialists).map((member: any) => (
-              <div key={member.id} className="border rounded-2xl p-4 flex flex-col gap-4 hover:shadow-md transition">
+              <div key={member.id} className="border rounded-[28px] p-4 flex flex-col gap-4 hover:shadow-md transition">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-100 border">
+                  <div className="w-16 h-16 rounded-full overflow-hidden bg-[#F1F6FB] border">
                     <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-bold text-gray-900 truncate">{member.name}</h3>
-                    <p className="text-xs text-blue-600 font-medium truncate">{tab === "admin" ? member.role : member.title}</p>
+                    <p className="text-xs text-[#155DFC] font-medium truncate">{tab === "admin" ? member.role : member.title}</p>
                     <p className="text-[10px] text-gray-400 truncate">{member.specialty}</p>
                   </div>
                 </div>
                 <div className="flex gap-2 mt-auto pt-4 border-t">
                   <button 
                     onClick={() => { setEditingMember(member); setShowForm(true); }}
-                    className="flex-1 py-2 bg-gray-50 text-gray-600 rounded-lg hover:bg-gray-100 transition flex items-center justify-center gap-2 text-xs font-bold"
+                    className="flex-1 py-2 bg-[#F7FAFE] text-gray-600 rounded-xl hover:bg-[#F1F6FB] transition flex items-center justify-center gap-2 text-xs font-bold"
                   >
                     <Edit size={14} /> Modifier
                   </button>
                   <button 
                     onClick={() => deleteMember(member.id)}
-                    className="py-2 px-3 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition flex items-center justify-center"
+                    className="py-2 px-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition flex items-center justify-center"
                   >
                     <Trash2 size={14} />
                   </button>
@@ -149,10 +149,10 @@ const GestionEquipe: React.FC = () => {
 
       {showForm && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-8 shadow-2xl">
+          <div className="bg-white rounded-[32px] w-full max-w-2xl max-h-[90vh] overflow-y-auto p-8 shadow-2xl">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold">{editingMember?.id ? "Modifier" : "Ajouter"} {tab === "admin" ? "un membre admin" : "un spécialiste"}</h2>
-              <button onClick={() => setShowForm(false)} className="p-2 hover:bg-gray-100 rounded-full"><X size={20}/></button>
+              <button onClick={() => setShowForm(false)} className="p-2 hover:bg-[#F1F6FB] rounded-full"><X size={20}/></button>
             </div>
             <form onSubmit={handleSaveMember} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -163,7 +163,7 @@ const GestionEquipe: React.FC = () => {
                     type="text" 
                     value={editingMember.name} 
                     onChange={e => setEditingMember({...editingMember, name: e.target.value})}
-                    className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-xl outline-none transition"
+                    className="w-full px-4 py-3 bg-[#F7FAFE] border-2 border-transparent focus:border-[#155DFC] rounded-2xl outline-none transition"
                   />
                 </div>
                 <div className="space-y-2">
@@ -173,7 +173,7 @@ const GestionEquipe: React.FC = () => {
                     type="text" 
                     value={tab === "admin" ? editingMember.role : editingMember.title} 
                     onChange={e => setEditingMember(tab === "admin" ? {...editingMember, role: e.target.value} : {...editingMember, title: e.target.value})}
-                    className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-xl outline-none transition"
+                    className="w-full px-4 py-3 bg-[#F7FAFE] border-2 border-transparent focus:border-[#155DFC] rounded-2xl outline-none transition"
                   />
                 </div>
                 <div className="space-y-2">
@@ -183,7 +183,7 @@ const GestionEquipe: React.FC = () => {
                     type="text" 
                     value={editingMember.specialty} 
                     onChange={e => setEditingMember({...editingMember, specialty: e.target.value})}
-                    className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-xl outline-none transition"
+                    className="w-full px-4 py-3 bg-[#F7FAFE] border-2 border-transparent focus:border-[#155DFC] rounded-2xl outline-none transition"
                   />
                 </div>
                 {tab === "admin" && (
@@ -194,7 +194,7 @@ const GestionEquipe: React.FC = () => {
                       type="text" 
                       value={editingMember.experience || ""} 
                       onChange={e => setEditingMember({...editingMember, experience: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-xl outline-none transition"
+                      className="w-full px-4 py-3 bg-[#F7FAFE] border-2 border-transparent focus:border-[#155DFC] rounded-2xl outline-none transition"
                     />
                   </div>
                 )}
@@ -205,7 +205,7 @@ const GestionEquipe: React.FC = () => {
                     type="text" 
                     value={editingMember.phone} 
                     onChange={e => setEditingMember({...editingMember, phone: e.target.value})}
-                    className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-xl outline-none transition"
+                    className="w-full px-4 py-3 bg-[#F7FAFE] border-2 border-transparent focus:border-[#155DFC] rounded-2xl outline-none transition"
                   />
                 </div>
                 <div className="space-y-2">
@@ -215,7 +215,7 @@ const GestionEquipe: React.FC = () => {
                     type="email" 
                     value={editingMember.email} 
                     onChange={e => setEditingMember({...editingMember, email: e.target.value})}
-                    className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-xl outline-none transition"
+                    className="w-full px-4 py-3 bg-[#F7FAFE] border-2 border-transparent focus:border-[#155DFC] rounded-2xl outline-none transition"
                   />
                 </div>
                 <div className="space-y-2 md:col-span-2">
@@ -225,14 +225,14 @@ const GestionEquipe: React.FC = () => {
                     value={tab === "admin" ? (editingMember.education?.join('\n') || '') : (editingMember.qualifications?.join('\n') || '')} 
                     onChange={e => setEditingMember(tab === "admin" ? {...editingMember, education: e.target.value.split('\n')} : {...editingMember, qualifications: e.target.value.split('\n')})}
                     placeholder="Séparez les formations par un retour à la ligne"
-                    className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-xl outline-none transition resize-none"
+                    className="w-full px-4 py-3 bg-[#F7FAFE] border-2 border-transparent focus:border-[#155DFC] rounded-2xl outline-none transition resize-none"
                   />
                 </div>
               </div>
               <div className="space-y-4">
                 <label className="text-xs font-bold text-gray-400 uppercase">Image du membre</label>
                 <div className="flex items-center gap-6">
-                  <div className="w-24 h-24 rounded-2xl bg-gray-50 border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden group relative">
+                  <div className="w-24 h-24 rounded-[28px] bg-[#F7FAFE] border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden group relative">
                     {editingMember.image ? (
                       <>
                         <img src={editingMember.image} alt="Preview" className="w-full h-full object-cover" />
@@ -256,7 +256,7 @@ const GestionEquipe: React.FC = () => {
                     <button 
                       type="button"
                       onClick={() => document.getElementById('fileInput')?.click()}
-                      className="text-xs font-bold text-blue-600 hover:text-blue-700 mt-1"
+                      className="text-xs font-bold text-[#155DFC] hover:text-[#155DFC] mt-1"
                     >
                       Parcourir les fichiers
                     </button>
@@ -277,7 +277,7 @@ const GestionEquipe: React.FC = () => {
                     rows={3}
                     value={editingMember.bio} 
                     onChange={e => setEditingMember({...editingMember, bio: e.target.value})}
-                    className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-xl outline-none transition resize-none"
+                    className="w-full px-4 py-3 bg-[#F7FAFE] border-2 border-transparent focus:border-[#155DFC] rounded-2xl outline-none transition resize-none"
                   />
                 </div>
               )}
@@ -285,13 +285,13 @@ const GestionEquipe: React.FC = () => {
                 <button 
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="flex-1 py-4 bg-gray-100 text-gray-600 font-bold rounded-2xl hover:bg-gray-200 transition uppercase tracking-widest text-[10px]"
+                  className="flex-1 py-4 bg-[#F1F6FB] text-gray-600 font-bold rounded-[28px] hover:bg-gray-200 transition uppercase tracking-widest text-[10px]"
                 >
                   Annuler
                 </button>
                 <button 
                   type="submit"
-                  className="flex-[2] py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 transition shadow-lg shadow-blue-100 uppercase tracking-widest text-[10px] flex items-center justify-center gap-2"
+                  className="flex-[2] py-4 bg-gray-950 text-white font-bold rounded-full hover:bg-black transition shadow-lg shadow-[#155DFC]/10 uppercase tracking-widest text-[10px] flex items-center justify-center gap-2"
                 >
                   <Save size={16} /> Enregistrer
                 </button>

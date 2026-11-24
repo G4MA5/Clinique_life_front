@@ -15,16 +15,16 @@ const APropos: React.FC = () => {
       <FadeIn duration={0.8} delay={0.1} direction="up">
         <Partie2_apropos />
       </FadeIn>
-      <FadeIn duration={0.8} delay={0.1} direction="left">
+      <FadeIn duration={0.8} delay={0.1} direction="up">
         <Partie3_apropos />
       </FadeIn>
-      <FadeIn duration={0.8} delay={0.1} direction="right">
+      <FadeIn duration={0.8} delay={0.1} direction="up">
         <Partie4_apropos />
       </FadeIn>
       <FadeIn duration={0.8} delay={0.1} direction="up">
         <Partie5_apropos />
       </FadeIn>
-      <FadeIn duration={0.8} delay={0.1} direction="none">
+      <FadeIn duration={0.8} delay={0.1} direction="up">
         <Partie6_apropos />
       </FadeIn>
      

@@ -62,27 +62,27 @@ const ChangePassword: React.FC = () => {
     <div className="max-w-2xl mx-auto">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <Lock className="text-blue-500" />
+          <Lock className="text-[#155DFC]" />
           Changer le mot de passe
         </h1>
         <p className="text-gray-500 mt-1">Modifiez votre mot de passe de connexion</p>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-start gap-3">
           <X className="text-red-500 mt-0.5" size={20} />
           <p className="text-red-700">{error}</p>
         </div>
       )}
 
       {success && (
-        <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-start gap-3">
+        <div className="mb-6 p-4 bg-[#00BBA7]/10 border border-[#00BBA7]/30 rounded-2xl flex items-start gap-3">
           <Check className="text-green-500 mt-0.5" size={20} />
-          <p className="text-green-700">{success}</p>
+          <p className="text-[#00968a]">{success}</p>
         </div>
       )}
 
-      <div className="bg-white rounded-2xl shadow-sm border p-8">
+      <div className="bg-white rounded-[28px] shadow-sm border p-8">
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Mot de passe actuel */}
           <div>
@@ -94,7 +94,7 @@ const ChangePassword: React.FC = () => {
                 type={showCurrent ? "text" : "password"}
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12"
+                className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 focus:border-transparent pr-12"
                 placeholder="Entrez votre mot de passe actuel"
               />
               <button
@@ -117,7 +117,7 @@ const ChangePassword: React.FC = () => {
                 type={showNew ? "text" : "password"}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12"
+                className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 focus:border-transparent pr-12"
                 placeholder="Entrez votre nouveau mot de passe"
               />
               <button
@@ -132,19 +132,19 @@ const ChangePassword: React.FC = () => {
             {/* Critères de validation */}
             {newPassword && (
               <div className="mt-3 space-y-2">
-                <div className={`flex items-center gap-2 text-sm ${validation.minLength ? 'text-green-600' : 'text-gray-500'}`}>
+                <div className={`flex items-center gap-2 text-sm ${validation.minLength ? 'text-[#00968a]' : 'text-gray-500'}`}>
                   {validation.minLength ? <Check size={16} /> : <X size={16} />}
                   Au moins 8 caractères
                 </div>
-                <div className={`flex items-center gap-2 text-sm ${validation.hasUpperCase ? 'text-green-600' : 'text-gray-500'}`}>
+                <div className={`flex items-center gap-2 text-sm ${validation.hasUpperCase ? 'text-[#00968a]' : 'text-gray-500'}`}>
                   {validation.hasUpperCase ? <Check size={16} /> : <X size={16} />}
                   Au moins une majuscule
                 </div>
-                <div className={`flex items-center gap-2 text-sm ${validation.hasLowerCase ? 'text-green-600' : 'text-gray-500'}`}>
+                <div className={`flex items-center gap-2 text-sm ${validation.hasLowerCase ? 'text-[#00968a]' : 'text-gray-500'}`}>
                   {validation.hasLowerCase ? <Check size={16} /> : <X size={16} />}
                   Au moins une minuscule
                 </div>
-                <div className={`flex items-center gap-2 text-sm ${validation.hasNumber ? 'text-green-600' : 'text-gray-500'}`}>
+                <div className={`flex items-center gap-2 text-sm ${validation.hasNumber ? 'text-[#00968a]' : 'text-gray-500'}`}>
                   {validation.hasNumber ? <Check size={16} /> : <X size={16} />}
                   Au moins un chiffre
                 </div>
@@ -162,7 +162,7 @@ const ChangePassword: React.FC = () => {
                 type={showConfirm ? "text" : "password"}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12"
+                className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 focus:border-transparent pr-12"
                 placeholder="Confirmez votre nouveau mot de passe"
               />
               <button
@@ -184,7 +184,7 @@ const ChangePassword: React.FC = () => {
           <div className="pt-4">
             <button
               type="submit"
-              className="w-full py-3 bg-gradient-to-r from-blue-500 to-emerald-400 text-white rounded-xl font-medium hover:shadow-lg transition-all"
+              className="w-full py-3 bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] text-white rounded-2xl font-medium hover:shadow-lg transition-all"
             >
               Modifier le mot de passe
             </button>

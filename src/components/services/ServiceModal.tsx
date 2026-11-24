@@ -1,113 +1,118 @@
 import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle } from "lucide-react";
+import { X, Check, Calendar, Phone } from "lucide-react";
 import { ServiceDetail } from "../../data/servicesDetailedData";
-import OptimizedImage from "../ui/OptimizedImage";
 
+// Fiche détaillée d'un service (même disposition que les fiches profil)
 interface ServiceModalProps {
   isOpen: boolean;
   onClose: () => void;
   service: ServiceDetail | null;
 }
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 const ServiceModal: React.FC<ServiceModalProps> = ({ isOpen, onClose, service }) => {
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
-  if (!service) return null;
-
-  return (
+  return createPortal(
     <AnimatePresence>
-      {isOpen && (
-        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
-          {/* Backdrop */}
+      {isOpen && service && (
+        <motion.div
+          className="fixed inset-0 z-[80] flex items-center justify-center p-3 sm:p-6 bg-gray-950/50 backdrop-blur-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-slate-900/40 backdrop-blur-md"
-          />
-
-          {/* Modal Content */}
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative w-[95%] sm:w-full max-w-2xl bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh] z-10"
+            role="dialog"
+            aria-modal="true"
+            aria-label={service.title}
+            initial={{ opacity: 0, y: 40, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 30, scale: 0.97 }}
+            transition={{ duration: 0.45, ease }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-[32px] bg-white shadow-2xl grid grid-cols-1 md:grid-cols-[0.95fr_1.05fr]"
           >
-            {/* Image Header */}
-            <div className="relative h-48 md:h-64 w-full flex-shrink-0">
-              <OptimizedImage
-                src={service.image}
-                alt={service.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              
-              <button
-                onClick={onClose}
-                className="absolute top-4 right-4 p-2 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/40 transition-all border border-white/30"
-              >
-                <X size={20} />
-              </button>
+            <button
+              onClick={onClose}
+              aria-label="Fermer"
+              className="absolute top-4 right-4 z-10 grid place-items-center w-10 h-10 rounded-full bg-white/90 backdrop-blur text-gray-950 shadow-md hover:rotate-90 transition-transform duration-300"
+            >
+              <X size={18} />
+            </button>
 
-              <div className="absolute bottom-4 left-4 md:bottom-6 md:left-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-white drop-shadow-md">
-                  {service.title}
-                </h2>
-                <p className="text-white/90 text-sm md:text-base font-medium mt-1">
-                  {service.subtitle}
+            {/* Photo */}
+            <div className="relative min-h-[260px] md:min-h-full">
+              <img src={service.image} alt={service.title} className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#155DFC]/85 via-[#155DFC]/10 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">
+                  <span className="w-6 h-px bg-[#00BBA7]" /> Nos services
                 </p>
+                <h2 className="mt-2 text-2xl sm:text-3xl font-bold leading-tight">{service.title}</h2>
               </div>
             </div>
 
-            {/* Body */}
-            <div className="p-5 md:p-8 lg:p-10">
-              <p className="text-slate-600 leading-relaxed text-sm md:text-lg mb-6 md:mb-8">
-                {service.description}
-              </p>
+            {/* Détails */}
+            <div className="p-6 sm:p-8 lg:p-10">
+              <span className="inline-block rounded-full bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] px-3.5 py-1 text-xs font-semibold text-white">
+                {service.subtitle}
+              </span>
+              <p className="mt-5 text-gray-600 leading-relaxed">{service.description}</p>
 
-              <div className="space-y-4">
-                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">
-                  Points forts & Services
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {service.highlights.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center">
-                        <CheckCircle size={16} className="text-teal-500" />
-                      </div>
-                      <span className="text-slate-700 font-medium">
+              {service.highlights.length > 0 && (
+                <div className="mt-8">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-950">Points forts</h3>
+                  <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {service.highlights.map((item) => (
+                      <li key={item} className="flex items-center gap-3 rounded-2xl bg-[#F1F6FB] px-4 py-3 text-sm font-medium text-gray-800">
+                        <span className="grid place-items-center w-6 h-6 shrink-0 rounded-full bg-[#00BBA7] text-white">
+                          <Check size={13} strokeWidth={3} />
+                        </span>
                         {item}
-                      </span>
-                    </div>
-                  ))}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
+              )}
 
-              {/* Action Button */}
-              <div className="mt-8 md:mt-10 flex justify-end">
-                <button
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  to="/rdv"
                   onClick={onClose}
-                  className="w-full md:w-auto px-6 md:px-10 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-teal-500 text-white rounded-xl md:rounded-2xl font-bold shadow-lg shadow-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all"
+                  className="inline-flex items-center gap-2 rounded-full bg-gray-950 pl-1.5 pr-5 py-1.5 text-sm font-semibold text-white"
                 >
-                  Fermer
-                </button>
+                  <span className="grid place-items-center w-8 h-8 rounded-full bg-white text-gray-950"><Calendar size={14} /></span>
+                  Prendre rendez-vous
+                </Link>
+                <a
+                  href="tel:+2250701214580"
+                  className="inline-flex items-center gap-2 rounded-full pl-1.5 pr-5 py-1.5 text-sm font-semibold text-gray-950 ring-1 ring-gray-200 hover:ring-[#155DFC]/40 transition"
+                >
+                  <span className="grid place-items-center w-8 h-8 rounded-full bg-[#F1F6FB] text-[#155DFC]"><Phone size={14} /></span>
+                  07 01 21 45 80
+                </a>
               </div>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 

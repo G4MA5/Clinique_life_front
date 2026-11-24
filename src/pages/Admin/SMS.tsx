@@ -68,19 +68,19 @@ Clinique Life`
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-[#F7FAFE] p-6">
       <div className="max-w-7xl mx-auto">
         {/* HEADER */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <MessageSquare className="w-8 h-8 text-blue-600" />
+            <MessageSquare className="w-8 h-8 text-[#155DFC]" />
             <h1 className="text-3xl font-bold text-gray-900">Paramètres SMS</h1>
           </div>
           <p className="text-gray-600">Gérez vos notifications SMS et vos forfaits de messages</p>
         </div>
 
         {/* SOLDE SMS */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-400 rounded-3xl p-8 mb-8 text-white shadow-xl">
+        <div className="bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] rounded-[32px] p-8 mb-8 text-white shadow-xl">
           <div className="flex items-center gap-3 mb-6">
             <MessageSquare className="w-8 h-8" />
             <h2 className="text-2xl font-bold">Solde SMS Disponible</h2>
@@ -115,13 +115,13 @@ Clinique Life`
         </div>
 
         {/* ONGLETS */}
-        <div className="bg-white rounded-2xl shadow-sm mb-6 p-2 flex gap-2">
+        <div className="bg-white rounded-[28px] shadow-sm mb-6 p-2 flex gap-2">
           <button
             onClick={() => setActiveTab("messages")}
-            className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition ${
+            className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium transition ${
               activeTab === "messages"
-                ? "bg-blue-600 text-white"
-                : "text-gray-600 hover:bg-gray-50"
+                ? "bg-gray-950 text-white"
+                : "text-gray-600 hover:bg-[#F7FAFE]"
             }`}
           >
             <MessageSquare className="w-5 h-5" />
@@ -129,10 +129,10 @@ Clinique Life`
           </button>
           <button
             onClick={() => setActiveTab("fournisseur")}
-            className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition ${
+            className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium transition ${
               activeTab === "fournisseur"
-                ? "bg-blue-600 text-white"
-                : "text-gray-600 hover:bg-gray-50"
+                ? "bg-gray-950 text-white"
+                : "text-gray-600 hover:bg-[#F7FAFE]"
             }`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,10 +143,10 @@ Clinique Life`
           </button>
           <button
             onClick={() => setActiveTab("acheter")}
-            className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition ${
+            className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium transition ${
               activeTab === "acheter"
-                ? "bg-blue-600 text-white"
-                : "text-gray-600 hover:bg-gray-50"
+                ? "bg-gray-950 text-white"
+                : "text-gray-600 hover:bg-[#F7FAFE]"
             }`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,7 +160,7 @@ Clinique Life`
         {activeTab === "messages" && (
           <div className="space-y-8">
             {/* MESSAGE DE CONFIRMATION */}
-            <div className="bg-white rounded-2xl shadow-sm p-8">
+            <div className="bg-white rounded-[28px] shadow-sm p-8">
               <h3 className="text-xl font-bold text-gray-900 mb-2">Message de Confirmation</h3>
               <p className="text-gray-600 mb-6">Message envoyé automatiquement lors de la confirmation d'un rendez-vous</p>
 
@@ -173,7 +173,7 @@ Clinique Life`
                 <button
                   onClick={() => setConfirmationActive(!confirmationActive)}
                   className={`relative w-14 h-8 rounded-full transition ${
-                    confirmationActive ? "bg-blue-600" : "bg-gray-300"
+                    confirmationActive ? "bg-gray-950" : "bg-gray-300"
                   }`}
                 >
                   <span
@@ -193,7 +193,7 @@ Clinique Life`
                   value={confirmationTemplate}
                   onChange={(e) => setConfirmationTemplate(e.target.value)}
                   rows={12}
-                  className="w-full p-4 border border-gray-300 rounded-xl font-mono text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full p-4 border border-gray-200 rounded-2xl font-mono text-sm focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                 />
 
                 {/* VARIABLES */}
@@ -208,7 +208,7 @@ Clinique Life`
                     <button
                       key={i}
                       onClick={() => insertVariable(item.var, true)}
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition"
+                      className="flex items-center gap-2 px-4 py-2 bg-[#F1F6FB] hover:bg-gray-200 rounded-xl text-sm font-medium transition"
                     >
                       <span>{item.icon}</span>
                       <span>{item.label}</span>
@@ -229,7 +229,7 @@ Clinique Life`
                     <span className="text-gray-600">Longueur actuelle :</span>
                   </div>
                   <span className="font-bold text-gray-900">{confirmationLength} caractères</span>
-                  <span className="text-orange-600">
+                  <span className="text-[#00968a]">
                     (Sera envoyé en {confirmationSMSCount} SMS)
                   </span>
                 </div>
@@ -237,7 +237,7 @@ Clinique Life`
             </div>
 
             {/* MESSAGE DE RAPPEL */}
-            <div className="bg-white rounded-2xl shadow-sm p-8">
+            <div className="bg-white rounded-[28px] shadow-sm p-8">
               <h3 className="text-xl font-bold text-gray-900 mb-2">Message de Rappel</h3>
               <p className="text-gray-600 mb-6">Message envoyé automatiquement avant le rendez-vous</p>
 
@@ -250,7 +250,7 @@ Clinique Life`
                 <button
                   onClick={() => setRappelActive(!rappelActive)}
                   className={`relative w-14 h-8 rounded-full transition ${
-                    rappelActive ? "bg-blue-600" : "bg-gray-300"
+                    rappelActive ? "bg-gray-950" : "bg-gray-300"
                   }`}
                 >
                   <span
@@ -269,7 +269,7 @@ Clinique Life`
                 <select
                   value={delaiRappel}
                   onChange={(e) => setDelaiRappel(e.target.value)}
-                  className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full p-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                 >
                   <option value="1">1 heure avant</option>
                   <option value="2">2 heures avant</option>
@@ -289,7 +289,7 @@ Clinique Life`
                   value={rappelTemplate}
                   onChange={(e) => setRappelTemplate(e.target.value)}
                   rows={6}
-                  className="w-full p-4 border border-gray-300 rounded-xl font-mono text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full p-4 border border-gray-200 rounded-2xl font-mono text-sm focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                 />
 
                 {/* VARIABLES */}
@@ -302,7 +302,7 @@ Clinique Life`
                     <button
                       key={i}
                       onClick={() => insertVariable(item.var, false)}
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition"
+                      className="flex items-center gap-2 px-4 py-2 bg-[#F1F6FB] hover:bg-gray-200 rounded-xl text-sm font-medium transition"
                     >
                       <span>{item.icon}</span>
                       <span>{item.label}</span>
@@ -318,7 +318,7 @@ Clinique Life`
                     <span className="text-gray-600">Longueur actuelle :</span>
                   </div>
                   <span className="font-bold text-gray-900">{rappelLength} caractères</span>
-                  <span className="text-orange-600">
+                  <span className="text-[#00968a]">
                     (Sera envoyé en {rappelSMSCount} SMS)
                   </span>
                 </div>
@@ -326,9 +326,9 @@ Clinique Life`
             </div>
 
             {/* TEST SMS */}
-            <div className="bg-white rounded-2xl shadow-sm p-8">
+            <div className="bg-white rounded-[28px] shadow-sm p-8">
               <div className="flex items-center gap-3 mb-4">
-                <Send className="w-6 h-6 text-blue-600" />
+                <Send className="w-6 h-6 text-[#155DFC]" />
                 <h3 className="text-xl font-bold text-gray-900">Tester l'envoi SMS</h3>
               </div>
               <p className="text-gray-600 mb-6">Envoyez un SMS de test pour vérifier votre configuration</p>
@@ -339,11 +339,11 @@ Clinique Life`
                   value={testPhone}
                   onChange={(e) => setTestPhone(e.target.value)}
                   placeholder="+225 XX XX XX XX XX"
-                  className="flex-1 p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="flex-1 p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                 />
                 <button
                   onClick={handleSendTest}
-                  className="flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition"
+                  className="flex items-center gap-2 px-8 py-4 bg-gray-950 hover:bg-black text-white font-semibold rounded-full transition"
                 >
                   <Send className="w-5 h-5" />
                   Envoyer un test
@@ -356,30 +356,30 @@ Clinique Life`
         {activeTab === "fournisseur" && (
           <div className="space-y-8">
             {/* TITRE */}
-            <div className="bg-white rounded-2xl shadow-sm p-8">
+            <div className="bg-white rounded-[28px] shadow-sm p-8">
               <h3 className="text-xl font-bold text-gray-900 mb-2">Choisir votre fournisseur SMS</h3>
               <p className="text-gray-600 mb-8">Sélectionnez et configurez votre service d'envoi de SMS</p>
 
               {/* GRID DES FOURNISSEURS */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {/* TWILIO */}
-                <div className="border-2 border-gray-200 rounded-2xl p-6 hover:border-blue-300 transition cursor-pointer">
+                <div className="border-2 border-gray-200 rounded-[28px] p-6 hover:border-blue-300 transition cursor-pointer">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-red-600 rounded-2xl flex items-center justify-center flex-shrink-0">
                       <MessageSquare className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
                       <h4 className="text-lg font-bold text-gray-900 mb-1">Twilio</h4>
                       <p className="text-sm text-gray-600 mb-3">Leader mondial de la messagerie SMS</p>
-                      <p className="text-lg font-bold text-blue-600">0.0075 $ / SMS</p>
+                      <p className="text-lg font-bold text-[#155DFC]">0.0075 $ / SMS</p>
                     </div>
                   </div>
                 </div>
 
                 {/* VONAGE */}
-                <div className="border-2 border-gray-200 rounded-2xl p-6 hover:border-blue-300 transition cursor-pointer">
+                <div className="border-2 border-gray-200 rounded-[28px] p-6 hover:border-blue-300 transition cursor-pointer">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-gray-950 rounded-2xl flex items-center justify-center flex-shrink-0">
                       <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
                       </svg>
@@ -387,38 +387,38 @@ Clinique Life`
                     <div className="flex-1">
                       <h4 className="text-lg font-bold text-gray-900 mb-1">Vonage (Nexmo)</h4>
                       <p className="text-sm text-gray-600 mb-3">Solution SMS fiable et scalable</p>
-                      <p className="text-lg font-bold text-blue-600">0.0080 $ / SMS</p>
+                      <p className="text-lg font-bold text-[#155DFC]">0.0080 $ / SMS</p>
                     </div>
                   </div>
                 </div>
 
                 {/* ORANGE CI */}
-                <div className="border-2 border-gray-200 rounded-2xl p-6 hover:border-blue-300 transition cursor-pointer">
+                <div className="border-2 border-gray-200 rounded-[28px] p-6 hover:border-blue-300 transition cursor-pointer">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center flex-shrink-0">
                       <span className="text-white font-bold text-xl">O</span>
                     </div>
                     <div className="flex-1">
                       <h4 className="text-lg font-bold text-gray-900 mb-1">Orange CI SMS API</h4>
                       <p className="text-sm text-gray-600 mb-3">Opérateur local - Meilleure couverture en Côte d'Ivoire</p>
-                      <p className="text-lg font-bold text-blue-600">10 FCFA / SMS</p>
+                      <p className="text-lg font-bold text-[#155DFC]">10 FCFA / SMS</p>
                     </div>
                   </div>
                 </div>
 
                 {/* MTN CI */}
-                <div className="border-2 border-blue-600 bg-blue-50 rounded-2xl p-6 cursor-pointer relative">
-                  <div className="absolute -top-3 right-4 px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full">
+                <div className="border-2 border-blue-600 bg-[#F1F6FB] rounded-[28px] p-6 cursor-pointer relative">
+                  <div className="absolute -top-3 right-4 px-3 py-1 bg-gray-950 text-white text-xs font-bold rounded-full">
                     Actif
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-yellow-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-yellow-500 rounded-2xl flex items-center justify-center flex-shrink-0">
                       <span className="text-white font-bold text-xl">M</span>
                     </div>
                     <div className="flex-1">
                       <h4 className="text-lg font-bold text-gray-900 mb-1">MTN CI SMS API</h4>
                       <p className="text-sm text-gray-600 mb-3">Opérateur local - Large couverture nationale</p>
-                      <p className="text-lg font-bold text-blue-600">12 FCFA / SMS</p>
+                      <p className="text-lg font-bold text-[#155DFC]">12 FCFA / SMS</p>
                     </div>
                   </div>
                 </div>
@@ -426,7 +426,7 @@ Clinique Life`
             </div>
 
             {/* CONFIGURATION API */}
-            <div className="bg-white rounded-2xl shadow-sm p-8">
+            <div className="bg-white rounded-[28px] shadow-sm p-8">
               <div className="flex items-center gap-2 mb-6">
                 <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -444,7 +444,7 @@ Clinique Life`
                   <input
                     type="text"
                     value="CLINIQUE LIFE"
-                    className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-gray-50"
+                    className="w-full p-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 outline-none bg-[#F7FAFE]"
                   />
                   <p className="text-xs text-gray-500 mt-2">
                     Maximum 11 caractères alphanumériques (peut nécessiter une validation du fournisseur)
@@ -460,7 +460,7 @@ Clinique Life`
                     <input
                       type="password"
                       placeholder="Entrez votre clé API..."
-                      className="w-full p-4 pr-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                      className="w-full p-4 pr-12 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                     />
                     <button className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -480,7 +480,7 @@ Clinique Life`
                     <input
                       type="password"
                       placeholder="Entrez votre secret API..."
-                      className="w-full p-4 pr-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                      className="w-full p-4 pr-12 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 outline-none"
                     />
                     <button className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -492,8 +492,8 @@ Clinique Life`
                 </div>
 
                 {/* AVERTISSEMENT */}
-                <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-                  <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-start gap-3 p-4 bg-[#F1F6FB] border border-blue-200 rounded-2xl">
+                  <svg className="w-5 h-5 text-[#155DFC] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <p className="text-sm text-gray-700">
@@ -503,10 +503,10 @@ Clinique Life`
 
                 {/* BOUTONS */}
                 <div className="flex gap-4 pt-4">
-                  <button className="flex-1 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition">
+                  <button className="flex-1 py-3 border-2 border-gray-200 text-gray-700 font-semibold rounded-2xl hover:bg-[#F7FAFE] transition">
                     Tester la connexion
                   </button>
-                  <button className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition">
+                  <button className="flex-1 py-3 bg-gray-950 hover:bg-black text-white font-semibold rounded-full transition">
                     Enregistrer la configuration
                   </button>
                 </div>
@@ -518,7 +518,7 @@ Clinique Life`
         {activeTab === "acheter" && (
   <div className="space-y-8">
     {/* ACHETER DES CRÉDITS */}
-    <div className="bg-white rounded-2xl shadow-sm p-8">
+    <div className="bg-white rounded-[28px] shadow-sm p-8">
       <div className="flex items-center gap-3 mb-2">
         <svg className="w-7 h-7 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
           <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
@@ -529,14 +529,14 @@ Clinique Life`
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* PACK STARTER */}
-        <div className="border-2 border-gray-200 rounded-2xl p-8 hover:border-gray-300 transition bg-white">
+        <div className="border-2 border-gray-200 rounded-[28px] p-8 hover:border-gray-200 transition bg-white">
           <div className="text-center">
             <p className="text-sm font-semibold text-gray-600 mb-3">Pack Starter</p>
-            <p className="text-5xl font-bold text-blue-600 mb-1">500</p>
+            <p className="text-5xl font-bold text-[#155DFC] mb-1">500</p>
             <p className="text-gray-500 text-sm mb-6">SMS</p>
             <p className="text-3xl font-bold text-gray-900 mb-2">5.000 FCFA</p>
             <p className="text-sm text-gray-500 mb-6">10 FCFA / SMS</p>
-            <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:opacity-90 text-white font-semibold rounded-xl transition flex items-center justify-center gap-2">
+            <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:opacity-90 text-white font-semibold rounded-2xl transition flex items-center justify-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -546,20 +546,20 @@ Clinique Life`
         </div>
 
         {/* PACK BUSINESS - POPULAIRE */}
-        <div className="relative border-2 border-blue-600 bg-blue-50 rounded-2xl p-8">
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-600 text-white text-xs font-bold rounded-full">
+        <div className="relative border-2 border-blue-600 bg-[#F1F6FB] rounded-[28px] p-8">
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gray-950 text-white text-xs font-bold rounded-full">
             Populaire
           </div>
           <div className="text-center">
             <p className="text-sm font-semibold text-gray-600 mb-3">Pack Business</p>
-            <p className="text-5xl font-bold text-blue-600 mb-1">2.000</p>
+            <p className="text-5xl font-bold text-[#155DFC] mb-1">2.000</p>
             <p className="text-gray-500 text-sm mb-6">SMS</p>
             <p className="text-3xl font-bold text-gray-900 mb-2">18.000 FCFA</p>
             <div className="flex items-center justify-center gap-2 mb-6">
-              <p className="text-sm font-semibold text-green-600">9 FCFA / SMS</p>
+              <p className="text-sm font-semibold text-[#00968a]">9 FCFA / SMS</p>
               <span className="px-2 py-0.5 bg-white text-gray-700 text-xs font-semibold rounded">-10%</span>
             </div>
-            <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:opacity-90 text-white font-semibold rounded-xl transition flex items-center justify-center gap-2">
+            <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:opacity-90 text-white font-semibold rounded-2xl transition flex items-center justify-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -569,17 +569,17 @@ Clinique Life`
         </div>
 
         {/* PACK PREMIUM */}
-        <div className="border-2 border-gray-200 rounded-2xl p-8 hover:border-gray-300 transition bg-white">
+        <div className="border-2 border-gray-200 rounded-[28px] p-8 hover:border-gray-200 transition bg-white">
           <div className="text-center">
             <p className="text-sm font-semibold text-gray-600 mb-3">Pack Premium</p>
-            <p className="text-5xl font-bold text-blue-600 mb-1">5.000</p>
+            <p className="text-5xl font-bold text-[#155DFC] mb-1">5.000</p>
             <p className="text-gray-500 text-sm mb-6">SMS</p>
             <p className="text-3xl font-bold text-gray-900 mb-2">40.000 FCFA</p>
             <div className="flex items-center justify-center gap-2 mb-6">
-              <p className="text-sm font-semibold text-green-600">8 FCFA / SMS</p>
+              <p className="text-sm font-semibold text-[#00968a]">8 FCFA / SMS</p>
               <span className="px-2 py-0.5 bg-white text-gray-700 text-xs font-semibold rounded">-20%</span>
             </div>
-            <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:opacity-90 text-white font-semibold rounded-xl transition flex items-center justify-center gap-2">
+            <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:opacity-90 text-white font-semibold rounded-2xl transition flex items-center justify-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -591,21 +591,21 @@ Clinique Life`
     </div>
 
     {/* MOYENS DE PAIEMENT */}
-    <div className="bg-white rounded-2xl shadow-sm p-8">
+    <div className="bg-white rounded-[28px] shadow-sm p-8">
       <h3 className="text-lg font-bold text-gray-900 mb-6">Moyens de paiement acceptés</h3>
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {/* CARTE BANCAIRE */}
-        <div className="flex flex-col items-center p-6 border border-gray-200 rounded-xl hover:border-blue-300 transition cursor-pointer bg-white">
-          <svg className="w-12 h-12 text-blue-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="flex flex-col items-center p-6 border border-gray-200 rounded-2xl hover:border-blue-300 transition cursor-pointer bg-white">
+          <svg className="w-12 h-12 text-[#155DFC] mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
           </svg>
           <p className="text-sm font-medium text-gray-900">Carte bancaire</p>
         </div>
 
         {/* ORANGE MONEY */}
-        <div className="flex flex-col items-center p-6 border border-gray-200 rounded-xl hover:border-blue-300 transition cursor-pointer bg-white">
-          <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center mb-3">
+        <div className="flex flex-col items-center p-6 border border-gray-200 rounded-2xl hover:border-blue-300 transition cursor-pointer bg-white">
+          <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-3">
             <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
             </svg>
@@ -614,8 +614,8 @@ Clinique Life`
         </div>
 
         {/* MTN MOBILE MONEY */}
-        <div className="flex flex-col items-center p-6 border border-gray-200 rounded-xl hover:border-blue-300 transition cursor-pointer bg-white">
-          <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg flex items-center justify-center mb-3">
+        <div className="flex flex-col items-center p-6 border border-gray-200 rounded-2xl hover:border-blue-300 transition cursor-pointer bg-white">
+          <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-3">
             <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
             </svg>
@@ -624,8 +624,8 @@ Clinique Life`
         </div>
 
         {/* VIREMENT BANCAIRE */}
-        <div className="flex flex-col items-center p-6 border border-gray-200 rounded-xl hover:border-blue-300 transition cursor-pointer bg-white">
-          <svg className="w-12 h-12 text-blue-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="flex flex-col items-center p-6 border border-gray-200 rounded-2xl hover:border-blue-300 transition cursor-pointer bg-white">
+          <svg className="w-12 h-12 text-[#155DFC] mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
           </svg>
           <p className="text-sm font-medium text-gray-900">Virement bancaire</p>
@@ -634,31 +634,31 @@ Clinique Life`
     </div>
 
     {/* HISTORIQUE DES ACHATS */}
-    <div className="bg-white rounded-2xl shadow-sm p-8">
+    <div className="bg-white rounded-[28px] shadow-sm p-8">
       <h3 className="text-lg font-bold text-gray-900 mb-6">Historique des achats</h3>
       
       <div className="space-y-3">
         {/* ACHAT 1 */}
-        <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
+        <div className="flex items-center justify-between p-4 bg-[#F7FAFE] rounded-2xl border border-gray-100">
           <div>
             <p className="font-semibold text-gray-900">Pack Business - 2.000 SMS</p>
             <p className="text-sm text-gray-500">15 janvier 2026</p>
           </div>
           <div className="text-right">
             <p className="text-lg font-bold text-gray-900">18.000 FCFA</p>
-            <p className="text-xs text-green-600 font-semibold">Payé</p>
+            <p className="text-xs text-[#00968a] font-semibold">Payé</p>
           </div>
         </div>
 
         {/* ACHAT 2 */}
-        <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
+        <div className="flex items-center justify-between p-4 bg-[#F7FAFE] rounded-2xl border border-gray-100">
           <div>
             <p className="font-semibold text-gray-900">Pack Starter - 500 SMS</p>
             <p className="text-sm text-gray-500">28 décembre 2025</p>
           </div>
           <div className="text-right">
             <p className="text-lg font-bold text-gray-900">5.000 FCFA</p>
-            <p className="text-xs text-green-600 font-semibold">Payé</p>
+            <p className="text-xs text-[#00968a] font-semibold">Payé</p>
           </div>
         </div>
       </div>

@@ -2,11 +2,12 @@ import MaterniteImg from "../assets/Maternite.jpg";
 import MedecinImg from "../assets/Medecin.jpg";
 import ChirurgieImg from "../assets/Chirurgie.jpg";
 import AnalyseImg from "../assets/Analyse.jpg";
-import ImagerieImg from "../assets/Imagerie.jpg";
 import EnceinteImg from "../assets/Enceinte.jpg";
 import CardiologieImg from "../assets/Cardiologie.jpg";
-import RadiologieImg from "../assets/Radiologie.jpg";
 import SoinsImg from "../assets/Soins.jpg";
+import NeonatSalle from "../assets/plateau/neonat-salle.jpg";
+import RadioProImg from "../assets/plateau/radio-pro.jpg";
+import EchographeImg from "../assets/plateau/echographe.jpg";
 
 export interface ServiceDetail {
   title: string;
@@ -56,7 +57,7 @@ export const servicesDetailedData: Record<string, ServiceDetail> = {
   "service-de-neonatologie": {
     title: "Service de Néonatologie",
     subtitle: "Soins intensifs pour les tout-petits",
-    image: MaterniteImg,
+    image: NeonatSalle,
     description: "Notre unité de néonatologie accueille les prématurés et les nouveau-nés nécessitant une surveillance particulière. Équipée de couveuses modernes, elle garantit des soins optimaux 24h/24.",
     highlights: ["Soins intensifs néonataux", "Pathologies respiratoires", "Accompagnement des parents", "Surveillance continue"]
   },
@@ -134,14 +135,14 @@ export const servicesDetailedData: Record<string, ServiceDetail> = {
   "radiologie": {
     title: "Radiologie",
     subtitle: "Imagerie médicale standard",
-    image: RadiologieImg,
+    image: RadioProImg,
     description: "Examens de radiographie conventionnelle pour l'exploration des os et des organes internes. Résultats rapides pour un diagnostic efficace.",
     highlights: ["Radio pulmonaire", "Ostéo-articulaire", "ASP", "Interprétation rapide"]
   },
   "echographie": {
     title: "Échographie",
     subtitle: "Imagerie par ultrasons",
-    image: ImagerieImg,
+    image: EchographeImg,
     description: "Explorez vos organes en temps réel et sans irradiation. Idéal pour le suivi de grossesse et l'exploration abdominale ou pelvienne.",
     highlights: ["Dopler vasculaire", "Écho abdominale", "Thyroïde et tissus mous", "Gynéco-obstétrique"]
   }

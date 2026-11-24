@@ -53,16 +53,16 @@ const GestionCarousel: React.FC = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold flex items-center gap-2">
-          <Layout size={28} className="text-blue-600" /> Gestion du Carrousel
+          <Layout size={28} className="text-[#155DFC]" /> Gestion du Carrousel
         </h1>
       </div>
 
-      <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden">
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {slides.map((slide, index) => (
-              <div key={slide.id} className="group border border-gray-100 rounded-[1.5rem] overflow-hidden flex flex-col hover:border-blue-200 transition-all duration-300 shadow-sm">
-                <div className="relative aspect-video bg-gray-50 overflow-hidden">
+              <div key={slide.id} className="group border border-gray-100 rounded-[1.5rem] overflow-hidden flex flex-col hover:border-[#155DFC]/40 transition-all duration-300 shadow-sm">
+                <div className="relative aspect-video bg-[#F7FAFE] overflow-hidden">
                   {slide.type === "image" ? (
                     <img src={slide.url} alt={slide.title} className="w-full h-full object-cover transition-transform duration-500" />
                   ) : (
@@ -74,7 +74,7 @@ const GestionCarousel: React.FC = () => {
                     </div>
                   )}
                   <div className="absolute top-4 left-4">
-                    <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+                    <div className="w-8 h-8 bg-gray-950 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
                       {index + 1}
                     </div>
                   </div>
@@ -85,11 +85,11 @@ const GestionCarousel: React.FC = () => {
                   </div>
                 </div>
                 <div className="p-6 flex flex-col gap-2 bg-white">
-                  <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors uppercase tracking-wider text-sm">{slide.title}</h3>
+                  <h3 className="font-bold text-gray-900 group-hover:text-[#155DFC] transition-colors uppercase tracking-wider text-sm">{slide.title}</h3>
                   <p className="text-xs text-gray-400 line-clamp-2 italic">{slide.description}</p>
                   <button 
                     onClick={() => { setEditingSlide(slide); setShowForm(true); }}
-                    className="mt-4 w-full py-3 bg-gray-50 text-gray-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest"
+                    className="mt-4 w-full py-3 bg-[#F7FAFE] text-gray-600 rounded-full hover:bg-gray-950 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest"
                   >
                     <Edit size={14} /> Modifier
                   </button>
@@ -110,7 +110,7 @@ const GestionCarousel: React.FC = () => {
               </div>
               <button 
                 onClick={() => setShowForm(false)} 
-                className="w-12 h-12 flex items-center justify-center bg-gray-50 hover:bg-red-50 hover:text-red-600 rounded-full transition-all text-gray-400"
+                className="w-12 h-12 flex items-center justify-center bg-[#F7FAFE] hover:bg-red-50 hover:text-red-600 rounded-full transition-all text-gray-400"
               >
                 <X size={24} />
               </button>
@@ -126,7 +126,7 @@ const GestionCarousel: React.FC = () => {
                       type="text" 
                       value={editingSlide.title} 
                       onChange={e => setEditingSlide({...editingSlide, title: e.target.value})}
-                      className="w-full px-6 py-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition-all duration-300 font-medium"
+                      className="w-full px-6 py-4 bg-[#F7FAFE] border-2 border-transparent focus:border-[#155DFC] focus:bg-white rounded-[28px] outline-none transition-all duration-300 font-medium"
                     />
                   </div>
                   <div className="space-y-2">
@@ -136,14 +136,14 @@ const GestionCarousel: React.FC = () => {
                       rows={4}
                       value={editingSlide.description} 
                       onChange={e => setEditingSlide({...editingSlide, description: e.target.value})}
-                      className="w-full px-6 py-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition-all duration-300 resize-none font-medium text-sm leading-relaxed"
+                      className="w-full px-6 py-4 bg-[#F7FAFE] border-2 border-transparent focus:border-[#155DFC] focus:bg-white rounded-[28px] outline-none transition-all duration-300 resize-none font-medium text-sm leading-relaxed"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Média (Vidéo ou Image)</label>
-                  <div className="relative aspect-square rounded-[2.5rem] bg-gray-50 border-4 border-dashed border-gray-200 flex flex-col items-center justify-center overflow-hidden group hover:border-blue-400 transition-colors">
+                  <div className="relative aspect-square rounded-[2.5rem] bg-[#F7FAFE] border-4 border-dashed border-gray-200 flex flex-col items-center justify-center overflow-hidden group hover:border-[#155DFC]/40 transition-colors">
                     {editingSlide.url ? (
                       <>
                         {editingSlide.type === "image" ? (
@@ -177,7 +177,7 @@ const GestionCarousel: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setEditingSlide({...editingSlide, isActive: editingSlide.isActive !== false ? false : true})}
-                    className={`flex-1 py-4 text-center font-bold rounded-2xl transition-all shadow-sm flex items-center justify-center gap-2 mb-2 ${editingSlide.isActive !== false ? "bg-green-50 text-green-600 border border-green-200 hover:bg-green-100" : "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100"}`}
+                    className={`flex-1 py-4 text-center font-bold rounded-[28px] transition-all shadow-sm flex items-center justify-center gap-2 mb-2 ${editingSlide.isActive !== false ? "bg-[#00BBA7]/10 text-[#00968a] border border-[#00BBA7]/30 hover:bg-[#00BBA7]/15" : "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100"}`}
                   >
                     {editingSlide.isActive !== false ? "✓ Ce slide est Actif (Visible)" : "✕ Ce slide est Inactif (Masqué)"}
                   </button>
@@ -188,7 +188,7 @@ const GestionCarousel: React.FC = () => {
               <div className="flex flex-col gap-4">
                 <button 
                   type="submit"
-                  className="w-full py-5 bg-blue-600 text-white font-black rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 uppercase tracking-[0.2em] text-xs flex items-center justify-center gap-3"
+                  className="w-full py-5 bg-gray-950 text-white font-black rounded-full hover:bg-black transition-all shadow-xl shadow-[#155DFC]/20 uppercase tracking-[0.2em] text-xs flex items-center justify-center gap-3"
                 >
                   <Save size={20} /> Enregistrer les modifications
                 </button>

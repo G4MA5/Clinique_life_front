@@ -105,14 +105,14 @@ const GestionAdmins: React.FC = () => {
       <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-            <Users className="text-blue-500" />
+            <Users className="text-[#155DFC]" />
             Gestion des Administrateurs
           </h1>
           <p className="text-gray-500 mt-1">Gérez les accès administrateurs de la plateforme</p>
         </div>
         <button
           onClick={() => setShowAddForm(!showAddForm)}
-          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-emerald-400 text-white rounded-xl font-medium hover:shadow-lg transition-all"
+          className="flex items-center gap-2 px-6 py-3 bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] text-white rounded-2xl font-medium hover:shadow-lg transition-all"
         >
           <UserPlus size={20} />
           Ajouter un admin
@@ -120,20 +120,20 @@ const GestionAdmins: React.FC = () => {
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl">
           <p className="text-red-700">{error}</p>
         </div>
       )}
 
       {success && (
-        <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl">
-          <p className="text-green-700">{success}</p>
+        <div className="mb-6 p-4 bg-[#00BBA7]/10 border border-[#00BBA7]/30 rounded-2xl">
+          <p className="text-[#00968a]">{success}</p>
         </div>
       )}
 
       {/* Formulaire d'ajout */}
       {showAddForm && (
-        <div className="mb-6 bg-white rounded-2xl shadow-sm border p-8">
+        <div className="mb-6 bg-white rounded-[28px] shadow-sm border p-8">
           <h2 className="text-xl font-bold text-gray-800 mb-6">Nouvel Administrateur</h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -145,7 +145,7 @@ const GestionAdmins: React.FC = () => {
                   type="text"
                   value={nom}
                   onChange={(e) => setNom(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 focus:border-transparent"
                   placeholder="Ex: Jean Dupont"
                 />
               </div>
@@ -158,7 +158,7 @@ const GestionAdmins: React.FC = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 focus:border-transparent"
                   placeholder="admin@cliniquelife.com"
                 />
               </div>
@@ -172,7 +172,7 @@ const GestionAdmins: React.FC = () => {
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 focus:border-transparent pr-12"
                     placeholder="Au moins 8 caractères"
                   />
                   <button
@@ -192,7 +192,7 @@ const GestionAdmins: React.FC = () => {
                 <select
                   value={niveau}
                   onChange={(e) => setNiveau(Number(e.target.value))}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 focus:border-transparent"
                 >
                   <option value={1}>Niveau 1 - Gestion complète</option>
                   <option value={2}>Niveau 2 - Contenu & Communication</option>
@@ -203,14 +203,14 @@ const GestionAdmins: React.FC = () => {
             <div className="flex gap-4 pt-4">
               <button
                 type="submit"
-                className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-emerald-400 text-white rounded-xl font-medium hover:shadow-lg transition-all"
+                className="flex-1 py-3 bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] text-white rounded-2xl font-medium hover:shadow-lg transition-all"
               >
                 Créer l'administrateur
               </button>
               <button
                 type="button"
                 onClick={() => setShowAddForm(false)}
-                className="px-8 py-3 border border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-all"
+                className="px-8 py-3 border border-gray-200 text-gray-700 rounded-2xl font-medium hover:bg-[#F7FAFE] transition-all"
               >
                 Annuler
               </button>
@@ -227,17 +227,17 @@ const GestionAdmins: React.FC = () => {
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#155DFC]/30 focus:border-transparent"
             placeholder="Rechercher un administrateur..."
           />
         </div>
       </div>
 
       {/* Liste des admins */}
-      <div className="bg-white rounded-2xl shadow-sm border overflow-hidden">
+      <div className="bg-white rounded-[28px] shadow-sm border overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b">
+            <thead className="bg-[#F7FAFE] border-b">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Administrateur
@@ -261,10 +261,10 @@ const GestionAdmins: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {filteredAdmins.map((admin) => (
-                <tr key={admin.id} className="hover:bg-gray-50 transition">
+                <tr key={admin.id} className="hover:bg-[#F7FAFE] transition">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-emerald-400 text-white rounded-full flex items-center justify-center font-bold">
+                      <div className="w-10 h-10 bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] text-white rounded-full flex items-center justify-center font-bold">
                         {admin.nom.charAt(0)}
                       </div>
                       <div className="ml-4">
@@ -280,7 +280,7 @@ const GestionAdmins: React.FC = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center gap-2">
-                      <Shield size={16} className={admin.niveau === 1 ? "text-blue-500" : "text-emerald-500"} />
+                      <Shield size={16} className={admin.niveau === 1 ? "text-[#155DFC]" : "text-[#00BBA7]"} />
                       <span className="text-sm font-medium text-gray-900">Niveau {admin.niveau}</span>
                     </div>
                   </td>
@@ -290,8 +290,8 @@ const GestionAdmins: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                       admin.status === 'actif' 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-gray-100 text-gray-800'
+                        ? 'bg-[#00BBA7]/15 text-green-800' 
+                        : 'bg-[#F1F6FB] text-gray-800'
                     }`}>
                       {admin.status}
                     </span>

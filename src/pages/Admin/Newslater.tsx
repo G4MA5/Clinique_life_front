@@ -100,16 +100,16 @@ export default function Newsletter() {
   const abonnesActifs = abonnes.filter(a => a.statut === "Actif").length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#F7FAFE] via-cyan-50 to-[#F1F6FB] p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <h1 className="text-3xl font-bold flex items-center gap-3 text-gray-900">
-            <Mail className="text-teal-600" size={36} />
+            <Mail className="text-[#155DFC]" size={36} />
             Gestion Newsletter
           </h1>
           <button 
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-xl shadow-lg font-semibold transition"
+            className="flex items-center gap-2 bg-gray-950 hover:bg-black text-white px-6 py-3 rounded-2xl shadow-lg font-semibold transition"
           >
             <Plus size={20} />
             Nouvelle campagne
@@ -117,32 +117,32 @@ export default function Newsletter() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          <div className="rounded-2xl p-6 shadow-md border-l-4 border-teal-500 bg-gradient-to-br from-white to-teal-50">
+          <div className="rounded-[28px] p-6 shadow-md border-l-4 border-[#155DFC]/30 bg-gradient-to-br from-white to-[#F1F6FB]">
             <p className="text-gray-600 text-sm font-medium mb-2">Abonnés totaux</p>
             <p className="text-3xl font-bold text-gray-900">{abonnes.length}</p>
           </div>
-          <div className="rounded-2xl p-6 shadow-md border-l-4 border-green-500 bg-gradient-to-br from-white to-green-50">
+          <div className="rounded-[28px] p-6 shadow-md border-l-4 border-[#00BBA7] bg-gradient-to-br from-white to-[#F1F6FB]">
             <p className="text-gray-600 text-sm font-medium mb-2">Abonnés actifs</p>
             <p className="text-3xl font-bold text-gray-900">{abonnesActifs}</p>
           </div>
-          <div className="rounded-2xl p-6 shadow-md border-l-4 border-blue-500 bg-gradient-to-br from-white to-blue-50">
+          <div className="rounded-[28px] p-6 shadow-md border-l-4 border-[#155DFC] bg-gradient-to-br from-white to-[#F1F6FB]">
             <p className="text-gray-600 text-sm font-medium mb-2">Taux d'ouverture</p>
             <p className="text-3xl font-bold text-gray-900">42%</p>
           </div>
-          <div className="rounded-2xl p-6 shadow-md border-l-4 border-purple-500 bg-gradient-to-br from-white to-purple-50">
+          <div className="rounded-[28px] p-6 shadow-md border-l-4 border-[#155DFC] bg-gradient-to-br from-white to-[#F1F6FB]">
             <p className="text-gray-600 text-sm font-medium mb-2">Taux de clic</p>
             <p className="text-3xl font-bold text-gray-900">10%</p>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div className="bg-white rounded-[28px] shadow-lg overflow-hidden">
           <div className="flex border-b border-gray-200">
             <button
               onClick={() => setActiveTab("abonnes")}
               className={`flex items-center gap-2 px-8 py-5 font-semibold transition text-base ${
                 activeTab === "abonnes"
-                  ? "border-b-4 border-teal-600 text-teal-600 bg-teal-50"
-                  : "border-transparent text-gray-500 hover:text-teal-600 hover:bg-gray-50"
+                  ? "border-b-4 border-[#155DFC]/30 text-[#155DFC] bg-[#F1F6FB]"
+                  : "border-transparent text-gray-500 hover:text-[#155DFC] hover:bg-[#F7FAFE]"
               }`}
             >
               <Users size={20} />
@@ -152,8 +152,8 @@ export default function Newsletter() {
               onClick={() => setActiveTab("campagnes")}
               className={`flex items-center gap-2 px-8 py-5 font-semibold transition text-base ${
                 activeTab === "campagnes"
-                  ? "border-b-4 border-teal-600 text-teal-600 bg-teal-50"
-                  : "border-transparent text-gray-500 hover:text-teal-600 hover:bg-gray-50"
+                  ? "border-b-4 border-[#155DFC]/30 text-[#155DFC] bg-[#F1F6FB]"
+                  : "border-transparent text-gray-500 hover:text-[#155DFC] hover:bg-[#F7FAFE]"
               }`}
             >
               <Send size={20} />
@@ -175,7 +175,7 @@ export default function Newsletter() {
                   </thead>
                   <tbody>
                     {abonnes.map((a, i) => (
-                      <tr key={i} className="border-b border-gray-100 hover:bg-gray-50 transition">
+                      <tr key={i} className="border-b border-gray-100 hover:bg-[#F7FAFE] transition">
                         <td className="py-5 px-2">
                           <div className="flex items-center gap-3">
                             <Mail size={18} className="text-gray-400" />
@@ -185,7 +185,7 @@ export default function Newsletter() {
                         <td className="py-5 px-2 text-gray-600">{a.date}</td>
                         <td className="py-5 px-2">
                           <span className={`px-4 py-1.5 rounded-full text-xs font-semibold ${
-                            a.statut === "Actif" ? "bg-green-100 text-green-700" : "bg-gray-200 text-gray-700"
+                            a.statut === "Actif" ? "bg-[#00BBA7]/15 text-[#00968a]" : "bg-gray-200 text-gray-700"
                           }`}>
                             {a.statut}
                           </span>
@@ -193,7 +193,7 @@ export default function Newsletter() {
                         <td className="py-5 px-2 text-right">
                           <button 
                             onClick={() => deleteAbonne(a.email)}
-                            className="p-2.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition inline-flex items-center justify-center"
+                            className="p-2.5 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 transition inline-flex items-center justify-center"
                           >
                             <Trash2 size={18} />
                           </button>
@@ -212,17 +212,17 @@ export default function Newsletter() {
                   const tauxClic = Math.round((campagne.clics / campagne.destinataires) * 100);
                   
                   return (
-                    <div key={campagne.id} className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-6 border border-teal-100">
+                    <div key={campagne.id} className="bg-gradient-to-br from-[#F7FAFE] to-[#F1F6FB] rounded-[28px] p-6 border border-[#155DFC]/30">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
                           <h3 className="text-xl font-bold text-gray-900 mb-2">{campagne.titre}</h3>
                           <div className="flex items-center gap-2 text-gray-700 mb-3">
-                            <Target size={16} className="text-teal-600" />
+                            <Target size={16} className="text-[#155DFC]" />
                             <span className="font-medium">{campagne.sujet}</span>
                           </div>
                           <p className="text-gray-600 text-sm">{campagne.description}</p>
                         </div>
-                        <span className="px-4 py-1.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+                        <span className="px-4 py-1.5 rounded-full text-xs font-semibold bg-[#00BBA7]/15 text-[#00968a]">
                           {campagne.statut}
                         </span>
                       </div>
@@ -235,12 +235,12 @@ export default function Newsletter() {
                         <div>
                           <p className="text-xs text-gray-500 mb-1">Ouvertures</p>
                           <p className="text-2xl font-bold text-gray-900">{campagne.ouvertures}</p>
-                          <p className="text-sm font-semibold text-teal-600">{tauxOuverture}%</p>
+                          <p className="text-sm font-semibold text-[#155DFC]">{tauxOuverture}%</p>
                         </div>
                         <div>
                           <p className="text-xs text-gray-500 mb-1">Clics</p>
                           <p className="text-2xl font-bold text-gray-900">{campagne.clics}</p>
-                          <p className="text-sm font-semibold text-teal-600">{tauxClic}%</p>
+                          <p className="text-sm font-semibold text-[#155DFC]">{tauxClic}%</p>
                         </div>
                         <div>
                           <p className="text-xs text-gray-500 mb-1">Envoyé le</p>
@@ -250,7 +250,7 @@ export default function Newsletter() {
 
                       <button 
                         onClick={() => handleVoirDetails(campagne)}
-                        className="flex items-center gap-2 text-teal-600 hover:text-teal-700 font-semibold text-sm transition"
+                        className="flex items-center gap-2 text-[#155DFC] hover:text-[#155DFC] font-semibold text-sm transition"
                       >
                         <Eye size={16} />
                         Voir les détails
@@ -267,13 +267,13 @@ export default function Newsletter() {
       {/* Modal Nouvelle Campagne */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-[32px] shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="p-8">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-900">Nouvelle campagne</h2>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition"
+                  className="p-2 hover:bg-[#F1F6FB] rounded-xl transition"
                 >
                   <X size={24} className="text-gray-500" />
                 </button>
@@ -289,7 +289,7 @@ export default function Newsletter() {
                     placeholder="Ex: Newsletter Janvier 2025"
                     value={newCampagne.titre}
                     onChange={(e) => setNewCampagne({ ...newCampagne, titre: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#155DFC]/30 focus:border-transparent"
                   />
                 </div>
 
@@ -302,7 +302,7 @@ export default function Newsletter() {
                     placeholder="Ex: Vos conseils santé pour le nouvel an"
                     value={newCampagne.sujet}
                     onChange={(e) => setNewCampagne({ ...newCampagne, sujet: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#155DFC]/30 focus:border-transparent"
                   />
                 </div>
 
@@ -315,7 +315,7 @@ export default function Newsletter() {
                     value={newCampagne.contenu}
                     onChange={(e) => setNewCampagne({ ...newCampagne, contenu: e.target.value })}
                     rows={8}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#155DFC]/30 focus:border-transparent resize-none"
                   />
                 </div>
 
@@ -325,13 +325,13 @@ export default function Newsletter() {
                       setShowModal(false);
                       setNewCampagne({ titre: "", sujet: "", contenu: "" });
                     }}
-                    className="flex-1 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition"
+                    className="flex-1 px-6 py-3 bg-[#F1F6FB] hover:bg-gray-200 text-gray-700 font-semibold rounded-2xl transition"
                   >
                     Annuler
                   </button>
                   <button
                     onClick={handleEnvoyerCampagne}
-                    className="flex-1 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl transition"
+                    className="flex-1 px-6 py-3 bg-gray-950 hover:bg-black text-white font-semibold rounded-2xl transition"
                   >
                     Envoyer la campagne
                   </button>
@@ -345,7 +345,7 @@ export default function Newsletter() {
       {/* Modal Détails de la Campagne */}
       {showDetailsModal && selectedCampagne && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col">
+          <div className="bg-white rounded-[32px] shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col">
             <div className="p-6 border-b border-gray-200">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-900">Détails de la campagne</h2>
@@ -354,7 +354,7 @@ export default function Newsletter() {
                     setShowDetailsModal(false);
                     setSelectedCampagne(null);
                   }}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition"
+                  className="p-2 hover:bg-[#F1F6FB] rounded-xl transition"
                 >
                   <X size={24} className="text-gray-500" />
                 </button>
@@ -364,21 +364,21 @@ export default function Newsletter() {
             <div className="flex-1 overflow-y-auto px-6 pb-6">
               <div className="space-y-6">
                 {/* En-tête de la campagne */}
-                <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-4 border border-teal-100">
+                <div className="bg-gradient-to-br from-[#F7FAFE] to-[#F1F6FB] rounded-2xl p-4 border border-[#155DFC]/30">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900 mb-2">{selectedCampagne.titre}</h3>
                       <div className="flex items-center gap-2 text-gray-700 mb-2">
-                        <Target size={16} className="text-teal-600" />
+                        <Target size={16} className="text-[#155DFC]" />
                         <span className="font-medium">{selectedCampagne.sujet}</span>
                       </div>
                     </div>
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                       selectedCampagne.statut === "Envoyée" 
-                        ? "bg-green-100 text-green-700" 
+                        ? "bg-[#00BBA7]/15 text-[#00968a]" 
                         : selectedCampagne.statut === "Brouillon"
                         ? "bg-gray-200 text-gray-700"
-                        : "bg-blue-100 text-blue-700"
+                        : "bg-[#155DFC]/10 text-[#155DFC]"
                     }`}>
                       {selectedCampagne.statut}
                     </span>
@@ -395,25 +395,25 @@ export default function Newsletter() {
                 <div>
                   <h4 className="text-lg font-bold text-gray-900 mb-3">Statistiques</h4>
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-gradient-to-br from-white to-teal-50 rounded-xl p-4 border border-teal-100">
+                    <div className="bg-gradient-to-br from-white to-[#F1F6FB] rounded-2xl p-4 border border-[#155DFC]/30">
                       <p className="text-xs text-gray-600 mb-1">Destinataires</p>
                       <p className="text-2xl font-bold text-gray-900">{selectedCampagne.destinataires}</p>
                     </div>
-                    <div className="bg-gradient-to-br from-white to-blue-50 rounded-xl p-4 border border-blue-100">
+                    <div className="bg-gradient-to-br from-white to-[#F1F6FB] rounded-2xl p-4 border border-gray-100">
                       <p className="text-xs text-gray-600 mb-1">Ouvertures</p>
                       <p className="text-2xl font-bold text-gray-900">{selectedCampagne.ouvertures}</p>
-                      <p className="text-sm font-semibold text-blue-600">
+                      <p className="text-sm font-semibold text-[#155DFC]">
                         {Math.round((selectedCampagne.ouvertures / selectedCampagne.destinataires) * 100)}%
                       </p>
                     </div>
-                    <div className="bg-gradient-to-br from-white to-purple-50 rounded-xl p-4 border border-purple-100">
+                    <div className="bg-gradient-to-br from-white to-[#F1F6FB] rounded-2xl p-4 border border-gray-100">
                       <p className="text-xs text-gray-600 mb-1">Clics</p>
                       <p className="text-2xl font-bold text-gray-900">{selectedCampagne.clics}</p>
-                      <p className="text-sm font-semibold text-purple-600">
+                      <p className="text-sm font-semibold text-[#155DFC]">
                         {Math.round((selectedCampagne.clics / selectedCampagne.destinataires) * 100)}%
                       </p>
                     </div>
-                    <div className="bg-gradient-to-br from-white to-green-50 rounded-xl p-4 border border-green-100">
+                    <div className="bg-gradient-to-br from-white to-[#F1F6FB] rounded-2xl p-4 border border-gray-100">
                       <p className="text-xs text-gray-600 mb-1">Taux de clic</p>
                       <p className="text-2xl font-bold text-gray-900">
                         {selectedCampagne.ouvertures > 0 
@@ -432,13 +432,13 @@ export default function Newsletter() {
                     <div>
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-sm font-medium text-gray-700">Taux d'ouverture</span>
-                        <span className="text-sm font-bold text-teal-600">
+                        <span className="text-sm font-bold text-[#155DFC]">
                           {Math.round((selectedCampagne.ouvertures / selectedCampagne.destinataires) * 100)}%
                         </span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2.5">
                         <div 
-                          className="bg-gradient-to-r from-teal-500 to-teal-600 h-2.5 rounded-full transition-all duration-500"
+                          className="bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] h-2.5 rounded-full transition-all duration-500"
                           style={{ width: `${Math.round((selectedCampagne.ouvertures / selectedCampagne.destinataires) * 100)}%` }}
                         ></div>
                       </div>
@@ -447,13 +447,13 @@ export default function Newsletter() {
                     <div>
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-sm font-medium text-gray-700">Taux de clic</span>
-                        <span className="text-sm font-bold text-purple-600">
+                        <span className="text-sm font-bold text-[#155DFC]">
                           {Math.round((selectedCampagne.clics / selectedCampagne.destinataires) * 100)}%
                         </span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2.5">
                         <div 
-                          className="bg-gradient-to-r from-purple-500 to-purple-600 h-2.5 rounded-full transition-all duration-500"
+                          className="bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] h-2.5 rounded-full transition-all duration-500"
                           style={{ width: `${Math.round((selectedCampagne.clics / selectedCampagne.destinataires) * 100)}%` }}
                         ></div>
                       </div>
@@ -464,13 +464,13 @@ export default function Newsletter() {
             </div>
 
             {/* Bouton de fermeture fixe en bas */}
-            <div className="p-4 border-t border-gray-200 bg-gray-50 rounded-b-3xl">
+            <div className="p-4 border-t border-gray-200 bg-[#F7FAFE] rounded-b-3xl">
               <button
                 onClick={() => {
                   setShowDetailsModal(false);
                   setSelectedCampagne(null);
                 }}
-                className="w-full px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl transition"
+                className="w-full px-6 py-3 bg-gray-950 hover:bg-black text-white font-semibold rounded-2xl transition"
               >
                 Fermer
               </button>

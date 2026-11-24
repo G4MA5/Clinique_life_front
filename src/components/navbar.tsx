@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
-import { Home, Info, Briefcase, BookOpen, Mail, Calendar, Heart, ChevronDown, Stethoscope, Users } from "lucide-react";
+import { NavLink, useLocation } from "react-router-dom";
+import { Home, Info, Briefcase, BookOpen, Mail, Calendar, Heart, ChevronDown, Stethoscope, Users, Menu, Phone, ArrowRight } from "lucide-react";
 import logo from "/src/assets/life.png";
 
 const links = [
@@ -37,141 +37,139 @@ const Navbar: React.FC = () => {
     };
   }, [isOpen]);
 
+  // Transparente sur le hero de l'accueil, pleine dès qu'on défile
+  const { pathname } = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const clair = pathname === "/" && !scrolled; // texte blanc sur la vidéo
+
+  const lien = (actif: boolean) =>
+    `relative px-1 py-2 font-medium transition-colors ${
+      clair ? (actif ? "text-white" : "text-white/75 hover:text-white") : actif ? "text-gray-950" : "text-gray-500 hover:text-gray-950"
+    }`;
+
   return (
     <>
-      {/* NAVBAR VERRE */}
-      <nav className="
-        fixed top-2 sm:top-3 md:top-4 
-        left-1/2 -translate-x-1/2 
-        z-50 
-        w-[96%] sm:w-[95%] md:w-[95%] lg:w-[92%] 
-        max-w-[1400px] 
-        h-[60px] sm:h-[65px] md:h-[72px]
-        rounded-full 
-        border-2 border-white 
-        overflow-visible
-        shadow-lg
-      ">
-        
-        {/* Blur */}
-        <div className="absolute inset-0 bg-white/15 backdrop-blur-lg pointer-events-none rounded-full" />
-
-        {/* Contenu */}
-        <div className="relative z-10 flex items-center justify-between h-full px-4 sm:px-5 md:px-6 lg:px-5">
-          
-          {/* MOBILE & TABLET (< lg) */}
-          <div className="flex lg:hidden items-center justify-between w-full">
-            {/* Menu Burger */}
+      <nav
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+          clair ? "bg-transparent" : "bg-white/85 backdrop-blur-xl shadow-[0_1px_0_rgba(0,0,0,0.06)]"
+        }`}
+      >
+        <div className={`max-w-7xl mx-auto px-4 md:px-8 flex items-center transition-all duration-500 ${scrolled ? "h-16" : "h-20"}`}>
+          {/* MOBILE & TABLET (< lg) : burger à gauche, logo seul au centre */}
+          <div className="relative flex lg:hidden items-center w-full h-full">
             <button
               onClick={() => setIsOpen(true)}
-              className="text-2xl sm:text-3xl text-[#134774] hover:text-[#1E80EF] transition"
+              aria-label="Ouvrir le menu"
+              className="grid place-items-center w-10 h-10 rounded-full bg-white/80 backdrop-blur text-slate-900 shadow-sm"
             >
-              ☰
+              <Menu className="w-5 h-5" />
             </button>
-
-           {/* Logo centré */}
-            <NavLink to="/" className="flex items-center gap-2 cursor-pointer">
-              <img src={logo} alt="Logo" className="w-8 sm:w-9 md:w-10 h-8 sm:h-9 md:h-10 object-contain" />
-              <span className="font-bold text-[#134774] text-base sm:text-lg md:text-[22px] whitespace-nowrap">
-                Clinique Life
-              </span>
+            <NavLink to="/" aria-label="Accueil" className="absolute left-1/2 -translate-x-1/2">
+              <img src={logo} alt="Clinique Life" className="w-11 h-11 object-contain drop-shadow" />
             </NavLink>
-
-            {/* Espace vide pour équilibrer */}
-            <div className="w-8 sm:w-10"></div>
           </div>
 
           {/* DESKTOP (≥ lg) */}
           <div className="hidden lg:flex items-center justify-between w-full">
-            
-            {/* Logo */}
-            <NavLink to="/" className="flex items-center gap-2 lg:gap-3 flex-[1.2] cursor-pointer relative z-20">
-              <img src={logo} alt="Logo" className="w-12 lg:w-14 h-12 lg:h-14 object-contain" />
-              <span className="font-bold text-black text-lg lg:text-[22px] whitespace-nowrap">
+            <NavLink to="/" className="flex items-center gap-2.5 flex-1">
+              <span className="grid place-items-center w-11 h-11 rounded-full bg-white shadow-sm">
+                <img src={logo} alt="" className="w-8 h-8 object-contain" />
+              </span>
+              <span className={`font-bold text-lg tracking-tight transition-colors ${clair ? "text-white" : "text-gray-950"}`}>
                 Clinique Life
               </span>
             </NavLink>
 
-            {/* LINKS */}
-            <ul className="flex gap-4 lg:gap-6 xl:gap-10 justify-center items-center flex-[3] relative z-10">
+            <ul className="flex items-center gap-8">
               {links.map(({ label, path, subMenu }) => (
-                <li 
-                  key={label} 
+                <li
+                  key={label}
                   className="relative"
                   onMouseEnter={() => subMenu && setDropdownOpen(true)}
                   onMouseLeave={() => subMenu && setDropdownOpen(false)}
                 >
                   {subMenu ? (
-                    // Lien avec dropdown
-                    <div>
-                      <button
-                        className={`px-3 lg:px-4 xl:px-5 py-1.5 rounded-full font-poppins text-sm lg:text-base xl:text-[18px] transition-colors duration-300 whitespace-nowrap font-medium text-[#134774] hover:bg-white/20 flex items-center gap-1`}
-                      >
+                    <>
+                      <button className={`${lien(subMenu.some((m) => m.path === pathname))} flex items-center gap-1`}>
                         {label}
-                        <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
                       </button>
-
-                      {/* Dropdown Desktop */}
                       <AnimatePresence>
                         {dropdownOpen && (
                           <motion.div
-                            initial={{ opacity: 0, y: -10 }}
+                            initial={{ opacity: 0, y: 8 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
+                            exit={{ opacity: 0, y: 8 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden"
+                            className="absolute top-full left-1/2 -translate-x-1/2 pt-3"
                           >
-                            {subMenu.map((item) => (
-                              <NavLink
-                                key={item.path}
-                                to={item.path}
-                                className={({ isActive }) =>
-                                  `block px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap flex items-center gap-2
-                                  ${isActive 
-                                    ? "bg-gradient-to-r from-[#05D2CE] to-[#007E7B] text-white" 
-                                    : "text-[#134774] hover:bg-blue-50"}`
-                                }
-                              >
-                                <item.icon className="w-4 h-4" />
-                                {item.label}
-                              </NavLink>
-                            ))}
+                            <div className="w-60 rounded-2xl bg-white p-2 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.25)] ring-1 ring-black/5">
+                              {subMenu.map((item) => (
+                                <NavLink
+                                  key={item.path}
+                                  to={item.path}
+                                  className={({ isActive }) =>
+                                    `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
+                                      isActive ? "bg-[#F1F6FB] text-[#155DFC]" : "text-gray-700 hover:bg-[#F1F6FB]"
+                                    }`
+                                  }
+                                >
+                                  <span className="grid place-items-center w-8 h-8 rounded-lg bg-[#155DFC]/10 text-[#155DFC]">
+                                    <item.icon className="w-4 h-4" />
+                                  </span>
+                                  {item.label}
+                                </NavLink>
+                              ))}
+                            </div>
                           </motion.div>
                         )}
                       </AnimatePresence>
-                    </div>
+                    </>
                   ) : (
-                    // Lien normal
-                    <NavLink
-                      to={path}
-                      className={({ isActive }) =>
-                        `px-3 lg:px-4 xl:px-5 py-1.5 rounded-full font-poppins text-sm lg:text-base xl:text-[18px] transition-colors duration-300 whitespace-nowrap
-                        ${
-                          isActive
-                            ? "font-semibold text-white bg-gradient-to-b from-[#05D2CE] to-[#007E7B]"
-                            : "font-medium text-[#134774] hover:bg-white/20"
-                        }`
-                      }
-                    >
-                      {label}
+                    <NavLink to={path} end={path === "/"} className={({ isActive }) => lien(isActive)}>
+                      {({ isActive }) => (
+                        <>
+                          {label}
+                          <span
+                            className={`absolute left-1/2 -bottom-1 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#00BBA7] transition-all duration-300 ${
+                              isActive ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                            }`}
+                          />
+                        </>
+                      )}
                     </NavLink>
                   )}
                 </li>
               ))}
             </ul>
 
-            {/* BOUTON RDV Desktop */}
-            <div className="flex justify-end flex-[1]">
+            <div className="flex items-center justify-end gap-5 flex-1">
+              <a
+                href="tel:+2250701214580"
+                className={`hidden xl:flex items-center gap-2 text-sm font-medium transition-colors ${clair ? "text-white/85 hover:text-white" : "text-gray-600 hover:text-gray-950"}`}
+              >
+                <Phone className="w-4 h-4" /> 07 01 21 45 80
+              </a>
               <NavLink
                 to="/rdv"
-                className={({ isActive }) =>
-                  `px-5 lg:px-6 xl:px-7 py-2.5 lg:py-3 rounded-full font-medium text-white text-sm lg:text-base transition-transform duration-200 hover:scale-105 whitespace-nowrap
-                   ${isActive 
-                     ? "bg-[linear-gradient(90deg,#155DFC_0%,#00BBA7_100%)]"
-                     : "bg-[#1E80EF]"}`
-                }
+                className={`group inline-flex items-center gap-2 pl-5 pr-1.5 py-1.5 rounded-full font-semibold text-sm transition-colors ${
+                  clair ? "bg-white text-gray-950" : "bg-gray-950 text-white"
+                }`}
               >
                 Rendez-vous
+                <span
+                  className={`grid place-items-center w-8 h-8 rounded-full transition-transform group-hover:translate-x-0.5 ${
+                    clair ? "bg-gray-950 text-white" : "bg-white text-gray-950"
+                  }`}
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </span>
               </NavLink>
             </div>
           </div>
