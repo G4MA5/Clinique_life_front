@@ -110,8 +110,8 @@ const Partie1_apropos: React.FC = () => {
                 )}
               </div>
 
-              {/* Carte flottante chiffres */}
-              <div className="absolute -left-4 sm:-left-8 bottom-8 flex items-center gap-3 rounded-2xl bg-white/95 backdrop-blur p-3 pr-5 text-gray-950 shadow-xl icon-drift">
+              {/* Carte flottante chiffres (masquée sur mobile) */}
+              <div className="hidden sm:flex absolute -left-4 sm:-left-8 bottom-8 items-center gap-3 rounded-2xl bg-white/95 backdrop-blur p-3 pr-5 text-gray-950 shadow-xl icon-drift">
                 <span className="grid place-items-center w-10 h-10 rounded-full bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] text-white">
                   <Users size={18} />
                 </span>
