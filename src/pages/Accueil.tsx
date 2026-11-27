@@ -7,7 +7,7 @@ import Presentation from "../components/accueils/Presentation";
 import PlateauTechnique from "../components/accueils/PlateauTechnique";
 import ApercuEquipe from "../components/accueils/ApercuEquipe";
 import ApercuBlog from "../components/accueils/ApercuBlog";
-import Specialites from "../components/accueils/Specialites";
+// import Specialites from "../components/accueils/Specialites";
 import Paiements from "../components/accueils/Paiements";
 import CarouselHero from "../components/accueils/CarouselHero";
 import AnnouncementPopup from "../components/accueils/AnnouncementPopup";

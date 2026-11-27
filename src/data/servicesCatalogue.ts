@@ -1,11 +1,8 @@
 // Catalogue des services, regroupés par pôle (contenu repris des anciennes sections de la page Services)
 import type { LucideIcon } from "lucide-react";
 import { Baby, Stethoscope, Scissors, FlaskConical, ScanLine } from "lucide-react";
-import NeonatEntree from "../assets/plateau/neonat-entree.jpg";
-import Chambre from "../assets/plateau/chambre.jpg";
 import ChirurgieImg from "../assets/Chirurgie.jpg";
 import AnalyseImg from "../assets/Analyse.jpg";
-import RadioPoste from "../assets/plateau/radio-poste.jpg";
 import ReanimationImg from "../assets/reanimation.jpeg";
 
 export type ServiceItem = { title: string; description: string };
