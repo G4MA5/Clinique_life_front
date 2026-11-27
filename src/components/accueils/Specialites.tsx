@@ -5,6 +5,7 @@ import {
   Eye, Droplets, Activity, FlaskConical, ScanLine, Smile,
 } from "lucide-react";
 
+// NOTE : Cette section est actuellement masquée sur la page d'accueil (Accueil.tsx), mais le fichier est conservé intégralement.
 // Section « Nos spécialités » : la liste affichée sur l'enseigne de la clinique
 const specialites = [
   { icon: Siren, title: "Urgences médico-chirurgicales" },

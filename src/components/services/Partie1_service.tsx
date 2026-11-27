@@ -19,9 +19,9 @@ const atouts = [
 ];
 
 const apparition = (delay: number) => ({
-  initial: { opacity: 0, y: 24, filter: "blur(6px)" },
-  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-  transition: { duration: 0.8, delay, ease },
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.4, delay, ease },
 });
 
 const Partie1_service: React.FC = () => (

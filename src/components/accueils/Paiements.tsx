@@ -22,10 +22,10 @@ const actions = [
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const apparition = {
-  hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
-  show: (i = 0) => ({ opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, delay: i * 0.12, ease } }),
+  hidden: { opacity: 0, y: 16 },
+  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.4, delay: i * 0.05, ease } }),
 };
-const vue = { once: true, margin: "-80px" } as const;
+const vue = { once: true, margin: "-20px" } as const;
 
 const Paiements: React.FC = () => {
   const ref = useRef<HTMLElement>(null);

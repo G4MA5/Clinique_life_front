@@ -24,12 +24,12 @@ const Accueil: React.FC = () => {
       </section>
 
       {/* AVANTAGES */}
-      <FadeIn duration={0.8} delay={0.1} direction="up">
+      <FadeIn>
         <Avantages />
       </FadeIn>
 
       {/* PARCOURS */}
-      <FadeIn duration={0.8} delay={0.2} direction="up">
+      <FadeIn>
         <Parcours />
       </FadeIn>
 
@@ -38,10 +38,18 @@ const Accueil: React.FC = () => {
         <Presentation />
       </FadeIn>
 
-      {/* SPÉCIALITÉS */}
+      {/* 
+        ===================================================================
+        SECTION SPÉCIALITÉS (Masquée - grille des spécialités & services)
+        Composant conservé dans : src/components/accueils/Specialites.tsx
+        Pour la réafficher, décommentez le bloc ci-dessous :
+        ===================================================================
+      */}
+      {/* 
       <FadeIn>
         <Specialites />
-      </FadeIn>
+      </FadeIn> 
+      */}
 
       {/* PLATEAU TECHNIQUE */}
       <FadeIn>
@@ -49,7 +57,7 @@ const Accueil: React.FC = () => {
       </FadeIn>
 
       {/* ÉQUIPEMENTS */}
-      <FadeIn duration={0.6} direction="up">
+      <FadeIn>
         <Equipements />
       </FadeIn>
 
@@ -67,12 +75,12 @@ const Accueil: React.FC = () => {
       </FadeIn>
 
       {/* ACTUALITES */}
-      <FadeIn duration={0.6} direction="up">
+      <FadeIn>
         <Actualites />
       </FadeIn>
 
       {/* BANNIERE */}
-      <FadeIn duration={0.8} delay={0.1} direction="up">
+      <FadeIn>
         <Banniere />
       </FadeIn>
 

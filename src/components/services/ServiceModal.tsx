@@ -55,16 +55,31 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ isOpen, onClose, service })
               <X size={18} />
             </button>
 
-            {/* Photo */}
+            {/* Photo / Vidéo */}
             <div className="relative min-h-[260px] md:min-h-full">
-              <img src={service.image} alt={service.title} className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#155DFC]/85 via-[#155DFC]/10 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">
-                  <span className="w-6 h-px bg-[#00BBA7]" /> Nos services
-                </p>
-                <h2 className="mt-2 text-2xl sm:text-3xl font-bold leading-tight">{service.title}</h2>
-              </div>
+              {service.image?.endsWith(".mp4") ? (
+                <video
+                  src={service.image}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              ) : (
+                <img src={service.image} alt={service.title} className="absolute inset-0 w-full h-full object-cover" />
+              )}
+              {!service.image?.endsWith(".mp4") && (
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#155DFC]/85 via-[#155DFC]/10 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white pointer-events-none">
+                    <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">
+                      <span className="w-6 h-px bg-[#00BBA7]" /> Nos services
+                    </p>
+                    <h2 className="mt-2 text-2xl sm:text-3xl font-bold leading-tight">{service.title}</h2>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Détails */}

@@ -5,7 +5,7 @@ import {
   ArrowRight, ShieldCheck, Clock, Award, HeartPulse, Pill, Stethoscope, Syringe, Activity, Siren,
 } from "lucide-react";
 import Cube3D from "../ui/Cube3D";
-import Photo from "../../assets/plateau/neonat-salle.jpg";
+import Photo from "../../assets/enseigne-bleue.png";
 
 // Section « Pourquoi choisir la Clinique Life » : fond bleu pâle animé, photo et éléments 3D flottants
 const avantages = [
@@ -42,39 +42,41 @@ const Avantages: React.FC = () => (
       {/* ===== Texte + atouts ===== */}
       <div>
         <motion.h2
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease }}
+          viewport={{ once: true, margin: "-20px" }}
+          transition={{ duration: 0.4, ease }}
           className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight"
         >
           Pourquoi choisir la <span className="text-cyan-500">CLINIQUE LIFE</span> ?
         </motion.h2>
         <motion.p
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, delay: 0.1, ease }}
+          viewport={{ once: true, margin: "-20px" }}
+          transition={{ duration: 0.4, delay: 0.05, ease }}
           className="mt-5 text-lg text-gray-600"
         >
           Une prise en charge humaine, moderne et fiable pour votre santé.
         </motion.p>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="mt-8 sm:mt-10 grid grid-cols-2 gap-3 sm:gap-4">
           {avantages.map(({ title, text, icon: Icon }, i) => (
             <motion.div
               key={title}
-              initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.8, delay: 0.2 + i * 0.1, ease }}
-              className="group rounded-3xl bg-white/75 backdrop-blur-md p-5 ring-1 ring-white shadow-[0_15px_40px_-25px_rgba(21,93,252,0.5)] transition-colors duration-500 hover:bg-white"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-20px" }}
+              transition={{ duration: 0.4, delay: i * 0.06, ease }}
+              className="group rounded-2xl sm:rounded-3xl bg-white/80 backdrop-blur-md p-3.5 sm:p-5 ring-1 ring-white shadow-[0_15px_40px_-25px_rgba(21,93,252,0.5)] transition-colors duration-500 hover:bg-white flex flex-col justify-between"
             >
-              <span className="grid place-items-center w-11 h-11 rounded-2xl bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] text-white shadow-md shadow-[#155DFC]/25 transition-transform duration-500 group-hover:rotate-[-8deg] group-hover:scale-110">
-                <Icon size={20} />
-              </span>
-              <h3 className="mt-4 font-semibold text-gray-950">{title}</h3>
-              <p className="mt-1 text-sm text-gray-500 leading-relaxed">{text}</p>
+              <div>
+                <span className="grid place-items-center w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] text-white shadow-md shadow-[#155DFC]/25 transition-transform duration-500 group-hover:rotate-[-8deg] group-hover:scale-110">
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                </span>
+                <h3 className="mt-2.5 sm:mt-4 font-semibold text-xs sm:text-base text-gray-950 leading-snug">{title}</h3>
+              </div>
+              <p className="hidden sm:block mt-1 text-sm text-gray-500 leading-relaxed">{text}</p>
             </motion.div>
           ))}
         </div>
@@ -92,35 +94,35 @@ const Avantages: React.FC = () => (
 
       {/* ===== Photo + éléments 3D ===== */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 1, ease }}
-        className="relative mx-auto w-full max-w-xl lg:mr-0 pb-16 pl-10 sm:pl-16"
+        viewport={{ once: true, margin: "-20px" }}
+        transition={{ duration: 0.4, ease }}
+        className="relative mx-auto w-full max-w-xl lg:mr-0 pb-12 sm:pb-16 pl-6 sm:pl-16"
       >
-        <div className="relative rounded-[32px] overflow-hidden shadow-[0_40px_80px_-30px_rgba(21,93,252,0.5)] ring-8 ring-white">
-          <img src={Photo} alt="Salle de néonatologie de la Clinique Life" loading="lazy" className="w-full aspect-[4/5] sm:aspect-[5/6] object-cover" />
+        <div className="relative rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-[0_40px_80px_-30px_rgba(21,93,252,0.5)] ring-4 sm:ring-8 ring-white">
+          <img src={Photo} alt="Enseigne bleue de la Clinique Life" loading="lazy" className="w-full aspect-[4/5] sm:aspect-[5/6] object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#155DFC]/10 via-transparent to-transparent" />
         </div>
 
         {/* Badge flottant */}
-        <div className="absolute right-4 top-6 flex items-center gap-3 rounded-2xl bg-white/90 backdrop-blur px-4 py-3 shadow-xl icon-drift" style={{ animationDelay: "-2s" }}>
-          <span className="grid place-items-center w-9 h-9 rounded-full bg-gray-950 text-white"><Siren size={16} /></span>
-          <span className="text-sm leading-tight"><b className="block text-gray-950">Urgences 24h/24</b><span className="text-gray-500">7 jours sur 7</span></span>
+        <div className="absolute right-2 sm:right-4 top-3 sm:top-6 flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl bg-white/95 backdrop-blur px-2.5 sm:px-4 py-2 sm:py-3 shadow-xl icon-drift" style={{ animationDelay: "-2s" }}>
+          <span className="grid place-items-center w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gray-950 text-white shrink-0"><Siren className="w-3.5 h-3.5 sm:w-4 sm:h-4" /></span>
+          <span className="text-xs sm:text-sm leading-tight"><b className="block text-gray-950 text-[11px] sm:text-sm">Urgences 24h/24</b><span className="text-[10px] sm:text-xs text-gray-500">7 jours sur 7</span></span>
         </div>
 
         {/* Croix néon flottante */}
-        <div className="absolute left-2 sm:left-4 bottom-24 neon-cross-float">
+        <div className="absolute left-1 sm:left-4 bottom-20 sm:bottom-24 neon-cross-float scale-[0.55] sm:scale-100 origin-left">
           <div className="relative w-20 h-20">
             <span className="absolute left-1/2 top-0 -translate-x-1/2 w-7 h-20 rounded-lg border-[3px] border-cyan-300 bg-cyan-300/15 shadow-[0_0_25px_rgba(34,211,238,0.9),inset_0_0_14px_rgba(34,211,238,0.6)]" />
             <span className="absolute top-1/2 left-0 -translate-y-1/2 w-20 h-7 rounded-lg border-[3px] border-cyan-300 bg-cyan-300/15 shadow-[0_0_25px_rgba(34,211,238,0.9),inset_0_0_14px_rgba(34,211,238,0.6)]" />
           </div>
         </div>
 
-        {/* Quelques cubes 3D dispersés, tailles variées */}
-        <Cube3D front={HeartPulse} side={Activity} size={78} delay="-1s" className="absolute -left-2 sm:left-0 bottom-0" />
-        <Cube3D front={Pill} side={Syringe} size={54} delay="-3s" className="absolute -top-5 left-6 sm:left-10" />
-        <Cube3D front={Stethoscope} side={HeartPulse} size={64} delay="-2s" className="absolute -right-4 sm:-right-8 top-1/2" />
+        {/* Quelques cubes 3D dispersés, tailles variées (très discrets sur mobile) */}
+        <Cube3D front={HeartPulse} side={Activity} size={78} delay="-1s" className="absolute left-1 sm:left-0 bottom-1 sm:bottom-0 scale-[0.38] sm:scale-100 origin-bottom-left" />
+        <Cube3D front={Pill} side={Syringe} size={54} delay="-3s" className="absolute top-1 left-2 sm:-top-5 sm:left-10 scale-[0.42] sm:scale-100 origin-top-left" />
+        <Cube3D front={Stethoscope} side={HeartPulse} size={64} delay="-2s" className="absolute right-0 sm:-right-8 top-1/2 scale-[0.4] sm:scale-100 origin-right" />
       </motion.div>
     </div>
   </section>

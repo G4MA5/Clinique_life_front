@@ -33,6 +33,7 @@ const Rdv: React.FC = () => {
     "Diabétologie",
     "Endocrinologie",
     "Gastro-entérologie",
+    "Coloscopie",
     "Urologie",
     "Dermatologie",
     "Vénérologie",

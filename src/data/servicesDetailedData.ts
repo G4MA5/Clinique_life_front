@@ -8,6 +8,9 @@ import SoinsImg from "../assets/Soins.jpg";
 import NeonatSalle from "../assets/plateau/neonat-salle.jpg";
 import RadioProImg from "../assets/plateau/radio-pro.jpg";
 import EchographeImg from "../assets/plateau/echographe.jpg";
+import ReanimationImg from "../assets/reanimation.jpeg";
+import HematoImg from "../assets/hemato.jpeg";
+import ColoscopieImg from "../assets/coloscopie.jpeg";
 
 export interface ServiceDetail {
   title: string;
@@ -57,7 +60,7 @@ export const servicesDetailedData: Record<string, ServiceDetail> = {
   "service-de-neonatologie": {
     title: "Service de Néonatologie",
     subtitle: "Soins intensifs pour les tout-petits",
-    image: NeonatSalle,
+    image: "/videos/neonatologie.mp4",
     description: "Notre unité de néonatologie accueille les prématurés et les nouveau-nés nécessitant une surveillance particulière. Équipée de couveuses modernes, elle garantit des soins optimaux 24h/24.",
     highlights: ["Soins intensifs néonataux", "Pathologies respiratoires", "Accompagnement des parents", "Surveillance continue"]
   },
@@ -83,6 +86,62 @@ export const servicesDetailedData: Record<string, ServiceDetail> = {
     image: CardiologieImg,
     description: "Diagnostic et traitement des maladies cardiovasculaires. Notre service dispose d'outils modernes pour l'électrocardiographie et le suivi de l'hypertension et de l'insuffisance cardiaque.",
     highlights: ["ECG et Doppler", "Holter tensionnel", "Épreuve d'effort", "Prévention cardiovasculaire"]
+  },
+  "service-dophtalmologie": {
+    title: "Service d'Ophtalmologie",
+    subtitle: "Santé oculaire et soins de la vision",
+    image: MedecinImg,
+    description: "Le service d'ophtalmologie prend en charge l'ensemble des troubles de la vision et des pathologies oculaires. Nos spécialistes réalisent bilans visuels, dépistage du glaucome, suivi de la rétine et actes de microchirurgie avec des technologies modernes.",
+    highlights: ["Bilan de la vue & réfraction", "Dépistage du glaucome & DMLA", "Fond d'œil et imagerie oculaire", "Chirurgie de la cataracte & réfraction"]
+  },
+  "ophtalmologie": {
+    title: "Service d'Ophtalmologie",
+    subtitle: "Santé oculaire et soins de la vision",
+    image: MedecinImg,
+    description: "Le service d'ophtalmologie prend en charge l'ensemble des troubles de la vision et des pathologies oculaires. Nos spécialistes réalisent bilans visuels, dépistage du glaucome, suivi de la rétine et actes de microchirurgie avec des technologies modernes.",
+    highlights: ["Bilan de la vue & réfraction", "Dépistage du glaucome & DMLA", "Fond d'œil et imagerie oculaire", "Chirurgie de la cataracte & réfraction"]
+  },
+  "service-dhematologie": {
+    title: "Service d'Hématologie",
+    subtitle: "Diagnostic et traitement des maladies du sang",
+    image: HematoImg,
+    description: "Le service d'hématologie prend en charge l'ensemble des pathologies du sang, de la moelle osseuse et des ganglions lymphatiques. Nous assurons le diagnostic précis et le suivi thérapeutique des anémies, troubles de la coagulation et hémopathies.",
+    highlights: ["Bilan hématologique complet et myélogramme", "Prise en charge des anémies et carences sévères", "Diagnostic et suivi des troubles de l'hémostase", "Traitements ambulatoires et protocoles spécialisés"]
+  },
+  "hematologie": {
+    title: "Service d'Hématologie",
+    subtitle: "Diagnostic et traitement des maladies du sang",
+    image: HematoImg,
+    description: "Le service d'hématologie prend en charge l'ensemble des pathologies du sang, de la moelle osseuse et des ganglions lymphatiques. Nous assurons le diagnostic précis et le suivi thérapeutique des anémies, troubles de la coagulation et hémopathies.",
+    highlights: ["Bilan hématologique complet et myélogramme", "Prise en charge des anémies et carences sévères", "Diagnostic et suivi des troubles de l'hémostase", "Traitements ambulatoires et protocoles spécialisés"]
+  },
+  "service-hematologie": {
+    title: "Service d'Hématologie",
+    subtitle: "Diagnostic et traitement des maladies du sang",
+    image: HematoImg,
+    description: "Le service d'hématologie prend en charge l'ensemble des pathologies du sang, de la moelle osseuse et des ganglions lymphatiques. Nous assurons le diagnostic précis et le suivi thérapeutique des anémies, troubles de la coagulation et hémopathies.",
+    highlights: ["Bilan hématologique complet et myélogramme", "Prise en charge des anémies et carences sévères", "Diagnostic et suivi des troubles de l'hémostase", "Traitements ambulatoires et protocoles spécialisés"]
+  },
+  "service-de-coloscopie": {
+    title: "Service de Coloscopie",
+    subtitle: "Exploration endoscopique et dépistage digestif",
+    image: ColoscopieImg,
+    description: "La coloscopie est un examen médical endoscopique de référence permettant de visualiser la paroi interne du côlon et du rectum avec une précision millimétrique. Elle assure le dépistage précoce, la résection préventive de polypes (polypectomie) et le diagnostic des affections digestives sous anesthésie/sédation sécurisée.",
+    highlights: ["Dépistage précoce des polypes et du cancer colorectal", "Examen sous sédation pour un confort absolu sans douleur", "Ablation de polypes en ambulatoire (polypectomie)", "Système vidéo-endoscopique HD de haute précision"]
+  },
+  "coloscopie": {
+    title: "Service de Coloscopie",
+    subtitle: "Exploration endoscopique et dépistage digestif",
+    image: ColoscopieImg,
+    description: "La coloscopie est un examen médical endoscopique de référence permettant de visualiser la paroi interne du côlon et du rectum avec une précision millimétrique. Elle assure le dépistage précoce, la résection préventive de polypes (polypectomie) et le diagnostic des affections digestives sous anesthésie/sédation sécurisée.",
+    highlights: ["Dépistage précoce des polypes et du cancer colorectal", "Examen sous sédation pour un confort absolu sans douleur", "Ablation de polypes en ambulatoire (polypectomie)", "Système vidéo-endoscopique HD de haute précision"]
+  },
+  "service-coloscopie": {
+    title: "Service de Coloscopie",
+    subtitle: "Exploration endoscopique et dépistage digestif",
+    image: ColoscopieImg,
+    description: "La coloscopie est un examen médical endoscopique de référence permettant de visualiser la paroi interne du côlon et du rectum avec une précision millimétrique. Elle assure le dépistage précoce, la résection préventive de polypes (polypectomie) et le diagnostic des affections digestives sous anesthésie/sédation sécurisée.",
+    highlights: ["Dépistage précoce des polypes et du cancer colorectal", "Examen sous sédation pour un confort absolu sans douleur", "Ablation de polypes en ambulatoire (polypectomie)", "Système vidéo-endoscopique HD de haute précision"]
   },
 
   // CHIRURGIE
@@ -110,14 +169,14 @@ export const servicesDetailedData: Record<string, ServiceDetail> = {
   "service-de-reanimation": {
     title: "Service de Réanimation",
     subtitle: "Soins intensifs et surveillance continue 24/7",
-    image: SoinsImg,
+    image: ReanimationImg,
     description: "Unité de soins intensifs et de réanimation polyvalente assurant la prise en charge des détresses vitales, réanimations médicales et surveillances post-opératoires critiques sous monitorage continu 24h/24.",
     highlights: ["Surveillance hémodynamique 24/7", "Ventilation et assistance respiratoire", "Prise en charge des détresses vitales", "Soins intensifs post-opératoires"]
   },
   "reanimation": {
     title: "Service de Réanimation",
     subtitle: "Soins intensifs et surveillance continue 24/7",
-    image: SoinsImg,
+    image: ReanimationImg,
     description: "Unité de soins intensifs et de réanimation polyvalente assurant la prise en charge des détresses vitales, réanimations médicales et surveillances post-opératoires critiques sous monitorage continu 24h/24.",
     highlights: ["Surveillance hémodynamique 24/7", "Ventilation et assistance respiratoire", "Prise en charge des détresses vitales", "Soins intensifs post-opératoires"]
   },
@@ -135,7 +194,7 @@ export const servicesDetailedData: Record<string, ServiceDetail> = {
   "radiologie": {
     title: "Radiologie",
     subtitle: "Imagerie médicale standard",
-    image: RadioProImg,
+    image: "/videos/radiologie.mp4",
     description: "Examens de radiographie conventionnelle pour l'exploration des os et des organes internes. Résultats rapides pour un diagnostic efficace.",
     highlights: ["Radio pulmonaire", "Ostéo-articulaire", "ASP", "Interprétation rapide"]
   },

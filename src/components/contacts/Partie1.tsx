@@ -8,9 +8,9 @@ const ITINERAIRE =
   "https://www.google.com/maps/place/CLINIQUE+M%C3%89DICALE+LIFE/@5.4114731,-3.9716629,17z/data=!3m1!4b1!4m6!3m5!1s0xfc193799b22a97b:0x5a22fb6fb3abb026!8m2!3d5.4114731!4d-3.969088!16s%2Fg%2F11t6qw58ym";
 
 const apparition = (delay: number) => ({
-  initial: { opacity: 0, y: 24, filter: "blur(6px)" },
-  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-  transition: { duration: 0.8, delay, ease },
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.4, delay, ease },
 });
 
 // Carte du bento : icône + titre + lignes, avec flèche au survol

@@ -6,6 +6,7 @@ import Chambre from "../assets/plateau/chambre.jpg";
 import ChirurgieImg from "../assets/Chirurgie.jpg";
 import AnalyseImg from "../assets/Analyse.jpg";
 import RadioPoste from "../assets/plateau/radio-poste.jpg";
+import ReanimationImg from "../assets/reanimation.jpeg";
 
 export type ServiceItem = { title: string; description: string };
 export type Pole = { id: string; nom: string; accroche: string; icon: LucideIcon; image: string; services: ServiceItem[] };
@@ -16,7 +17,7 @@ export const poles: Pole[] = [
     nom: "Femme – Mère – Enfant",
     accroche: "De la grossesse aux premiers pas, un accompagnement complet.",
     icon: Baby,
-    image: NeonatEntree,
+    image: "/videos/neonatologie.mp4",
     services: [
       { title: "La Gynécologie", description: "Consultations et suivi gynécologique complet" },
       { title: "Obstétrique", description: "Suivi de grossesse et accouchement" },
@@ -31,8 +32,9 @@ export const poles: Pole[] = [
     nom: "Médecine",
     accroche: "Des spécialistes pour diagnostiquer et traiter chaque pathologie.",
     icon: Stethoscope,
-    image: Chambre,
+    image: ReanimationImg,
     services: [
+      { title: "Service de Réanimation", description: "Soins intensifs, surveillance continue et réanimation 24h/24" },
       { title: "Service de Médecine Interne", description: "Diagnostic et traitement des pathologies complexes" },
       { title: "Service de neurologie", description: "Prise en charge des troubles neurologiques" },
       { title: "Service de Diabétologie-Endocrinologie", description: "Suivi du diabète et troubles hormonaux" },
@@ -40,19 +42,20 @@ export const poles: Pole[] = [
       { title: "Service de Dermatologie et Vénérologie", description: "Soins de la peau et MST" },
       { title: "Service d'Hématologie", description: "Traitement des maladies du sang" },
       { title: "Service d'Oto-Rhino-Laryngologie (ORL)", description: "Spécialiste ORL et troubles auditifs" },
+      { title: "Service d'Ophtalmologie", description: "Bilan visuel, dépistage des pathologies oculaires et soins de la vision" },
+      { title: "Service de Coloscopie", description: "Endoscopie digestive, dépistage précoce et ablation de polypes" },
     ],
   },
   {
     id: "chirurgie",
     nom: "Chirurgie",
-    accroche: "Un bloc opératoire et une réanimation pour opérer en sécurité.",
+    accroche: "Un bloc opératoire moderne pour opérer en toute sécurité.",
     icon: Scissors,
     image: ChirurgieImg,
     services: [
       { title: "Service d'Urologie", description: "Chirurgie des voies urinaires et appareil génital" },
       { title: "Service d'Orthopédie et de Traumatologie", description: "Chirurgie osseuse et articulaire" },
       { title: "Service de Chirurgie Digestive et Viscérale", description: "Chirurgie de l'appareil digestif" },
-      { title: "Service de Réanimation", description: "Soins intensifs, surveillance continue et réanimation 24h/24" },
     ],
   },
   {
@@ -73,7 +76,7 @@ export const poles: Pole[] = [
     nom: "Imagerie médicale",
     accroche: "Radiographie et échographie pour des diagnostics précis.",
     icon: ScanLine,
-    image: RadioPoste,
+    image: "/videos/radiologie.mp4",
     services: [
       { title: "Radiologie", description: "Examens radiologiques standards" },
       { title: "Échographie", description: "Échographie générale et spécialisée" },

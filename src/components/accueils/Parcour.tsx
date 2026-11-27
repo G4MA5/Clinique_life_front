@@ -1,7 +1,8 @@
-import { CalendarDays, ClipboardList, Stethoscope, FileText, ArrowRight } from "lucide-react";
+import { CalendarDays, ClipboardList, Stethoscope, FileText, ArrowRight, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Assurance, initialAssurances } from "../../data/assurancesData";
 
 // Liste des logos qui ont besoin d'être plus grands - We use the name instead of filename now
@@ -36,6 +37,7 @@ const steps = [
 
 export default function Parcours() {
   const [partners, setPartners] = useState<Assurance[]>([]);
+  const [activeStep, setActiveStep] = useState<string | null>(null);
 
   useEffect(() => {
     try {
@@ -109,44 +111,111 @@ export default function Parcours() {
       </div>
 
       {/* Section Parcours de soins */}
-      <section className="w-full py-20 px-6">
+      <section className="w-full py-12 sm:py-20 px-4 sm:px-6 relative">
         <div className="max-w-7xl mx-auto text-center">
 
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
             Votre consultation en toute simplicité
           </h2>
 
-          <p className="mt-6 max-w-3xl mx-auto text-lg text-gray-500">
+          <p className="mt-4 sm:mt-6 max-w-3xl mx-auto text-sm sm:text-lg text-gray-500">
             Nous avons simplifié chaque étape pour que vous puissiez vous concentrer
             sur ce qui compte le plus : votre santé.
           </p>
 
-          <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 relative">
+          {/* Overlay transparent pour fermer la bulle au clic extérieur sur mobile */}
+          {activeStep && (
+            <div
+              className="fixed inset-0 z-20 md:hidden"
+              onClick={() => setActiveStep(null)}
+            />
+          )}
+
+          <div className="mt-10 sm:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 relative">
             {steps.map((step, index) => {
               const Icon = step.icon;
+              const isActive = activeStep === step.id;
+
               return (
                 <div key={index} className="relative flex justify-center">
-                  {/* Ligne de connexion */}
+                  {/* Ligne de connexion desktop */}
                   {index !== steps.length - 1 && (
-                    <div className="hidden lg:block absolute top-[62px] right-[-60px] w-[100px] h-[4px] bg-gradient-to-r from-cyan-400 to-transparent" />
+                    <div className="hidden lg:block absolute top-[62px] right-[-60px] w-[100px] h-[4px] bg-gradient-to-r from-cyan-400 to-transparent pointer-events-none" />
                   )}
 
+                  {/* Bulle de message mobile au tap (design blanc) */}
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.85, y: 8 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.85, y: 8 }}
+                        transition={{ duration: 0.18, ease: "easeOut" }}
+                        className={`md:hidden absolute z-30 bottom-[calc(100%+12px)] ${
+                          index % 2 === 0 ? "left-0" : "right-0"
+                        } w-[215px] max-w-[85vw] p-3.5 bg-white text-gray-900 rounded-2xl shadow-[0_15px_40px_-10px_rgba(21,93,252,0.28)] border border-blue-100/90 ring-1 ring-black/5 text-left`}
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-1.5 pb-1 border-b border-gray-100">
+                          <span className="text-[11px] font-bold text-[#155DFC] flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#155DFC] animate-pulse" />
+                            Étape {step.id}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveStep(null);
+                            }}
+                            className="text-gray-400 hover:text-gray-700 text-xs p-1 leading-none -mr-1"
+                            aria-label="Fermer"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                        <p className="text-xs text-gray-700 leading-snug">
+                          {step.text}
+                        </p>
+                        {/* Pointe flèche bulle de message blanche */}
+                        <div
+                          className={`absolute top-full w-0 h-0 border-x-[7px] border-x-transparent border-t-[8px] border-t-white drop-shadow-[0_2px_1px_rgba(0,0,0,0.06)] ${
+                            index % 2 === 0 ? "left-7" : "right-7"
+                          }`}
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
                   {/* Carte */}
-                  <div className="bg-white rounded-2xl shadow-lg px-6 py-8 text-center w-full max-w-[260px] mx-auto hover:shadow-xl transition-shadow duration-300">
-                    <div className="w-14 h-14 mx-auto mb-6 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center text-white">
-                      <Icon size={26} />
+                  <div
+                    onClick={() => setActiveStep(isActive ? null : step.id)}
+                    className={`bg-white rounded-2xl shadow-md sm:shadow-lg p-3.5 sm:px-6 sm:py-8 text-center w-full max-w-[260px] mx-auto transition-all duration-300 cursor-pointer md:cursor-default select-none ${
+                      isActive
+                        ? "ring-2 ring-blue-500 shadow-xl scale-[1.02]"
+                        : "hover:shadow-xl"
+                    }`}
+                  >
+                    <div className="w-10 h-10 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-6 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
 
-                    <div className="text-5xl font-extrabold text-gray-100 mb-2">
+                    <div className="text-3xl sm:text-5xl font-extrabold text-gray-100 mb-1 sm:mb-2">
                       {step.id}
                     </div>
 
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                    <h3 className="text-xs sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-3 leading-snug">
                       {step.title}
                     </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">
+
+                    {/* Sur desktop : texte normal affiché */}
+                    <p className="hidden md:block text-gray-500 text-sm leading-relaxed">
                       {step.text}
                     </p>
+
+                    {/* Sur mobile : petit indicateur interactif */}
+                    <div className="md:hidden mt-2 flex items-center justify-center gap-1 text-[10px] font-medium text-blue-600 bg-blue-50/80 py-0.5 px-2 rounded-full mx-auto w-fit">
+                      <Info size={11} />
+                      <span>{isActive ? "Fermer" : "Détails"}</span>
+                    </div>
                   </div>
                 </div>
               );

@@ -14,10 +14,14 @@ const features = [
 const IMAGE_DURATION = 8000;
 
 const CarouselHero: React.FC = () => {
-  const [slides, setSlides] = useState<CarouselSlide[]>([videoSlide, ...initialSlides]);
+  const [slides, setSlides] = useState<CarouselSlide[]>([
+    initialSlides[0],
+    videoSlide,
+    ...initialSlides.slice(1),
+  ]);
   const [index, setIndex] = useState(0);
 
-  // Les slides images gérées depuis l'admin (localStorage) suivent la vidéo
+  // La première slide est l'image "Votre santé, notre engagement", suivie de la vidéo puis des autres visuels
   useEffect(() => {
     try {
       const saved = localStorage.getItem("carouselSlides");
@@ -25,7 +29,9 @@ const CarouselHero: React.FC = () => {
       const images = (JSON.parse(saved) as CarouselSlide[]).filter(
         (s) => s.isActive !== false && s.type !== "video"
       );
-      if (images.length) setSlides([videoSlide, ...images]);
+      if (images.length) {
+        setSlides([images[0], videoSlide, ...images.slice(1)]);
+      }
     } catch {
       /* ignore */
     }
@@ -45,7 +51,7 @@ const CarouselHero: React.FC = () => {
   if (!slide) return null;
 
   return (
-    <div className="relative w-full h-[100svh] min-h-[640px] overflow-hidden bg-slate-950 group">
+    <div className="relative w-full h-[62svh] sm:h-[75svh] lg:h-[100svh] min-h-[460px] sm:min-h-[540px] lg:min-h-[640px] overflow-hidden bg-slate-950 group">
       {/* Média */}
       <AnimatePresence initial={false}>
         <motion.div
@@ -63,20 +69,21 @@ const CarouselHero: React.FC = () => {
               muted
               playsInline
               onEnded={next}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-center"
             />
           ) : (
-            <img src={slide.url} alt={slide.title} className="w-full h-full object-cover" />
+            <img src={slide.url} alt={slide.title} className="w-full h-full object-cover object-center" />
           )}
         </motion.div>
       </AnimatePresence>
 
       {/* Voiles pour la lisibilité du texte */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/15 to-transparent pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/45 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent sm:from-black/45 sm:via-black/15 pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-20 sm:h-28 bg-gradient-to-b from-black/45 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-1/3 sm:h-2/5 bg-gradient-to-t from-black/55 to-transparent pointer-events-none" />
 
       {/* Contenu */}
-      <div className="relative z-10 h-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col justify-end pb-10 md:pb-14 pt-28">
+      <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex flex-col justify-end pb-5 sm:pb-10 md:pb-14 pt-20 sm:pt-24 md:pt-28">
         <div className="flex-1 flex items-center">
           <AnimatePresence mode="wait">
             <motion.div
@@ -87,32 +94,32 @@ const CarouselHero: React.FC = () => {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="max-w-3xl"
             >
-              <h1 className="font-poppins font-semibold text-white tracking-tight leading-[1.05] text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
+              <h1 className="font-poppins font-semibold text-white tracking-tight leading-[1.08] text-2xl sm:text-4xl lg:text-6xl xl:text-7xl">
                 {slide.title}
                 {slide.accent && (
                   <>
                     <br />
-                    <span className="text-white/60">{slide.accent}</span>
+                    <span className="text-white/70">{slide.accent}</span>
                   </>
                 )}
               </h1>
-              <p className="mt-6 text-base md:text-lg text-white/80 max-w-lg leading-relaxed">
+              <p className="mt-2.5 sm:mt-6 text-xs sm:text-base md:text-lg text-white/85 max-w-lg leading-relaxed line-clamp-2 sm:line-clamp-none">
                 {slide.description}
               </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3">
+              <div className="mt-4 sm:mt-8 flex flex-wrap items-center gap-2.5 sm:gap-3">
                 <Link
                   to="/rdv"
-                  className="inline-flex items-center gap-3 bg-white text-slate-900 pl-6 pr-1.5 py-1.5 rounded-full font-semibold text-sm md:text-base hover:bg-white/90 transition"
+                  className="inline-flex items-center gap-2 sm:gap-3 bg-white text-slate-900 pl-4 sm:pl-6 pr-1.5 py-1 sm:py-1.5 rounded-full font-semibold text-xs sm:text-sm md:text-base hover:bg-white/90 transition shadow-lg"
                 >
                   Prendre rendez-vous
-                  <span className="grid place-items-center w-9 h-9 rounded-full bg-slate-900 text-white">
-                    <ArrowRight size={18} />
+                  <span className="grid place-items-center w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-slate-900 text-white">
+                    <ArrowRight size={15} className="sm:w-[18px] sm:h-[18px]" />
                   </span>
                 </Link>
                 <Link
                   to="/services"
-                  className="inline-flex items-center px-6 py-3 rounded-full border border-white/50 text-white font-semibold text-sm md:text-base hover:bg-white/10 transition"
+                  className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-white/50 text-white font-semibold text-xs sm:text-sm md:text-base hover:bg-white/10 transition"
                 >
                   Nos services
                 </Link>
@@ -135,8 +142,8 @@ const CarouselHero: React.FC = () => {
           </span>
         </Link>
 
-        {/* Bandeau des points forts */}
-        <div className="border-t border-white/25 pt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8">
+        {/* Bandeau des points forts (visible dès tablette sm) */}
+        <div className="hidden sm:grid border-t border-white/25 pt-6 grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8">
           {features.map((f) => (
             <div key={f.title} className="hidden sm:block first:block">
               <h3 className="text-white font-medium text-lg">{f.title}</h3>
@@ -146,14 +153,14 @@ const CarouselHero: React.FC = () => {
         </div>
 
         {/* Indicateurs */}
-        <div className="mt-6 flex items-center gap-2">
+        <div className="mt-3 sm:mt-6 flex items-center gap-1.5 sm:gap-2">
           {slides.map((s, i) => (
             <button
               key={s.id + s.url}
               aria-label={`Slide ${i + 1}`}
               onClick={() => setIndex(i)}
               className={`h-1 rounded-full transition-all ${
-                i === index ? "w-10 bg-white" : "w-5 bg-white/40 hover:bg-white/70"
+                i === index ? "w-8 sm:w-10 bg-white" : "w-4 sm:w-5 bg-white/40 hover:bg-white/70"
               }`}
             />
           ))}

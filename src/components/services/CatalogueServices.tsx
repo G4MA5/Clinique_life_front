@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import ServiceModal from "./ServiceModal";
 import { poles, ServiceItem, Pole } from "../../data/servicesCatalogue";
 import { servicesDetailedData, getServiceKey, ServiceDetail } from "../../data/servicesDetailedData";
@@ -22,6 +22,7 @@ const CatalogueServices: React.FC = () => {
   const [poleId, setPoleId] = useState(poles[0].id);
   const [survol, setSurvol] = useState<number | null>(null);
   const [fiche, setFiche] = useState<ServiceDetail | null>(null);
+  const [menuMobileOuvert, setMenuMobileOuvert] = useState(false);
 
   const pole = poles.find((p) => p.id === poleId)!;
   const imageAffichee = survol !== null ? ficheDe(pole.services[survol], pole).image : pole.image;
@@ -36,8 +37,92 @@ const CatalogueServices: React.FC = () => {
           <p className="mt-5 text-lg text-gray-500">Choisissez un pôle, puis un service pour en savoir plus.</p>
         </div>
 
-        {/* Onglets */}
-        <div className="flex justify-center mb-12">
+        {/* NAVIGATION DES PÔLES */}
+        {/* Version Mobile (< md) : Menu déroulant élégant */}
+        <div className="relative mb-10 md:hidden w-full max-w-md mx-auto">
+          <button
+            type="button"
+            onClick={() => setMenuMobileOuvert(!menuMobileOuvert)}
+            className="w-full flex items-center justify-between gap-3 bg-[#F1F6FB] px-5 py-3.5 rounded-2xl shadow-sm text-gray-950 font-semibold text-sm transition-all border border-gray-200/60"
+          >
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="grid place-items-center w-8 h-8 rounded-xl bg-gray-950 text-white shrink-0">
+                <PoleIcon size={16} />
+              </span>
+              <span className="truncate">{pole.nom}</span>
+              <span className="rounded-full bg-white px-2 py-0.5 text-xs font-bold text-gray-700 shadow-sm">
+                {pole.services.length}
+              </span>
+            </div>
+            <ChevronDown
+              size={18}
+              className={`text-gray-500 transition-transform duration-300 shrink-0 ${
+                menuMobileOuvert ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          <AnimatePresence>
+            {menuMobileOuvert && (
+              <>
+                {/* Backdrop invisible pour fermer en cliquant en dehors */}
+                <div
+                  className="fixed inset-0 z-30"
+                  onClick={() => setMenuMobileOuvert(false)}
+                />
+                <motion.div
+                  initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-0 right-0 top-full mt-2 z-40 overflow-hidden rounded-2xl bg-white p-2 shadow-2xl ring-1 ring-black/10 divide-y divide-gray-100"
+                >
+                  {poles.map((p) => {
+                    const Icon = p.icon;
+                    const actif = p.id === poleId;
+                    return (
+                      <button
+                        key={p.id}
+                        type="button"
+                        onClick={() => {
+                          setPoleId(p.id);
+                          setSurvol(null);
+                          setMenuMobileOuvert(false);
+                        }}
+                        className={`w-full flex items-center justify-between gap-3 px-4 py-3 text-left transition-colors rounded-xl ${
+                          actif
+                            ? "bg-gray-950 text-white"
+                            : "text-gray-700 hover:bg-[#F1F6FB]"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <span
+                            className={`grid place-items-center w-8 h-8 rounded-xl shrink-0 ${
+                              actif ? "bg-white/20 text-white" : "bg-[#F1F6FB] text-gray-700"
+                            }`}
+                          >
+                            <Icon size={16} />
+                          </span>
+                          <span className="font-semibold text-sm truncate">{p.nom}</span>
+                        </div>
+                        <span
+                          className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
+                            actif ? "bg-white/20 text-white" : "bg-gray-100 text-gray-600"
+                          }`}
+                        >
+                          {p.services.length} services
+                        </span>
+                      </button>
+                    );
+                  })}
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Version Desktop (≥ md) : Barre d'onglets pilules avec glissière animée */}
+        <div className="hidden md:flex justify-center mb-12">
           <div className="flex max-w-full gap-1 overflow-x-auto rounded-full bg-[#F1F6FB] p-1.5 [scrollbar-width:none]">
             {poles.map((p) => {
               const Icon = p.icon;
@@ -63,30 +148,52 @@ const CatalogueServices: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-12 items-start">
           {/* Photo du pôle / du service survolé */}
           <div className="lg:sticky lg:top-28">
-            <div className="relative aspect-[4/3] lg:aspect-[4/5] overflow-hidden rounded-[32px] bg-[#F1F6FB]">
+            <div className="relative aspect-[4/3] lg:aspect-auto lg:h-[600px] w-full overflow-hidden rounded-[32px] bg-[#F1F6FB]">
               <AnimatePresence mode="popLayout">
-                <motion.img
-                  key={imageAffichee}
-                  src={imageAffichee}
-                  alt={pole.nom}
-                  initial={{ opacity: 0, scale: 1.06 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.6, ease }}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                {imageAffichee.endsWith(".mp4") ? (
+                  <motion.video
+                    key={imageAffichee}
+                    src={imageAffichee}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    initial={{ opacity: 0, scale: 1.06 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6, ease }}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <motion.img
+                    key={imageAffichee}
+                    src={imageAffichee}
+                    alt={pole.nom}
+                    initial={{ opacity: 0, scale: 1.06 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6, ease }}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                )}
               </AnimatePresence>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <div className="absolute left-6 right-6 bottom-6 text-white">
-                <span className="grid place-items-center w-12 h-12 rounded-2xl bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] shadow-lg">
-                  <PoleIcon size={22} />
-                </span>
-                <p className="mt-4 text-2xl md:text-3xl font-bold">{pole.nom}</p>
-                <p className="mt-1 text-white/80">{pole.accroche}</p>
-              </div>
+              
+              {/* Le dégradé et les textes ne s'affichent que sur les images fixes pour laisser la vidéo totalement dégagée */}
+              {!imageAffichee.endsWith(".mp4") && (
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
+                  <div className="absolute left-6 right-6 bottom-6 text-white pointer-events-none">
+                    <span className="grid place-items-center w-12 h-12 rounded-2xl bg-[linear-gradient(135deg,#155DFC_0%,#00BBA7_100%)] shadow-lg">
+                      <PoleIcon size={22} />
+                    </span>
+                    <p className="mt-4 text-2xl md:text-3xl font-bold">{pole.nom}</p>
+                    <p className="mt-1 text-white/80">{pole.accroche}</p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -108,7 +215,7 @@ const CatalogueServices: React.FC = () => {
                     onMouseEnter={() => setSurvol(i)}
                     onFocus={() => setSurvol(i)}
                     onClick={() => setFiche(ficheDe(s, pole))}
-                    className="group relative w-full grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-gray-200 py-6 text-left"
+                    className="group relative w-full grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-5 border-b border-gray-200 py-4 sm:py-6 text-left"
                   >
                     {/* Fond qui glisse au survol */}
                     <span className="absolute inset-0 -mx-4 rounded-2xl bg-[#F1F6FB] opacity-0 scale-[0.98] transition duration-300 group-hover:opacity-100 group-hover:scale-100" />
@@ -116,10 +223,10 @@ const CatalogueServices: React.FC = () => {
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="relative">
-                      <span className="block text-lg md:text-xl font-semibold text-gray-950 transition-transform duration-300 group-hover:translate-x-1">
+                      <span className="block text-base sm:text-lg md:text-xl font-semibold text-gray-950 transition-transform duration-300 group-hover:translate-x-1">
                         {s.title}
                       </span>
-                      <span className="block mt-1 text-sm text-gray-500">{s.description}</span>
+                      <span className="hidden sm:block mt-1 text-sm text-gray-500">{s.description}</span>
                     </span>
                     <span className="relative grid place-items-center w-11 h-11 rounded-full ring-1 ring-gray-200 text-gray-400 transition-all duration-300 group-hover:bg-gray-950 group-hover:text-white group-hover:ring-gray-950 group-hover:rotate-45">
                       <ArrowUpRight size={18} />
