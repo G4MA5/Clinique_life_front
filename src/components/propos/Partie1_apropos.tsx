@@ -62,10 +62,10 @@ const Partie1_apropos: React.FC = () => {
                 </span>
               </Link>
 
-              {/* Mini-carte directeur */}
+              {/* Mini-carte directeur (masquée sur mobile) */}
               <Link
                 to="/directeur-biographie"
-                className="mt-10 flex max-w-sm items-center gap-4 rounded-2xl bg-white p-3 pr-4 text-gray-950 shadow-xl transition hover:-translate-y-0.5"
+                className="mt-10 hidden sm:flex max-w-sm items-center gap-4 rounded-2xl bg-white p-3 pr-4 text-gray-950 shadow-xl transition hover:-translate-y-0.5"
               >
                 <img src={Directeur} alt="Dr. Gabriel DONGUI" className="w-16 h-16 rounded-xl object-cover object-top bg-[#F1F6FB]" />
                 <span className="flex-1">
