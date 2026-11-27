@@ -24,38 +24,47 @@ const Partie4_apropos: React.FC = () => {
   }, [selectedMember]);
 
   return (
-    <section className="w-full py-20 px-4 md:px-8 bg-white">
+    <section className="w-full py-12 sm:py-20 px-3 sm:px-6 md:px-8 bg-white">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2 sm:mb-4">
           Notre Équipe Administrative
         </h2>
-        <p className="text-gray-500 text-lg mb-14">
+        <p className="text-gray-500 text-sm sm:text-lg mb-8 sm:mb-14">
           Des professionnels dévoués pour vous accompagner dans vos démarches
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-left">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 text-left">
           {team.map((member, index) => (
             <button
               key={index}
               type="button"
               onClick={() => setSelectedMember(member)}
-              className="group relative h-[420px] overflow-hidden rounded-3xl bg-[#F1F6FB] text-left"
+              className="group relative h-[260px] sm:h-[420px] overflow-hidden rounded-2xl sm:rounded-3xl bg-[#F1F6FB] text-left transition-all duration-300 hover:shadow-xl active:scale-[0.98]"
             >
               <OptimizedImage
                 src={member.image}
                 alt={member.name}
                 className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-              <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/0 transition duration-500 group-hover:ring-white/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+              <div className="absolute inset-0 rounded-2xl sm:rounded-3xl ring-1 ring-inset ring-white/0 transition duration-500 group-hover:ring-white/30" />
 
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75">
-                  <span className="w-5 h-px bg-[#00BBA7] transition-all duration-500 group-hover:w-8" />
-                  {member.role}
+              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 text-white">
+                <p className="flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[11px] font-semibold uppercase tracking-wider text-white/80">
+                  <span className="w-3 sm:w-5 h-px bg-[#00BBA7] shrink-0" />
+                  <span className="truncate">{member.role}</span>
                 </p>
-                <h3 className="mt-2 text-xl font-semibold">{member.name}</h3>
-                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-500">
+                <h3 className="mt-1 sm:mt-2 text-sm sm:text-xl font-semibold leading-snug line-clamp-2">
+                  {member.name}
+                </h3>
+
+                {/* Indication tactile mobile */}
+                <span className="sm:hidden mt-2 inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-0.5 text-[10px] font-medium text-white ring-1 ring-white/30">
+                  Voir profil →
+                </span>
+
+                {/* Hover desktop */}
+                <div className="hidden sm:grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-500">
                   <div className="overflow-hidden">
                     <p className="pt-2 text-sm text-white/80">{member.specialty}</p>
                     <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-white text-gray-950 pl-4 pr-1 py-1 text-sm font-semibold">
